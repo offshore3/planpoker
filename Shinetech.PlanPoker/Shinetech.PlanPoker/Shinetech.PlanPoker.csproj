@@ -94,10 +94,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\boostrap.min.css" />
+    <Content Include="css\style.css" />
+    <Content Include="fonts\css\font-awesome.css" />
+    <Content Include="fonts\css\font-awesome.min.css" />
+    <Content Include="fonts\fonts\fontawesome-webfont.svg" />
+    <Content Include="images\logo.png" />
+    <Content Include="index.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -106,12 +118,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="scripts\ai.0.15.0-build58334.js" />
-    <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\angular\angular-cookies.js" />
+    <Content Include="scripts\angular\angular-route.js" />
+    <Content Include="scripts\angular\angular-route.min.js" />
+    <Content Include="scripts\angular\angular.js" />
+    <Content Include="scripts\angular\angular.min.js" />
+    <Content Include="scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="scripts\controller\resetPasswordController.js" />
+    <Content Include="scripts\controller\registerController.js" />
+    <Content Include="scripts\controller\loginController.js" />
+    <Content Include="scripts\jquery\jquery.js" />
+    <Content Include="scripts\route\shinetechApp.js" />
+    <Content Include="scripts\route\shinetechRoute.js" />
+    <Content Include="scripts\service\resetPasswordService.js" />
+    <Content Include="scripts\service\registerService.js" />
+    <Content Include="scripts\service\loginService.js" />
+    <Content Include="template\login.html" />
+    <Content Include="template\register.html" />
+    <Content Include="template\ResetPassword.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="scripts\directive\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

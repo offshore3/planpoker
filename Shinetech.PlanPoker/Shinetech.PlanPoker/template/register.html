@@ -1,0 +1,57 @@
+﻿<header class="navbar bs-docs-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#register">Shinetech Plan Poker</a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 input-box" ng-controller="registerController">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title"> Register </div>
+            </div>
+            <div class="panel-body">
+                <form name="signUpForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Email</label>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" name="userEmail" placeholder="somebody@example.com" ng-model="user.email" required />
+                            <span class="error" ng-show="signUpForm.userEmail.$dirty && signUpForm.userEmail.$invalid">
+                                <span ng-show="signUpForm.userEmail.$error.required">Email is required.</span>
+                                <span ng-show="signUpForm.userEmail.$error.email">Invalid email address.</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Password</label>
+                        <div class="col-md-9">
+                            <input type="password" id="password" class="form-control" name="password" placeholder="password" ng-model="user.password" required>
+                            <span class="error" ng-show="signUpForm.password.$dirty && signUpForm.password.$invalid">
+                                <span ng-show="signUpForm.password.$error.required">Password is required.</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Comfirm</label>
+                        <div class="col-md-9">
+                            <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="comfirm" pw-check="password" ng-model="user.comfirmPassword" required>
+                            <span class="error" ng-show="signUpForm.confirmPassword.$dirty && signUpForm.confirmPassword.$invalid">
+                                <span ng-show="signUpForm.confirmPassword.$error.required">Confirm is required.</span>
+                                <span ng-show="signUpForm.confirmPassword.$error.pwmatch">Confirm is not equeal with password</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="button" class="btn btn-primary btn-info" ng-disabled="signUpForm.$invalid" ng-click="getAllUser()"> Register </button>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-3 col-md-9">
+                        Have account! <a href="#login"> Sign in Here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

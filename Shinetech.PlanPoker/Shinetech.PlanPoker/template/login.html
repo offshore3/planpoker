@@ -1,0 +1,70 @@
+﻿<header class="navbar bs-docs-nav">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Shinetech Plan Poker</a>
+        </div>
+    </div>
+</header>
+<div class="container" ng-controller="loginController">
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 input-box">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title"> Sign In </div>
+                <div class="forgot-password"> <a href="#resetpassword">Forgot password?</a> </div>
+            </div>
+            <div class="panel-body panel-pad">
+                <div class="alert alert-danger col-sm-12 login-alert"></div>
+                <form name="signInForm" class="form-horizontal">
+                    <div class="input-group input-box-user">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                        <input type="email" class="form-control" name="userEmail" placeholder="somebody@example.com" ng-model="user.email" required />
+                    </div>
+                    <span class="error" ng-show="signInForm.userEmail.$dirty && signInForm.userEmail.$invalid">
+                        <span ng-show="signInForm.userEmail.$error.required">Email is required.</span>
+                        <span ng-show="signInForm.userEmail.$error.email">Invalid email address.</span>
+                    </span>
+                    <div class="input-group input-box-user">
+                        <span class="input-group-addon">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        <input type="password" class="form-control" name="password" placeholder="password" ng-model="user.password" ng-minlength="6" ng-maxlength="16" required>
+                    </div>
+                    <span class="error" ng-show="signInForm.password.$dirty && signInForm.password.$invalid">
+                        <span ng-show="signInForm.password.$error.required">Password is required.</span>
+                    </span>
+                    <span class="error" ng-show="user.isError">{{user.message}}</span>
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="remember" checked="checked"> Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group margT10">
+                        <div class="col-sm-12 controls">
+                            <button class="btn btn-block btn-primary" ng-click="onlogin()" ng-disabled="signInForm.$invalid">
+                                Sign in
+                            </button>
+                            <button type="button" class="btn btn-info hide" ng-disabled="signUpForm.$invalid" ng-click="getAllUser()"> Register </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div class="no-acc">
+                                Don't have an account!
+                                <a href="#register"> Register Here </a>
+                                <div class="pull-right">
+                                    <a class="btn btn btn-primary social-login-btn"><i class="fa fa-qq" aria-hidden="true"></i></a>
+                                    <a class="btn btn btn-primary social-login-btn"><i class="fa fa-weixin" aria-hidden="true"></i></a>
+                                    <a class="btn btn btn-primary social-login-btn"><i class="fa fa-weibo" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

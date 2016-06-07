@@ -1,0 +1,104 @@
+﻿.navbar {
+    background: #db0101;
+    min-height: 68px;
+    color: #fff;
+    border: 0;
+}
+
+.navbar a.navbar-brand {
+    background: transparent url(/images/logo.png) no-repeat left 3px;
+    height: 66px;
+    width: 275px;
+    text-indent: 70px;
+    line-height: 40px;
+    color: #fff;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.input-box{
+	margin-top:50px;
+}
+.forgot-password{
+	float:right; 
+	font-size: 80%; 
+	position: relative; 
+	top:-18px;
+}
+.panel-pad{
+	padding-top:30px;
+}
+.login-alert{
+	display:none;
+}
+.input-box-user{
+    margin-top: 15px;
+	margin-bottom: 10px;
+}
+.margT10{
+	margin-top:10px;
+}
+.margL10{
+	padding-left: 25px;
+}
+.no-acc{
+	border-top: 1px solid#888; 
+    padding-top:15px; 
+    font-size:85%;
+    line-height:30px;
+}
+.signup-fb{
+	border-top: 1px solid #999; 
+    padding-top:20px;
+}
+.signin{
+	float:right; 
+    font-size: 85%; 
+    position: relative; 
+    top:-18px;
+}
+.btn-facebook {
+  color: #fff;
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+.btn-facebook:hover,
+.btn-facebook:focus,
+.btn-facebook:active,
+.btn-facebook.active,
+.open > .dropdown-toggle.btn-facebook {
+  color: #fff;
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+.btn-google {
+  color: #fff;
+  background-color: #dd4b39;
+  border-color: #dd4b39;
+}
+.btn-google:hover,
+.btn-google:focus,
+.btn-google:active,
+.btn-google.active,
+.open > .dropdown-toggle.btn-google {
+  color: #fff;
+  background-color: #dd4b39;
+  border-color: #dd4b39;
+}
+.btn-twitter {
+  color: #fff;
+  background-color: #00aced;
+  border-color: #00aced;
+}
+.btn-twitter:hover,
+.btn-twitter:focus,
+.btn-twitter:active,
+.btn-twitter.active,
+.open > .dropdown-toggle.btn-twitter {
+  color: #fff;
+  background-color: #00aced;
+  border-color: #00aced;
+}
+.error {
+    color: #ff0000;
+}
