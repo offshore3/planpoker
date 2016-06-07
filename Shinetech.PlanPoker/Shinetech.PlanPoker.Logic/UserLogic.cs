@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
+using Shinetech.PlanPoker.Logic.Tools;
 using Shinetech.PlanPoker.LogicModel;
 
 namespace Shinetech.PlanPoker.Logic
@@ -34,9 +36,14 @@ namespace Shinetech.PlanPoker.Logic
             throw new System.NotImplementedException();
         }
 
-        public int Login(string email, string password)
+        public string Login(string email, string password)
         {
-            throw new System.NotImplementedException();
+            var user = _userRepository.Query().FirstOrDefault(x=>x.Email== email&& password==x.Password);
+            var isLoginSuccess= user != null;
+
+            return isLoginSuccess
+                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm"))
+                : string.Empty;
         }
 
         public IEnumerable<UserLogicModel> GetAll()

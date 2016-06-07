@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Shinetech.PlanPoker.LogicModel;
 
 namespace Shinetech.PlanPoker.ILogic
@@ -9,7 +10,7 @@ namespace Shinetech.PlanPoker.ILogic
         void Edit(UserLogicModel model);
         void Delete(int id);
         UserLogicModel Get(int id);
-        int Login(string email, string password);
+        string Login(string email, string password);
         IEnumerable<UserLogicModel> GetAll();
     }
 }

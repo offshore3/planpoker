@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
+using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
+using Convert = Shinetech.PlanPoker.WebApi.ViewModels.Convert;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
+    [RoutePrefix("api")]
     public class UserController : ApiController
     {
         private readonly IUserLogic _userLogic;
@@ -15,7 +20,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             _userLogic = userLogic;
         }
         [HttpGet]
-        [Route("api/users")]
+        [Route("users")]
         public List<UserViewModel> GetUsers()
         {
             return _userLogic.GetAll().Select(x => new UserViewModel
@@ -25,5 +30,21 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                 Password = x.Password
             }).ToList();
         }
+
+        [HttpGet]
+        [Route("login")]
+        public string Login(string email,string password)
+        {
+            return _userLogic.Login(email, password);
+        }
+
+        [HttpGet]
+        [Route("get-all")]
+        [BasicAuthorize]
+        public string GetAll()
+        {
+            return "OK";
+        }
+
     }
 }

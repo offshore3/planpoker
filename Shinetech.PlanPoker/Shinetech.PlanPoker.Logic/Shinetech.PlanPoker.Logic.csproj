@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Installer\LogicInstaller.cs" />
+    <Compile Include="Tools\Base64Helper.cs" />
+    <Compile Include="Tools\TokenGenerator.cs" />
     <Compile Include="UserLogic.cs" />
     <Compile Include="InviteLogic.cs" />
     <Compile Include="ProjectLogic.cs" />

@@ -222,6 +222,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Tools\BasicAuthorizeAttribute.cs" />
     <Compile Include="ViewModels\Convert.cs" />
     <Compile Include="ViewModels\InviteViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
