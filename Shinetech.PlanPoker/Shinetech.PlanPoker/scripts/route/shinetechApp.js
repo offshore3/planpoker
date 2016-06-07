@@ -1,1 +1,2 @@
-﻿var appModule = angular.module("shinetech-app", ["ngRoute"]);
+﻿var webAPI = "";
+var appModule = angular.module("shinetech-app", ["ngRoute"]);

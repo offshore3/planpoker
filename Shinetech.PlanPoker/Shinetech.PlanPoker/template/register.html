@@ -26,25 +26,28 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Password</label>
                         <div class="col-md-9">
-                            <input type="password" id="password" class="form-control" name="password" placeholder="password" ng-model="user.password" required>
+                            <input type="password" id="password" class="form-control" name="password" placeholder="password" ng-model="user.password" ng-pattern="/^[a-zA-Z0-9_-]{5,15}$/" required>
                             <span class="error" ng-show="signUpForm.password.$dirty && signUpForm.password.$invalid">
                                 <span ng-show="signUpForm.password.$error.required">Password is required.</span>
+                                <span ng-show="signUpForm.password.$error.minlength">This field minlength is six.</span>
+                                <span ng-show="signUpForm.password.$error.maxlength">This field maxlength is sixteen.</span>
+                                <span ng-show="signUpForm.password.$error.pattern">Only contain characters,numbers,underline, length between 6 and 16.</span>
                             </span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Comfirm</label>
                         <div class="col-md-9">
-                            <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="comfirm" pw-check="password" ng-model="user.comfirmPassword" required>
+                            <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="comfirm" password-check="password" ng-model="user.comfirmPassword" required>
                             <span class="error" ng-show="signUpForm.confirmPassword.$dirty && signUpForm.confirmPassword.$invalid">
                                 <span ng-show="signUpForm.confirmPassword.$error.required">Confirm is required.</span>
-                                <span ng-show="signUpForm.confirmPassword.$error.pwmatch">Confirm is not equeal with password</span>
+                                <span ng-show="signUpForm.confirmPassword.$error.passwordmatch">Confirm is not equeal with password</span>
                             </span>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-9">
-                            <button type="button" class="btn btn-primary btn-info" ng-disabled="signUpForm.$invalid" ng-click="getAllUser()"> Register </button>
+                            <button type="button" class="btn btn-primary btn-info" ng-disabled="signUpForm.$invalid" ng-click="registerUser()"> Register </button>
                         </div>
                     </div>
                     <div class="col-md-offset-3 col-md-9">
