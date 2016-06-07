@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Shinetech.PlanPoker.Data.Models;
 
 namespace Shinetech.PlanPoker.LogicModel
 {
@@ -7,6 +9,6 @@ namespace Shinetech.PlanPoker.LogicModel
         public int Id { get; set; }
         public string Name { get; set; }
         public UserLogicModel OwnerLogicModel { get; set; }
-        public IEnumerable<UserLogicModel> ParticipatesDto { get; set; }
+        public IEnumerable<UserLogicModel> Participates { get; set; }
     }
 }

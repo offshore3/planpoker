@@ -40,10 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Convert.cs" />
     <Compile Include="InviteLogicModel.cs" />
     <Compile Include="ProjectLogicModel.cs" />
     <Compile Include="UserLogicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Data\Shinetech.PlanPoker.Data.csproj">
+      <Project>{8d48d4d2-1e16-419f-9250-95981dd8f9b3}</Project>
+      <Name>Shinetech.PlanPoker.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

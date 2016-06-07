@@ -46,7 +46,7 @@ namespace Shinetech.PlanPoker.Logic
                 Email = x.Email,
                 Name = x.Name,
                 Password = x.Password
-            }).ToList();
+            });
         }
     }
 }
