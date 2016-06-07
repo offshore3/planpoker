@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Globalization;
 using System.Reflection;
 using FluentNHibernate.Cfg;
@@ -15,7 +14,7 @@ namespace Shinetech.PlanPoker.Data
         private readonly NHibernate.Cfg.Configuration _configuration;
         private readonly ISessionFactory _factory;
         private readonly ISession _connectionCreatingSession;
-        private readonly IDbConnection _connection;
+
         public InMemoryNHibernateSessionSource(IEnumerable<Assembly> mappingAssemblies)
         {
             _configuration = Fluently.Configure()
@@ -31,13 +30,13 @@ namespace Shinetech.PlanPoker.Data
 
             _factory = _configuration.BuildSessionFactory();
             _connectionCreatingSession=_factory.OpenSession();
-            _connection = _connectionCreatingSession.Connection;
+            var connection = _connectionCreatingSession.Connection;
 
             new SchemaExport(_configuration).Execute(
                                false,
                                true,
                               justDrop: false,
-                              connection: _connection,
+                              connection: connection,
                               exportOutput: null);
             var export = new SchemaUpdate(_configuration);
             export.Execute(true, true);
