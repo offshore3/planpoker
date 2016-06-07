@@ -49,10 +49,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Dto\Convert.cs" />
+    <Compile Include="Dto\InviteDto.cs" />
+    <Compile Include="Dto\ProjectDto.cs" />
+    <Compile Include="Dto\UserDto.cs" />
+    <Compile Include="IInviteLogic.cs" />
+    <Compile Include="IUserLogic.cs" />
+    <Compile Include="IProjectLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Data\Shinetech.PlanPoker.Data.csproj">
+      <Project>{8d48d4d2-1e16-419f-9250-95981dd8f9b3}</Project>
+      <Name>Shinetech.PlanPoker.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
