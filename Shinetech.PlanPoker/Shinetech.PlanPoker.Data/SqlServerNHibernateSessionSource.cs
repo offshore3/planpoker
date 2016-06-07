@@ -14,11 +14,18 @@ namespace Shinetech.PlanPoker.Data
     {
         private readonly NHibernate.Cfg.Configuration _configuration;
         private readonly ISessionFactory _factory;
+
         public SqlServerNHibernateSessionSource(string connectionString, IEnumerable<Assembly> mappingAssemblies)
         {
             _configuration = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connectionString))
-                .ExposeConfiguration(c => c.SetProperty(NHibernate.Cfg.Environment.CommandTimeout, TimeSpan.FromMinutes(3).TotalSeconds.ToString(CultureInfo.InvariantCulture)))
+                .ExposeConfiguration(
+                c =>
+                    {
+                        c.SetProperty(NHibernate.Cfg.Environment.CommandTimeout,
+                          TimeSpan.FromMinutes(3).TotalSeconds.ToString(CultureInfo.InvariantCulture));
+                        new SchemaExport(c).Execute(true, true, false);
+                    })
                 .Mappings(x =>
                 {
                     foreach (var mappingAssembly in mappingAssemblies)

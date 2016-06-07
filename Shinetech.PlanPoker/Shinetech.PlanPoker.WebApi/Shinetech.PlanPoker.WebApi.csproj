@@ -205,6 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Installer\WindsorBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
@@ -260,6 +261,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Data\Shinetech.PlanPoker.Data.csproj">
+      <Project>{8d48d4d2-1e16-419f-9250-95981dd8f9b3}</Project>
+      <Name>Shinetech.PlanPoker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Logic\Shinetech.PlanPoker.Logic.csproj">
+      <Project>{594a3782-8397-459f-9757-d340aeb0df58}</Project>
+      <Name>Shinetech.PlanPoker.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Repository\Shinetech.PlanPoker.Repository.csproj">
+      <Project>{c030cc89-7712-4da1-a080-6747bc45dfba}</Project>
+      <Name>Shinetech.PlanPoker.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -11,11 +11,5 @@ namespace Shinetech.PlanPoker.Data.Models
         public virtual string Name { get; set; }
         public virtual UserModel Owner { get; set; }
         public virtual IList<UserModel> Participates { get; set; }
-
-        public ProjectModel()
-        {
-            Owner = new UserModel();
-            Participates = new List<UserModel>();
-        }
     }
 }
