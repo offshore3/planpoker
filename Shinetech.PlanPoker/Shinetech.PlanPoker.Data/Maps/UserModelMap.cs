@@ -7,10 +7,15 @@ namespace Shinetech.PlanPoker.Data.Maps
     {
         public UserModelMap()
         {
+            Table("UserModel");
+            LazyLoad();
             Id(x => x.Id);
-            Map(x => x.Name);
-            Map(x => x.Email);
-            Map(x => x.Password);
+            Map(m => m.Password);
+            Map(m => m.Email);
+            Map(m => m.Name).Nullable();
+            Map(m => m.Image).Length(8000).Nullable();
+            HasMany(x => x.MyProjects).Cascade.AllDeleteOrphan().Inverse().Table("Project").KeyColumn("ProjectId");
+            HasManyToMany(x => x.ParticipatedProjects).Table("Project").AsSet();
         }
     }
 }

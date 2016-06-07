@@ -31,7 +31,7 @@ namespace Shinetech.PlanPoker.Repository.Installer
 
             container.RegisterSqlServerNHibernateComponents(new NHibernateRegistration<RepositoryInstaller>(),
                   ComponentKeys.ConnectionStringName,
-                  new[] { typeof(UserModelMap).Assembly }
+                  new[] { typeof(UserModelMap).Assembly, typeof(ProjectModelMap).Assembly, typeof(InviteModelMap).Assembly, }
                   );
             Component.For<IConnectionStringProvider>()
                 .ImplementedBy<ConnectionStringProvider>()
