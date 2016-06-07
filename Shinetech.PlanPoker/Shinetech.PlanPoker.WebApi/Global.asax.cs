@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
+﻿using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using System.Web.Routing;
+using Castle.Windsor;
 using Shinetech.PlanPoker.WebApi.Installer;
 
 namespace Shinetech.PlanPoker.WebApi
@@ -14,9 +11,12 @@ namespace Shinetech.PlanPoker.WebApi
     {
         protected void Application_Start()
         {
-            WindsorBootstrapper.Initialize();
+            var container = new WindsorContainer();
+            WindsorBootstrapper.Initialize(container);
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator),
+              new WindsorCompositionRoot(WindsorBootstrapper.Container));
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

@@ -48,11 +48,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Installer\LogicInstaller.cs" />
+    <Compile Include="UserLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Data\Shinetech.PlanPoker.Data.csproj">
+      <Project>{8d48d4d2-1e16-419f-9250-95981dd8f9b3}</Project>
+      <Name>Shinetech.PlanPoker.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.ILogic\Shinetech.PlanPoker.ILogic.csproj">
+      <Project>{b21cec42-72bc-47a2-8e2b-e10dac2cc43e}</Project>
+      <Name>Shinetech.PlanPoker.ILogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.IRepository\Shinetech.PlanPoker.IRepository.csproj">
+      <Project>{9d0264ec-45b4-4f63-ab8a-91a2790ce84d}</Project>
+      <Name>Shinetech.PlanPoker.IRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.LogicModel\Shinetech.PlanPoker.LogicModel.csproj">
+      <Project>{e7da59b0-e14b-4cde-bc60-9a8080ebc468}</Project>
+      <Name>Shinetech.PlanPoker.LogicModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Repository\Shinetech.PlanPoker.Repository.csproj">
+      <Project>{c030cc89-7712-4da1-a080-6747bc45dfba}</Project>
+      <Name>Shinetech.PlanPoker.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
