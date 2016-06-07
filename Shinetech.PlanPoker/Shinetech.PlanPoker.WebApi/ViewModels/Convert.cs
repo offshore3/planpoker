@@ -17,7 +17,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 Password = user.Password,
                 Email = user.Email,
                 ImagePath = user.ImagePath,
-                Projects = user.Projects.Select(x => x.ToLogicModel())
+                Projects = user.Projects?.Select(x => x.ToLogicModel())
             };
 
         }
@@ -30,7 +30,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 Name = user.Name,
                 Password = user.Password,
                 Email = user.Email,
-                Projects = user.Projects.Select(x => x.ToViewModel())
+                Projects = user.Projects?.Select(x => x.ToViewModel())
             };
         }
 
@@ -52,7 +52,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 Id = project.Id,
                 Name = project.Name,
                 OwnerViewModel = project.OwnerLogicModel.ToViewModel(),
-                Participates = project.Participates.Select(x => x.ToViewModel())
+                Participates = project.Participates?.Select(x => x.ToViewModel())
             };
         }
     }
