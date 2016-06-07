@@ -10,7 +10,7 @@ using Convert = Shinetech.PlanPoker.WebApi.ViewModels.Convert;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
-    [RoutePrefix("api/")]
+    [RoutePrefix("api")]
     public class UserController : ApiController
     {
         private readonly IUserLogic _userLogic;
@@ -44,6 +44,20 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         public bool CheckEmailExist(string email)
         {
             return _userLogic.CheckEmailExist(email);
+        }
+        [HttpGet]
+        [Route("login")]
+        public string Login(string email, string password)
+        {
+            return _userLogic.Login(email, password);
+        }
+
+        [HttpGet]
+        [Route("get-all")]
+        [BasicAuthorize]
+        public string GetAll()
+        {
+            return "OK";
         }
     }
 }

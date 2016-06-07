@@ -14,7 +14,7 @@
 
     $scope.getAllUser = function () {
         loginService.getAllUser(function (data) {
-            console.log(data);
+            console.log(data.data);
         }, function () {
 
         });
