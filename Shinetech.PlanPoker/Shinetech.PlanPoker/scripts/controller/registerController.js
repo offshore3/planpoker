@@ -1,29 +1,13 @@
 ﻿appModule.controller('registerController', ['$scope', 'registerService', function ($scope, registerService) {
 
-    $scope.user = {
-        isError: false,
-        message: ''
-    };
+    $scope.user = {};
 
-    $scope.onlogin = function () {
-        var command = {
-            UserName: $scope.user.email,
-            password: $scope.user.password
-        };
-        loginService.login(command, function () {
-
-        }, function () {
+    $scope.registerUser = function () {
+        registerService.createUser($scope.user).then(function (response) {
 
         });
     };
-
-    $scope.getAllUser = function () {
-        loginService.getAllUser(function (data) {
-            console.log(data);
-        }, function () {
-
-        });
-    }
+    
 }]);
 
 

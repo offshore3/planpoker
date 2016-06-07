@@ -1,19 +1,14 @@
-﻿appModule.service("registerService", ['$http', function ($http) {
+﻿appModule.service("registerService", ['$q', '$http', function ($q, $http) {  
 
-    this.login = function (command, successCallback, errorCallback) {
-        $http.post(webApi + "api/login", command).then(function (token) {
-            $http.defaults.headers.common['Authorization'] = token.data.substring(1, token.data.length - 1);
-            successCallback();
-        }, function (error) {
-            errorCallback(error);
+    this.createUser = function (user) {
+        console.log(user);
+        return $http({
+            method: "POST",
+            url: webAPI + "/api/user",
+            data: user
+        }).then(function (response) {
+            return $q.when(response);
         });
     };
 
-    this.getAllUser = function (successCallback, errorCallback) {
-        $http.get(webApi + "api/get-all").then(function (data) {
-            successCallback(data);
-        }, function (error) {
-            errorCallback(error);
-        });
-    }
 }])
