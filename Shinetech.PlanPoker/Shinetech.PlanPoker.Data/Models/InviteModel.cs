@@ -11,12 +11,5 @@ namespace Shinetech.PlanPoker.Data.Models
         public virtual ProjectModel Project { get; set; }
         public virtual UserModel User { get; set; }
         public virtual bool IsRegister { get; set; }
-        public InviteModel()
-        {
-            User=new UserModel();
-            Project = new ProjectModel();
-        }
     }
-
-    
 }
