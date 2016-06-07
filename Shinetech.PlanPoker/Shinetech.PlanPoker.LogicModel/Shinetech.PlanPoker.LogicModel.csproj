@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InviteLogicModel.cs" />
+    <Compile Include="ProjectLogicModel.cs" />
     <Compile Include="UserLogicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

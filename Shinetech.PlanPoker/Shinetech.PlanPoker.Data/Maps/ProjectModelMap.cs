@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 using Shinetech.PlanPoker.Data.Models;
 
 namespace Shinetech.PlanPoker.Data.Maps
@@ -17,7 +12,6 @@ namespace Shinetech.PlanPoker.Data.Maps
             Id(x => x.Id);
             Map(m => m.Name);
             References(x => x.Owner).Column("UserId");
-            HasManyToMany(x => x.Participates).Table("Project").AsSet();
         }
     }
 }

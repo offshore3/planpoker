@@ -18,9 +18,11 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [Route("api/users")]
         public List<UserViewModel> GetUsers()
         {
-            return _userLogic.GetUsers().Select(x=>new UserViewModel
+            return _userLogic.GetAll().Select(x => new UserViewModel
             {
-                Email = x.Email,Name = x.Name,Password = x.Password
+                Email = x.Email,
+                Name = x.Name,
+                Password = x.Password
             }).ToList();
         }
     }

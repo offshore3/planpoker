@@ -49,12 +49,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IUserLogic.cs" />
+    <Compile Include="IInviteLogic.cs" />
+    <Compile Include="IProjectLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shinetech.PlanPoker.Data\Shinetech.PlanPoker.Data.csproj">
+      <Project>{8d48d4d2-1e16-419f-9250-95981dd8f9b3}</Project>
+      <Name>Shinetech.PlanPoker.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shinetech.PlanPoker.LogicModel\Shinetech.PlanPoker.LogicModel.csproj">
       <Project>{e7da59b0-e14b-4cde-bc60-9a8080ebc468}</Project>
       <Name>Shinetech.PlanPoker.LogicModel</Name>

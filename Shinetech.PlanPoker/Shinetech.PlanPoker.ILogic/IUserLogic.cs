@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using Shinetech.PlanPoker.LogicModel;
 
 namespace Shinetech.PlanPoker.ILogic
 {
     public interface IUserLogic
     {
-        List<UserLogicModel> GetUsers();
+        void Create(UserLogicModel model);
+        void Edit(UserLogicModel model);
+        void Delete(int id);
+        UserLogicModel Get(int id);
+        int Login(string email, string password);
+        IEnumerable<UserLogicModel> GetAll();
     }
 }

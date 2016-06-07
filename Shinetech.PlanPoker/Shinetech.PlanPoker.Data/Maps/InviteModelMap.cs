@@ -8,7 +8,7 @@ using Shinetech.PlanPoker.Data.Models;
 
 namespace Shinetech.PlanPoker.Data.Maps
 {
-    public class InviteModelMap: ClassMap<InviteModel>
+    public class InviteModelMap : ClassMap<InviteModel>
     {
         public InviteModelMap()
         {

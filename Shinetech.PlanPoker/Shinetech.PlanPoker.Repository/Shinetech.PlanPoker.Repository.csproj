@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InviteRepository.cs" />
+    <Compile Include="ProjectRepository.cs" />
     <Compile Include="RepositoryBase.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="Installer\RepositoryInstaller.cs" />

@@ -7,9 +7,8 @@ namespace Shinetech.PlanPoker.Data.Models
         public virtual string Name { get; set; }
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }
-        public virtual string Image { get; set; }
-        public virtual IList<ProjectModel> MyProjects { get; set; }
-        public virtual IList<ProjectModel> ParticipatedProjects { get; set; }
+        public virtual string ImagePath { get; set; }
+        public virtual IEnumerable<ProjectModel> Projects { get; set; }
     }
 
     public abstract class Entity
