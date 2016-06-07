@@ -1,10 +1,18 @@
-﻿appModule.service("registerService", ['$q', '$http', function ($q, $http) {  
+﻿appModule.service("registerService", ['$q', '$http', function ($q, $http) { 
+
+    this.checkEmailExist = function (email) {
+        return $http({
+            method: "Get",
+            url: webAPI + "api/checkemail?email=" + email
+        }).then(function (response) {
+            return $q.when(response);
+        });
+    };
 
     this.createUser = function (user) {
-        console.log(user);
         return $http({
             method: "POST",
-            url: webAPI + "/api/user",
+            url: webAPI + "api/users",
             data: user
         }).then(function (response) {
             return $q.when(response);

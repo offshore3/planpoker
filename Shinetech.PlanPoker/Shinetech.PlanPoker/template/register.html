@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Password</label>
                         <div class="col-md-9">
-                            <input type="password" id="password" class="form-control" name="password" placeholder="password" ng-model="user.password" ng-pattern="/^[a-zA-Z0-9_-]{5,15}$/" required>
+                            <input type="password" id="password" class="form-control" name="password" placeholder="password" ng-model="user.password" ng-pattern="/^[a-zA-Z0-9_-]{6,16}$/" required>
                             <span class="error" ng-show="signUpForm.password.$dirty && signUpForm.password.$invalid">
                                 <span ng-show="signUpForm.password.$error.required">Password is required.</span>
                                 <span ng-show="signUpForm.password.$error.minlength">This field minlength is six.</span>
@@ -48,6 +48,9 @@
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-9">
                             <button type="button" class="btn btn-primary btn-info" ng-disabled="signUpForm.$invalid" ng-click="registerUser()"> Register </button>
+                            <span class="error" ng-show="isExist">
+                                <span>The email has been registered.</span>
+                            </span>
                         </div>
                     </div>
                     <div class="col-md-offset-3 col-md-9">

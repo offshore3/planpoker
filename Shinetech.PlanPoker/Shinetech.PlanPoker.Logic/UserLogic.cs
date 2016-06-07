@@ -5,20 +5,29 @@ using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
 using Shinetech.PlanPoker.Logic.Tools;
 using Shinetech.PlanPoker.LogicModel;
+using Shinetech.PlanPoker.Repository.UnitOfWork;
 
 namespace Shinetech.PlanPoker.Logic
 {
     public class UserLogic : IUserLogic
     {
         private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWorkFactory _unitOfWorkFactory;
 
-        public UserLogic(IUserRepository userRepository)
+        public UserLogic(IUserRepository userRepository, IUnitOfWorkFactory unitOfWorkFactory)
         {
             _userRepository = userRepository;
+            _unitOfWorkFactory = unitOfWorkFactory;
         }
         public void Create(UserLogicModel model)
         {
-            throw new System.NotImplementedException();
+            var userModel= model.ToModel();
+
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                _userRepository.Save(userModel);
+                unitOfwork.Commit();
+            }
         }
 
         public void Edit(UserLogicModel model)
@@ -48,12 +57,17 @@ namespace Shinetech.PlanPoker.Logic
 
         public IEnumerable<UserLogicModel> GetAll()
         {
-            return _userRepository.Query().Select(x => new UserLogicModel
+            return _userRepository.Query()?.Select(x => new UserLogicModel
             {
                 Email = x.Email,
                 Name = x.Name,
                 Password = x.Password
             });
+        }
+
+        public bool CheckEmailExist(string email)
+        {
+            return _userRepository.Query().Where(x => x.Email == email).ToList().Count > 0;
         }
     }
 }

@@ -3,9 +3,17 @@
     $scope.user = {};
 
     $scope.registerUser = function () {
-        registerService.createUser($scope.user).then(function (response) {
+        registerService.checkEmailExist($scope.user.email).then(function (response) {
+            if (response.data) {
+                $scope.isExist = response.data;
+            }
+            else
+            {
+                registerService.createUser($scope.user).then(function (response) {
 
-        });
+                });
+            }
+        });        
     };
     
 }]);
