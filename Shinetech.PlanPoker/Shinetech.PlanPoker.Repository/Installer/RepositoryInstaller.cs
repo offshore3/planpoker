@@ -21,33 +21,32 @@ namespace Shinetech.PlanPoker.Repository.Installer
         }
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            CommonInstaller(container);
-        }
-
-        private static void CommonInstaller(IWindsorContainer container)
-        {
-
             container.Register(Component.For<IConnectionStringProvider>().ImplementedBy<ConnectionStringProvider>().LifestylePerWebRequest());
-
-            container.RegisterSqlServerNHibernateComponents(new NHibernateRegistration<RepositoryInstaller>(),
-                  ComponentKeys.ConnectionStringName,
-                  new[] { typeof(UserModelMap).Assembly, typeof(ProjectModelMap).Assembly, typeof(InviteModelMap).Assembly, }
-                  );
             Component.For<IConnectionStringProvider>()
                 .ImplementedBy<ConnectionStringProvider>()
                 .DependsOn(new Dependency[] { Dependency.OnValue(typeof(string), ComponentKeys.ConnectionStringName) })
                 .LifestylePerWebRequest();
 
+            container.RegisterSqlServerNHibernateComponents(new NHibernateRegistration<RepositoryInstaller>(),
+                  ComponentKeys.ConnectionStringName,
+                  new[] { typeof(UserModelMap).Assembly, typeof(ProjectModelMap).Assembly, typeof(InviteModelMap).Assembly, }
+                  );
+            CommonInstaller(container);
+        }
+
+        private static void CommonInstaller(IWindsorContainer container)
+        {
             container.Register(Component.For<IUnitOfWorkFactory>().ImplementedBy<UnitOfWorkFactory>().LifestylePerWebRequest());
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<NHibernateUnitOfWork>().LifestylePerWebRequest());
             container.Register(Component.For<IUserRepository>().ImplementedBy<UserRepository>().LifestylePerWebRequest());
         }
         public static void InstallForTest(IWindsorContainer container)
         {
-
             container.Kernel.ComponentModelBuilder.AddContributor(
                 new LifestyleRegistrationMutator(originalLifestyle: LifestyleType.PerWebRequest, newLifestyleType: LifestyleType.Scoped)
                 );
+            container.RegisterInMemoryNHibernateComponents(new NHibernateRegistration<RepositoryInstaller>(), new[] { typeof(UserModelMap).Assembly }
+                  );
             CommonInstaller(container);
         }
         public class LifestyleRegistrationMutator : IContributeComponentModelConstruction
