@@ -65,6 +65,7 @@
     <Compile Include="INHibernateSessionSource.cs" />
     <Compile Include="ConnectStringProvider.cs" />
     <Compile Include="IConnectionStringProvider.cs" />
+    <Compile Include="InMemoryNHibernateSessionSource.cs" />
     <Compile Include="Installer\NHibernateRegistration.cs" />
     <Compile Include="Installer\NHibernateRegistrationExtensions.cs" />
     <Compile Include="Maps\UserModelMap.cs" />

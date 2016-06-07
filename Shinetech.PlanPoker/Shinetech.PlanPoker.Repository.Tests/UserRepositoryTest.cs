@@ -40,10 +40,10 @@ namespace Shinetech.PlanPoker.Repository.Tests
         [TearDown]
         public void DropTable()
         {
-            _scope.Dispose();
             var configuration = _container.Resolve<INHibernateSessionSource>().GetConfiguration();
             var export = new SchemaExport(configuration);
             export.Drop(false, true);
+            _scope.Dispose();
         }
     }
 }

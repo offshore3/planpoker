@@ -23,3 +23,5 @@ Shinetech.PlanPoker/_UpgradeReport_Files/
 Shinetech.PlanPoker/_NCrunch_*
 *.favdoc
 Shinetech.PlanPoker/.vs/config/applicationhost.config
+!Shinetech.PlanPoker/Shinetech.PlanPoker.Repository.Tests/x64/
+!Shinetech.PlanPoker/Shinetech.PlanPoker.Repository.Tests/x86/

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Reflection;
 using FluentNHibernate.Cfg;
@@ -9,15 +10,16 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace Shinetech.PlanPoker.Data
 {
-
-    public class SqlServerNHibernateSessionSource : INHibernateSessionSource
+    public class InMemoryNHibernateSessionSource : INHibernateSessionSource, IDisposable
     {
         private readonly NHibernate.Cfg.Configuration _configuration;
         private readonly ISessionFactory _factory;
-        public SqlServerNHibernateSessionSource(string connectionString, IEnumerable<Assembly> mappingAssemblies)
+        private readonly ISession _connectionCreatingSession;
+        private readonly IDbConnection _connection;
+        public InMemoryNHibernateSessionSource(IEnumerable<Assembly> mappingAssemblies)
         {
             _configuration = Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connectionString))
+                .Database(SQLiteConfiguration.Standard.ConnectionString("FullUri=file:memorydb.db?mode=memory&cache=shared"))
                 .ExposeConfiguration(c => c.SetProperty(NHibernate.Cfg.Environment.CommandTimeout, TimeSpan.FromMinutes(3).TotalSeconds.ToString(CultureInfo.InvariantCulture)))
                 .Mappings(x =>
                 {
@@ -28,6 +30,15 @@ namespace Shinetech.PlanPoker.Data
                 }).BuildConfiguration();
 
             _factory = _configuration.BuildSessionFactory();
+            _connectionCreatingSession=_factory.OpenSession();
+            _connection = _connectionCreatingSession.Connection;
+
+            new SchemaExport(_configuration).Execute(
+                               false,
+                               true,
+                              justDrop: false,
+                              connection: _connection,
+                              exportOutput: null);
             var export = new SchemaUpdate(_configuration);
             export.Execute(true, true);
         }
@@ -36,6 +47,11 @@ namespace Shinetech.PlanPoker.Data
         public NHibernate.Cfg.Configuration GetConfiguration()
         {
             return _configuration;
+        }
+
+        public void Dispose()
+        {
+            _connectionCreatingSession.Dispose();
         }
     }
 }
