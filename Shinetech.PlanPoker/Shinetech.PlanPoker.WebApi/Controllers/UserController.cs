@@ -64,14 +64,5 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             _userLogic.Edit(userViewModel.ToLogicModel());
         }
 
-        [HttpGet]
-        [Route("test-authorize")]
-        [BasicAuthorize]
-        public string TestAuthorize()
-        {
-            return "OK";
-        }
-
-        
     }
 }

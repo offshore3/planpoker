@@ -1,7 +1,7 @@
-﻿appModule.service("profileService", ['$http', function ($http) {
+﻿appModule.service("profileService", ['httpProxy', function (httpProxy) {
 
     this.getUser = function (successCallback, errorCallback) {
-        $http.get(webAPI + "api/user").then(function (data) {
+        httpProxy.get("api/user").then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);
@@ -9,9 +9,9 @@
     }
 
     this.editUser = function (user, successCallback, errorCallback) {
-        $http({
+        httpProxy({
             method: "Put",
-            url: webAPI + "api/user",
+            url: "api/user",
             data: user
         }).then(function (data) {
             successCallback(data);

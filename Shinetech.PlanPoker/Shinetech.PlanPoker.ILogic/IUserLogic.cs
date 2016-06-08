@@ -13,5 +13,7 @@ namespace Shinetech.PlanPoker.ILogic
         string Login(string email, string password);
         IEnumerable<UserLogicModel> GetAll();
         bool CheckEmailExist(string email);
+        bool CheckToken(string email, string password);
+
     }
 }

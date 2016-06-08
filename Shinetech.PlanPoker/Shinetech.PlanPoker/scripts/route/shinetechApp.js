@@ -1,2 +1,3 @@
 ﻿var webAPI = "http://localhost:25455/";
-var appModule = angular.module("shinetech-app", ["ngRoute"]);
+var Token = "Token";
+var appModule = angular.module("shinetech-app", ["ngRoute", "ngCookies"]);

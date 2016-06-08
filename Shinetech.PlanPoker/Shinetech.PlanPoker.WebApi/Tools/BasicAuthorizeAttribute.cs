@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.Logic.Tools;
+using Shinetech.PlanPoker.WebApi.Installer;
 
 namespace Shinetech.PlanPoker.WebApi.Tools
 {
     public class BasicAuthorizeAttribute : AuthorizeAttribute
     {
+        private IUserLogic _userLogic;
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {
@@ -26,13 +26,15 @@ namespace Shinetech.PlanPoker.WebApi.Tools
 
         private bool CheckTokenIsValidAndManageCache(string tokenStr)
         {
+            _userLogic= WindsorBootstrapper.Container.Resolve<IUserLogic>();
             bool result = false;
             var credentialstring = TokenGenerator.DecodeToken(tokenStr);
 
             var datas = credentialstring.Split('&');
             string userEmail = datas[0];
             string password = datas[1];
-            if (string.IsNullOrEmpty(userEmail)|| string.IsNullOrEmpty(password))
+            var isUserExist = _userLogic.CheckToken(userEmail, password);
+            if (string.IsNullOrEmpty(userEmail)|| string.IsNullOrEmpty(password)||!isUserExist)
             {
                 result = true;
             }

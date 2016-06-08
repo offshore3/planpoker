@@ -1,11 +1,11 @@
-﻿appModule.service("loginService", ['$http', function ($http) {
+﻿appModule.service("loginService", ['$http', '$cookieStore', 'httpProxy', function ($http, $cookieStore, httpProxy) {
     
     this.login = function (email,password,successCallback, errorCallback) {
         $http.get(webAPI + "api/login?email=" + email + "&password=" + password).then(function (token) {
             if (token.data.length > 0) {
                 var resultArray = token.data.split('&');
-                $http.defaults.headers.common['Authorization'] = resultArray[0];
-                $http.defaults.headers.common['LoginUserId'] = resultArray[1];
+                $cookieStore.put('Authorization', resultArray[0]);
+                $cookieStore.put('LoginUserId', resultArray[1]);
             }
             successCallback();
         }, function (error) {
@@ -14,14 +14,14 @@
     };
 
     this.testAuthorize = function (successCallback, errorCallback) {
-        $http.get(webAPI + "api/test-authorize").then(function (data) {
+        httpProxy.get("api/test-authorize").then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);
         });
     }
     this.testGetUser = function (successCallback, errorCallback) {
-        $http.get(webAPI + "api/user").then(function (data) {
+        httpProxy.get("api/user").then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);
@@ -29,9 +29,9 @@
     }
 
     this.testUpdateUser = function (command, successCallback, errorCallback) {
-        $http({
+        httpProxy({
             method: "Put",
-            url: webAPI + "api/user",
+            url: "api/user",
             data: command
         }).then(function (data) {
             successCallback(data);
