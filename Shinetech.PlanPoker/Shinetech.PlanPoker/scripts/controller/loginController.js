@@ -19,6 +19,29 @@
 
         });
     }
+
+    $scope.testGetUser = function () {
+        loginService.testGetUser(function (data) {
+            console.log(data.data);
+        }, function () {
+
+        });
+    }
+
+    $scope.testUpdateUser = function () {
+        var command = {
+            Id: 4,
+            Name: "Joy4",
+            ImagePath:"test"
+        }
+        loginService.testUpdateUser(command,function (data) {
+            console.log(data.data);
+        }, function () {
+
+        });
+    }
+    
+
 }]);
 
 

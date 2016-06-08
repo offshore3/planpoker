@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Shinetech.PlanPoker.Data.Models;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
 using Shinetech.PlanPoker.Logic.Tools;
@@ -32,7 +33,14 @@ namespace Shinetech.PlanPoker.Logic
 
         public void Edit(UserLogicModel model)
         {
-            throw new System.NotImplementedException();
+            var userModel = _userRepository.GetForUpdate(model.Id);
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                userModel.Name = model.Name;
+                userModel.ImagePath = model.ImagePath;
+                
+                unitOfwork.Commit();
+            }
         }
 
         public void Delete(int id)
@@ -42,7 +50,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public UserLogicModel Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _userRepository.Get(id).ToLogicModel();
         }
 
         public string Login(string email, string password)
@@ -51,7 +59,7 @@ namespace Shinetech.PlanPoker.Logic
             var isLoginSuccess= user != null;
 
             return isLoginSuccess
-                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm"))
+                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm"))+"&"+ user.Id
                 : string.Empty;
         }
 
@@ -67,7 +75,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public bool CheckEmailExist(string email)
         {
-            return _userRepository.Query().Where(x => x.Email == email).ToList().Count > 0;
+            return _userRepository.Query().Any(x => x.Email == email);
         }
     }
 }
