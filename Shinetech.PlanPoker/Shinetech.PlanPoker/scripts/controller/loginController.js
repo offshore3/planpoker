@@ -12,8 +12,8 @@
         });
     };
 
-    $scope.getAllUser = function () {
-        loginService.getAllUser(function (data) {
+    $scope.testAuthorize = function () {
+        loginService.testAuthorize(function (data) {
             console.log(data.data);
         }, function () {
 

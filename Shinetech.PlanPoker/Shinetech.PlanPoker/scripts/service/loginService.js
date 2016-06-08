@@ -11,8 +11,8 @@
         });
     };
 
-    this.getAllUser = function (successCallback, errorCallback) {
-        $http.get(webAPI + "api/get-all").then(function (data) {
+    this.testAuthorize = function (successCallback, errorCallback) {
+        $http.get(webAPI + "api/test-authorize").then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);

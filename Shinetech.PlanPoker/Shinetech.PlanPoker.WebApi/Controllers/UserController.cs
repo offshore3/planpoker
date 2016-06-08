@@ -53,9 +53,9 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("get-all")]
+        [Route("test-authorize")]
         [BasicAuthorize]
-        public string GetAll()
+        public string TestAuthorize()
         {
             return "OK";
         }
