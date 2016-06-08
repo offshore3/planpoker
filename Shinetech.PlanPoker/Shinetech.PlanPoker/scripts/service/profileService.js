@@ -1,20 +1,22 @@
-﻿appModule.service("profileService", ['$http', '$q', function ($q,$http) {
-    this.getUser = function (userId) {
-        return $http({
-            method: "Get",
-            url: webAPI + "/api/user/" + userId
-        }).then(function (response) {
-            return $q.when(response);
+﻿appModule.service("profileService", ['$http', function ($http) {
+
+    this.getUser = function (successCallback, errorCallback) {
+        $http.get(webAPI + "api/user").then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
         });
     }
 
-    this.editUser = function (user) {
-        return $http({
+    this.editUser = function (user, successCallback, errorCallback) {
+        $http({
             method: "Put",
-            url: webAPI + "/api/user",
+            url: webAPI + "api/user",
             data: user
-        }).then(function (response) {
-            return $q.when(response);
+        }).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
         });
     }
 }]);
