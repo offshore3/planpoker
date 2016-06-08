@@ -21,5 +21,10 @@
             controller:"dashboardController"
         })
 
+        .when("/profile", {
+            templateUrl: "template/profile.html",
+            controller:"profileController"
+        })
+
         .otherwise("/login");
 });
