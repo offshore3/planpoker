@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
-using Convert = Shinetech.PlanPoker.WebApi.ViewModels.Convert;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
