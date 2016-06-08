@@ -67,6 +67,10 @@
       <Project>{8d48d4d2-1e16-419f-9250-95981dd8f9b3}</Project>
       <Name>Shinetech.PlanPoker.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.ILogic\Shinetech.PlanPoker.ILogic.csproj">
+      <Project>{B21CEC42-72BC-47A2-8E2B-E10DAC2CC43E}</Project>
+      <Name>Shinetech.PlanPoker.ILogic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shinetech.PlanPoker.IRepository\Shinetech.PlanPoker.IRepository.csproj">
       <Project>{9d0264ec-45b4-4f63-ab8a-91a2790ce84d}</Project>
       <Name>Shinetech.PlanPoker.IRepository</Name>

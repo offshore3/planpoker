@@ -11,11 +11,10 @@ using Convert = Shinetech.PlanPoker.WebApi.ViewModels.Convert;
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
     [RoutePrefix("api")]
-    public class UserController : ApiController
+    public class UserController : BaseController
     {
         private readonly IUserLogic _userLogic;
-
-        public UserController(IUserLogic userLogic)
+        public UserController(IUserLogic userLogic) : base(userLogic)
         {
             _userLogic = userLogic;
         }
@@ -53,11 +52,29 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("user")]
+        [BasicAuthorize]
+        public UserViewModel GetUserViewModel()
+        {
+            return LoginUser;
+        }
+
+        [HttpPut]
+        [Route("user")]
+        [BasicAuthorize]
+        public void EditUser(UserViewModel userViewModel)
+        {
+            _userLogic.Edit(userViewModel.ToLogicModel());
+        }
+
+        [HttpGet]
         [Route("test-authorize")]
         [BasicAuthorize]
         public string TestAuthorize()
         {
             return "OK";
         }
+
+        
     }
 }
