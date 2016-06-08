@@ -118,3 +118,8 @@
     color: #fff;
     line-height:40px;
 }
+
+.user-image {
+    width:80px;
+    height:80px;
+}
