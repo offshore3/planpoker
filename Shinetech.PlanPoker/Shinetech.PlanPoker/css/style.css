@@ -102,3 +102,19 @@
 .error {
     color: #ff0000;
 }
+
+.dropdown a {
+    color:#fff;
+}
+.dropdown a:hover {
+    color:#db0101;
+}
+
+.navbar-nav {
+    background-color: #db0101;
+}
+
+.navbar-nav > li > a {
+    color: #fff;
+    line-height:40px;
+}

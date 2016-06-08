@@ -16,5 +16,10 @@
             controller:"resetPasswordController"
         })
 
+        .when("/dashboard", {
+            templateUrl: "template/dashboard.html",
+            controller:"dashboardController"
+        })
+
         .otherwise("/login");
 });

@@ -1,4 +1,4 @@
-﻿appModule.controller('registerController', ['$scope', 'registerService', function ($scope, registerService) {
+﻿appModule.controller('registerController', ['$scope', '$location', 'registerService', function ($scope, $location, registerService) {
 
     $scope.user = {};
 
@@ -10,7 +10,7 @@
             else
             {
                 registerService.createUser($scope.user).then(function (response) {
-
+                    $location.path('/login');
                 });
             }
         });        
