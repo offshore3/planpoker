@@ -24,7 +24,7 @@ namespace Shinetech.PlanPoker.Data
                     {
                         c.SetProperty(NHibernate.Cfg.Environment.CommandTimeout,
                           TimeSpan.FromMinutes(3).TotalSeconds.ToString(CultureInfo.InvariantCulture));
-                        new SchemaExport(c).Execute(true, true, false);
+                        
                     })
                 .Mappings(x =>
                 {
