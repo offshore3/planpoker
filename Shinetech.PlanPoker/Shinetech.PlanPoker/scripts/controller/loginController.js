@@ -30,8 +30,8 @@
 
     $scope.testUpdateUser = function () {
         var command = {
-            Id: 4,
-            Name: "Joy4",
+            Id: 1,
+            Name: "Joy101",
             ImagePath:"test"
         }
         loginService.testUpdateUser(command,function (data) {
