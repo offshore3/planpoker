@@ -90,9 +90,8 @@ namespace Shinetech.PlanPoker.WebApi.Tests
 
             //Act
             _userController.Login(userViewModel.Email, userViewModel.Password);
-
             //Assert
-            _iuserLogicMock.Verify(x => x.Login(It.IsAny<string>(),It.IsAny<string>()), Times.Once);            
+            _iuserLogicMock.Verify(x => x.Login(It.IsAny<string>(),It.IsAny<string>()), Times.Once);
         }
     }
 }
