@@ -72,6 +72,10 @@
       <Project>{B21CEC42-72BC-47A2-8E2B-E10DAC2CC43E}</Project>
       <Name>Shinetech.PlanPoker.ILogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shinetech.PlanPoker.LogicModel\Shinetech.PlanPoker.LogicModel.csproj">
+      <Project>{E7DA59B0-E14B-4CDE-BC60-9A8080EBC468}</Project>
+      <Name>Shinetech.PlanPoker.LogicModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shinetech.PlanPoker.WebApi\Shinetech.PlanPoker.WebApi.csproj">
       <Project>{bdb9e44b-3c16-4d30-8f3d-ed71cb2f1404}</Project>
       <Name>Shinetech.PlanPoker.WebApi</Name>

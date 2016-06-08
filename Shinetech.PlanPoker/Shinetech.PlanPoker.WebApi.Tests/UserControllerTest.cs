@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using Moq;
-using Shinetech.PlanPoker.WebApi.ViewModels;
+﻿using Moq;
+using NUnit.Framework;
 using Shinetech.PlanPoker.ILogic;
+using Shinetech.PlanPoker.WebApi.Controllers;
 using Shinetech.PlanPoker.WebApi.Controllers;
 
 namespace Shinetech.PlanPoker.WebApi.Tests
@@ -33,11 +33,13 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Email="123456@qq.com",
                 Password="123456"
             };
-
-            
+            var userController = new UserController(_iuserLogicMock.Object);
+            _iuserLogicMock.Setup(x => x.CheckEmailExist(userViewModelMock.Email)).Returns(true);
             //Act
-
+            var result = userController.CheckEmailExist(userViewModelMock.Email);
             //Assert
+            _iuserLogicMock.Verify(x => x.CheckEmailExist(userViewModelMock.Email), Times.Once);
+            Assert.IsTrue(result);
         }
 
         [Test]
@@ -48,13 +50,17 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Email = "123456@qq.com",
                 Password = "123456"
             };
+            var userController = new UserController(_iuserLogicMock.Object);
+            _iuserLogicMock.Setup(x => x.CheckEmailExist(userViewModelMock.Email)).Returns(false);
             //Act
-
+            var result = userController.CheckEmailExist(userViewModelMock.Email);
             //Assert
+            _iuserLogicMock.Verify(x => x.CheckEmailExist(userViewModelMock.Email), Times.Once);
+            Assert.IsFalse(result);
         }
 
         [Test]
-        public void Check_email_when_email_does_not_exist_should_return_false_and_create_user()
+        public void Create_user_when_email_does_not_exist_check_email_should_return_false()
         {
             //Arrange
             var userViewModelMock = new UserViewModel
@@ -62,8 +68,13 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Email = "123456@qq.com",
                 Password = "123456"
             };
+            var userController = new UserController(_iuserLogicMock.Object);
+            _iuserLogicMock.Setup(x => x.CheckEmailExist(userViewModelMock.Email)).Returns(false);
+            var userLogicModel = userViewModelMock.ToLogicModel();
+            _iuserLogicMock.Setup(x=>x.Create(userLogicModel));
             //Act
-
+            var result = userController.CheckEmailExist(userViewModelMock.Email);
+            userController.Create(userViewModelMock);
             //Assert
         }
 
