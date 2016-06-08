@@ -12,7 +12,7 @@
     this.createUser = function (user) {
         return $http({
             method: "POST",
-            url: webAPI + "api/users",
+            url: webAPI + "api/user",
             data: user
         }).then(function (response) {
             return $q.when(response);

@@ -21,7 +21,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("users")]
+        [Route("user")]
         public void Create(UserViewModel userViewModel) {
             var userLogicModel = userViewModel.ToLogicModel();
             _userLogic.Create(userLogicModel);

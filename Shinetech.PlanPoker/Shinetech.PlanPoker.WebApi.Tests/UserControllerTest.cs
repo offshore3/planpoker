@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Controllers;
-using Shinetech.PlanPoker.WebApi.Controllers;
+using Shinetech.PlanPoker.WebApi.ViewModels;
 
 namespace Shinetech.PlanPoker.WebApi.Tests
 {
@@ -92,7 +92,7 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             _userController.Login(userViewModel.Email, userViewModel.Password);
 
             //Assert
-            _iuserLogicMock.Verify(x => x.Login(It.IsAny<string>(),It.IsAny<string>()), Times.Once);
+            _iuserLogicMock.Verify(x => x.Login(It.IsAny<string>(),It.IsAny<string>()), Times.Once);            
         }
     }
 }
