@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
-using Convert = Shinetech.PlanPoker.WebApi.ViewModels.Convert;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Net;
@@ -74,12 +71,6 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             _userLogic.Edit(userViewModel.ToLogicModel());
         }
 
-        [HttpGet]
-        [Route("test-authorize")]
-        [BasicAuthorize]
-        public string TestAuthorize()
-        {
-            return "OK";
         }
 
 
@@ -308,8 +299,5 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             //        return hash;
             //    });
             //return task;
-        }
-
-        
     }
 }

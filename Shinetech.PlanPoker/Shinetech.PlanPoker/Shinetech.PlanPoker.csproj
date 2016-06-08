@@ -145,6 +145,8 @@
     <Content Include="template\profile.html" />
     <Content Include="template\register.html" />
     <Content Include="template\ResetPassword.html" />
+    <Content Include="scripts\tools\dateFormatter.js" />
+    <Content Include="scripts\tools\httpProxy.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

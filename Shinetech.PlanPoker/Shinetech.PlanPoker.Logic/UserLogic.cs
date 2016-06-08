@@ -77,5 +77,10 @@ namespace Shinetech.PlanPoker.Logic
         {
             return _userRepository.Query().Any(x => x.Email == email);
         }
+
+        public bool CheckToken(string email, string password)
+        {
+            return _userRepository.Query().Any(x => x.Email == email&&x.Password==password);
+        }
     }
 }
