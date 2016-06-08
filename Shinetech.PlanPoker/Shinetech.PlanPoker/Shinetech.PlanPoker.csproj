@@ -124,6 +124,7 @@
     <Content Include="scripts\angular\angular.js" />
     <Content Include="scripts\angular\angular.min.js" />
     <Content Include="scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="scripts\controller\dashboardController.js" />
     <Content Include="scripts\controller\resetPasswordController.js" />
     <Content Include="scripts\controller\registerController.js" />
     <Content Include="scripts\controller\loginController.js" />
@@ -131,9 +132,11 @@
     <Content Include="scripts\jquery\jquery.js" />
     <Content Include="scripts\route\shinetechApp.js" />
     <Content Include="scripts\route\shinetechRoute.js" />
+    <Content Include="scripts\service\dashboardService.js" />
     <Content Include="scripts\service\resetPasswordService.js" />
     <Content Include="scripts\service\registerService.js" />
     <Content Include="scripts\service\loginService.js" />
+    <Content Include="template\dashboard.html" />
     <Content Include="template\login.html" />
     <Content Include="template\register.html" />
     <Content Include="template\ResetPassword.html" />
