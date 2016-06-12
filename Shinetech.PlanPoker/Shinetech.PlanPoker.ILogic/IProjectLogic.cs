@@ -10,5 +10,8 @@ namespace Shinetech.PlanPoker.ILogic
         void Delete(int id);
         ProjectLogicModel Get(int id);
         IEnumerable<ProjectLogicModel> GetAll();
+        IEnumerable<ProjectLogicModel> GetByUser(int userId, int pageNumber, int pageCount, string queryText);
+        int GetPages(int userId, int pageNumber, int pageCount, string queryText);
+
     }
 }

@@ -10,6 +10,7 @@ namespace Shinetech.PlanPoker.Logic.Installer
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IUserLogic>().ImplementedBy<UserLogic>().LifestylePerWebRequest());
+            container.Register(Component.For<IProjectLogic>().ImplementedBy<ProjectLogic>().LifestylePerWebRequest());
         }
     }
 }
