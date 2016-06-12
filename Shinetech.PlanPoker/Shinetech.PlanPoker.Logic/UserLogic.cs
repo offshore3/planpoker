@@ -61,7 +61,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public UserLogicModel Get(int id)
         {
-            return _userRepository.Get(id).ToLogicModel();
+            return _userRepository.Get(id)?.ToLogicModel();
         }
 
         public string Login(string email, string password)

@@ -88,5 +88,84 @@ namespace Shinetech.PlanPoker.Logic.Tests
             //Assert
             
         }
+
+        [Test]
+        public void Check_token_will_check_email_and_password_is_pair()
+        {
+            //Arrange
+            var userLogicModel = new UserLogicModel
+            {
+                Email = "123456@qq.com",
+                Password = "123456"
+            };
+            var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
+            //Act
+            userLogic.CheckToken(userLogicModel.Email, userLogicModel.Password);
+            //Assert
+            _iuserRepositoryMock.Verify(x=>x.Query(),Times.Once);
+        }
+
+        [Test]
+        public void Get_will_project_by_id_and_renturn_project()
+        {
+            //Arrange
+            var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
+            //Act
+            var result = userLogic.Get(3);
+            //Assert
+            _iuserRepositoryMock.Verify(x => x.Get(It.IsAny<int>()), Times.Once);
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void Login_will_return_token_if_email_and_password_are_pair()
+        {
+            //Arrange
+            var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
+            var userLogicModel = new UserLogicModel
+            {
+                Email = "123456@qq.com",
+                Password = "123456"
+            };
+            //Act
+            var result = userLogic.Login(userLogicModel.Email, userLogicModel.Password);
+            //Assert
+            _iuserRepositoryMock.Verify(x => x.Query(), Times.Once);
+        }
+
+        [Test]
+        public void GetAll_will_return_all_user()
+        {
+            //Arrange
+            var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
+            //Act
+            var result = userLogic.GetAll();
+            //Assert
+            _iuserRepositoryMock.Verify(x => x.Query(), Times.Once);
+        }
+
+        [Test]
+        public void Edit_will_edit_user_name_and_image()
+        {
+            //Arrange
+            var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
+            var userLogicModel = new UserLogicModel
+            {
+                Id=1,
+                Email = "123456@qq.com",
+                Password = "123456",
+                Name = "Joy1",
+                ImagePath = "Location"
+            };
+            var userModel=new UserModel();
+            //Act
+            _iuserRepositoryMock.Setup(x => x.GetForUpdate(userLogicModel.Id)).Returns(userLogicModel.ToModel);
+            _unitOfWorkFactory.Setup(x => x.GetCurrentUnitOfWork()).Returns(_uniteOfWorkMock.Object);
+            userLogic.Edit(userLogicModel);
+            //Assert
+            _iuserRepositoryMock.Verify(x => x.GetForUpdate(It.IsAny<int>()), Times.Once);
+        }
+        
+
     }
 }
