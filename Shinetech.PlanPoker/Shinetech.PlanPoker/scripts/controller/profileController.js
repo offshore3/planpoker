@@ -26,7 +26,7 @@
         console.log('file is ');
         console.dir(file);
         var uploadUrl = "/fileUpload";
-        profileService.uploadFileToUrl(file, uploadUrl);
+        profileService.uploadFileToUrl(file);
     };
 
 }]);

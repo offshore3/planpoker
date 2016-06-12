@@ -6,12 +6,20 @@
                 var resultArray = token.data.split('&');
                 $cookieStore.put('Authorization', resultArray[0]);
                 $cookieStore.put('LoginUserId', resultArray[1]);
+                successCallback();
+            } else {
+                errorCallback();
             }
-            successCallback();
+        });
+    };
+
+    this.getUser = function (successCallback, errorCallback) {
+        httpProxy.get("api/user").then(function (data) {
+            successCallback(data);
         }, function (error) {
             errorCallback(error);
         });
-    };
+    }
 
     this.testAuthorize = function (successCallback, errorCallback) {
         httpProxy.get("api/test-authorize").then(function (data) {

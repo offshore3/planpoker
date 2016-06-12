@@ -7,8 +7,9 @@
         console.log($scope.user);
         loginService.login($scope.user.email, $scope.user.password, function () {
             $location.path("/dashboard");
-        }, function() {
-            
+        }, function () {
+            $scope.isError = true;
+            $scope.message = "The email or password is wrong!";
         });
     };
 
