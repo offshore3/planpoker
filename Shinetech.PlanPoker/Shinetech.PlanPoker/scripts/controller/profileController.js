@@ -23,9 +23,7 @@
 
     $scope.uploadFile = function () {
         var file = $scope.myFile;
-        console.log('file is ');
-        console.dir(file);
-        var uploadUrl = "/fileUpload";
+        console.log(file);
         profileService.uploadFileToUrl(file);
     };
 

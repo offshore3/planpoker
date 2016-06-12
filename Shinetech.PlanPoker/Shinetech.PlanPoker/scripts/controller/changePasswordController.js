@@ -1,4 +1,4 @@
-﻿appModule.controller('changePasswordController', ['$scope', '$cookieStore', 'changePasswordService', 'loginService', function ($scope, $cookieStore, changePasswordService, loginService) {
+﻿appModule.controller('changePasswordController', ['$scope','$location', '$cookieStore', 'changePasswordService', 'loginService', function ($scope, $location, $cookieStore, changePasswordService, loginService) {
 
     $scope.user = {};
 
@@ -9,12 +9,13 @@
                 loginService.login(data.Email, $scope.user.oldpassword, function () {
                     data.Password = $scope.user.password;
                     changePasswordService.editUser(data, function () {
-                        $scope.message = "update sucess";
-                        $scope.isStatus = true;                    
+                        $cookieStore.remove("Authorization");
+                        $cookieStore.remove("LoginUserId");
+                        $location.path("/login");
                     });
 
                 }, function () {
-                    $scope.message = "old password is wrong";
+                    $scope.message = "Old password is wrong";
                     $scope.isStatus = true;
                 });
             }

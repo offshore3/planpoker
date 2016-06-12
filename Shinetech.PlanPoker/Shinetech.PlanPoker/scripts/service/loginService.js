@@ -16,8 +16,8 @@
     this.getUser = function (successCallback, errorCallback) {
         httpProxy.get("api/user").then(function (data) {
             successCallback(data);
-        }, function (error) {
-            errorCallback(error);
+        }, function () {
+
         });
     }
 

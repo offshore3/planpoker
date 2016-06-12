@@ -82,7 +82,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("uploadImg")]
+        [Route("uploadImage")]
         public void ImgUpload(HttpContext context)
         {
             //Hashtable hash = new Hashtable();
@@ -187,9 +187,9 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             ////context.Response.Write(Json.ToJson(hash));
             //context.Response.End();
 
-            // 检查是否是 multipart/form-data 
-            if (!Request.Content.IsMimeMultipartContent("form-data"))
-                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            //// 检查是否是 multipart/form-data 
+            //if (!Request.Content.IsMimeMultipartContent("form-data"))
+            //    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
             // 文件保存目录路径 
             const string saveTempPath = "~/UploadFiles/";

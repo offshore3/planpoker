@@ -11,35 +11,27 @@
     this.editUser = function (user, successCallback, errorCallback) {
         httpProxy.put("api/user", user
        ).then(function (data) {
-            successCallback(data);
-        }, function (error) {
-            errorCallback(error);
-        });
+           successCallback(data);
+       }, function (error) {
+           errorCallback(error);
+       });
     }
 
     this.uploadFileToUrl = function (file) {
         var fd = new FormData();
         fd.append('file', file);
         console.log(fd);
-        httpProxy.post("api/uploadImg", fd, {
-            transformRequest: angular.identity,
-            headers: { 'Content-Type': undefined }
-        }).then(function () {
-            
-        },function(){
-            
+        httpProxy.post("api/uploadImage", fd).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
         });
 
-        //$http.post(webAPI + "api/uploadImg", fd, {
+        //, {
         //    transformRequest: angular.identity,
-        //    headers: { 'Content-Type': undefined }
-        //})
-        //.success(function () {
+        //    headers: { 'Content-Type': 'application/json' }
+        //}
 
-        //})
-        //.error(function () {
-
-        //});
     }
 
     //this.uploadFileToUrl = function (file, uploadUrl) {

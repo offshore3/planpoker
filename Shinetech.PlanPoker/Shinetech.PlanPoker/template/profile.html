@@ -46,7 +46,7 @@
                         <label class="col-md-3 control-label">User Picture</label>
                         <div class="col-md-9">
                             <!--<img class="img-responsive user-image" ng-src="{{user.ImagePath?'user.ImagePath':'/images/user.png'}}" alt="User Picture" />-->
-                            <img class="img-responsive user-image" ng-src="{{user.ImagePath}}" alt="User Picture" />
+                            <img class="img-responsive user-image" ng-src="{{user.ImagePath?'user.ImagePath':'/images/user.png'}}" alt="User Picture" />
                             <input type="file" id="imgUpload" ng-change="uploadUserPicture()" ng-model="imagepPath" accept="image/*" file-reader />
 
 
