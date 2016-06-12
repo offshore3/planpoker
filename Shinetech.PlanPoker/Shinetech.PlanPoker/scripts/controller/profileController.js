@@ -2,8 +2,7 @@
     $scope.user = {};
 
     profileService.getUser(function (data) {
-        console.log(data.data);
-        $scope.user = data.data;
+        $scope.user = data;
     }, function () {
 
     });
