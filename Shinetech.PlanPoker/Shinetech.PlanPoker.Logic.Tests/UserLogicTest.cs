@@ -88,5 +88,41 @@ namespace Shinetech.PlanPoker.Logic.Tests
             //Assert
             
         }
+
+        [Test]
+        public void Edit_user_name_and_imagepath_should_edit_user()
+        {
+            //Arrange
+            var userLogicModel = new UserLogicModel
+            {
+                Id = 1,
+                Name = "Bill Gates",
+                ImagePath = "/upload/aaa.jpg"
+            };
+            var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
+            _unitOfWorkFactory.Setup(x => x.GetCurrentUnitOfWork()).Returns(_uniteOfWorkMock.Object);
+            //Act
+            userLogic.Edit(userLogicModel);
+            //Assert
+            _iuserRepositoryMock.Verify(x => x.GetForUpdate(It.IsAny<UserModel>()), Times.Once);
+        }
+
+        [Test]
+        public void Edit_user_password_should_edit_user()
+        {
+            //Arrange
+            var userLogicModel = new UserLogicModel
+            {
+                Id = 1,
+                Email = "4324@qq.com",
+                Password = "123456"
+            };
+            var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
+            _unitOfWorkFactory.Setup(x => x.GetCurrentUnitOfWork()).Returns(_uniteOfWorkMock.Object);
+            //Act
+            userLogic.Edit(userLogicModel);
+            //Assert
+            _iuserRepositoryMock.Verify(x => x.GetForUpdate(It.IsAny<UserModel>()), Times.Once);
+        }
     }
 }
