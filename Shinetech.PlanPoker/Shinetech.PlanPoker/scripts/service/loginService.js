@@ -29,11 +29,8 @@
     }
 
     this.testUpdateUser = function (command, successCallback, errorCallback) {
-        httpProxy({
-            method: "Put",
-            url: "api/user",
-            data: command
-        }).then(function (data) {
+        httpProxy.put("api/user",command
+        ).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);

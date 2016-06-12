@@ -6,7 +6,7 @@
     $scope.login = function () {
         console.log($scope.user);
         loginService.login($scope.user.email, $scope.user.password, function () {
-            $location.path("/profile");
+            $location.path("/dashboard");
         }, function() {
             
         });
@@ -14,7 +14,7 @@
 
     $scope.testAuthorize = function () {
         loginService.testAuthorize(function (data) {
-            console.log(data.data);
+            console.log(data);
         }, function () {
 
         });
@@ -22,7 +22,7 @@
 
     $scope.testGetUser = function () {
         loginService.testGetUser(function (data) {
-            console.log(data.data);
+            console.log(data);
         }, function () {
 
         });
@@ -35,7 +35,7 @@
             ImagePath:"test"
         }
         loginService.testUpdateUser(command,function (data) {
-            console.log(data.data);
+            console.log(data);
         }, function () {
 
         });
