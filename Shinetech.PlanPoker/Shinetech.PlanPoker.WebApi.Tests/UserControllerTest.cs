@@ -93,5 +93,41 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             //Assert
             _iuserLogicMock.Verify(x => x.Login(It.IsAny<string>(),It.IsAny<string>()), Times.Once);
         }
+
+        [Test]
+        public void Edit_user_name_and_imagepath_should_edit_user()
+        {
+            //Arrange
+            var userViewModel = new UserViewModel
+            {
+                Id = 1,
+                Name = "Bill Gates",
+                ImagePath = "/upload/aaa.jpg"
+            };
+            var userController = new UserController(_iuserLogicMock.Object);
+            var userLogicModel = userViewModel.ToLogicModel();
+            //Act
+            userController.EditUser(userViewModel);
+            //Assert
+            _iuserLogicMock.Verify(x => x.Edit(userLogicModel), Times.Once);
+        }
+
+        [Test]
+        public void Edit_user_password_should_edit_user()
+        {
+            //Arrange
+            var userViewModel = new UserViewModel
+            {
+                Id = 1,
+                Email="4324@qq.com",
+                Password = "123456"
+            };
+            var userController = new UserController(_iuserLogicMock.Object);
+            var userLogicModel = userViewModel.ToLogicModel();
+            //Act
+            userController.EditUser(userViewModel);
+            //Assert
+            _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.Once);
+        }
     }
 }
