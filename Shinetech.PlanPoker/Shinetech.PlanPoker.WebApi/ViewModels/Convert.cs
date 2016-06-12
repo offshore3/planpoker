@@ -40,8 +40,8 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
             {
                 Id = project.Id,
                 Name = project.Name,
-                OwnerLogicModel = project.OwnerViewModel.ToLogicModel(),
-                Participates = project.Participates.Select(x => x.ToLogicModel())
+                OwnerLogicModel = project.OwnerViewModel?.ToLogicModel(),
+                Participates = project.Participates?.Select(x => x.ToLogicModel())
             };
         }
 
@@ -51,7 +51,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
             {
                 Id = project.Id,
                 Name = project.Name,
-                OwnerViewModel = project.OwnerLogicModel.ToViewModel(),
+                OwnerViewModel = project.OwnerLogicModel?.ToViewModel(),
                 Participates = project.Participates?.Select(x => x.ToViewModel())
             };
         }

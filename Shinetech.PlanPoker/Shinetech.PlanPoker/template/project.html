@@ -46,7 +46,6 @@
                             <thead>
                                 <tr>
                                     <th>Project name</th>
-                                    <th>Project owner</th>
                                     <th>
                                         <div class="pull-right">Operation</div>
                                     </th>
@@ -56,19 +55,16 @@
                                 <td>
                                     <span>{{project.Name}}</span>
                                 </td>
-                                <td>
-                                    <span>{{project.OwnerViewModel.Name}}</span>
-                                </td>
 
                                 <td style="width: 150px;">
                                     <div class="pull-right">
-                                        <button ng-click="showUpgradeModal(topic)" class="btn btn-info" title="Upgrade">
+                                        <button ng-click="showUpgradeModal(project)" class="btn btn-info" title="Upgrade">
                                             <span class="fa fa-users"></span>
                                         </button>
-                                        <button ng-click="showEditModal(topic)" class="btn btn-success">
+                                        <button ng-click="showEditModal(project)" class="btn btn-success">
                                             <span class="fa fa-edit"></span>
                                         </button>
-                                        <button ng-click="showDeleteModal(topic,$index)" class="btn btn-danger">
+                                        <button ng-click="showDeleteModal(project,$index)" class="btn btn-danger">
                                             <span class="fa fa-remove"></span>
                                         </button>
                                     </div>
@@ -93,104 +89,34 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="topicCreateAndEdit" tabindex="-1" role="dialog">
+                <div class="modal fade" id="projectCreateAndEdit" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel">
-                                    <span ng-show="newTopic.Id!=undefined">Edit Topic</span>
-                                    <span ng-show="newTopic.Id==undefined">Create Topic</span>
+                                    <span ng-show="newProject.Id!=undefined">Edit Project</span>
+                                    <span ng-show="newProject.Id==undefined">Create project</span>
                                 </h4>
                             </div>
 
                             <div class="modal-body">
-                                <form name="topicForm">
+                                <form name="projectForm">
                                     <div class="form-group">
-                                        <input type="hidden" ng-model="newTopic.Id" />
+                                        <input type="hidden" ng-model="newProject.Id" />
                                         <label>Name</label>
                                         <input class="form-control"
                                                type="text"
                                                name="Name"
-                                               ng-model="newTopic.Name"
-                                               required
-                                               ng-invalid-tip
-                                               ng-change="topicNameChange()"
-                                               ng-getfocus="showingTopicModal" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea class="form-control"
-                                                  name="Description"
-                                                  ng-model="newTopic.Description"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Tranlation</label>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <select class="form-control"
-                                                        ng-model="newTopic.CurrentLanguageType"
-                                                        name="languageType"
-                                                        ng-options="languageType.Value as languageType.Key for languageType in languageTypeForSelector"
-                                                        ng-change="saveCurrentTranslation('{{newTopic.CurrentLanguageType}}')"></select>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input class="form-control"
-                                                       type="text"
-                                                       name="TranslationValue"
-                                                       ng-model="newTopic.CurrentTranslationValue"
-                                                       ng-invalid-tip />
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="form-group">
-                                        <label>Synonyms</label>
-                                        <ng-topics-dropdown model="newTopic.SynonymTopics" topics="synonymTopicsForSelector" multiple="true"></ng-topics-dropdown>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Categories</label>
-                                        <select class="form-control "
-                                                ng-model="newTopic.Categories"
-                                                name="categories"
-                                                data-placeholder="Choose some categories ..."
-                                                ng-chosen="chosenSetting"
-                                                ng-options="category as category.Name for category in topicCategories track by category.Id"
-                                                multiple></select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Types</label>
-                                        <select class="form-control "
-                                                ng-model="newTopic.TopicClasses"
-                                                name="types"
-                                                data-placeholder="Choose some types ..."
-                                                ng-chosen="chosenSetting"
-                                                ng-options="topicClass as topicClass.Name for topicClass in topicClasses track by topicClass.Id"
-                                                multiple></select>
-                                    </div>
-                                </form>
-
-                                <form class="img-upload-form" method="post" enctype="multipart/form-data">
-                                    <div class="img-upload-block">
-                                        <i class="fa fa-picture-o"></i>
-                                        <input name="myFile" type="file" ng-file-model="topicPicture" accept=".jpg,.jpeg,.png,.bmp" ng-image-reader="imageSrc" />
-                                    </div>
-
-                                    <div style="position: relative;">
-                                        <a class="upload-picture-block" ng-background="imageSrc || newTopic.Picture"></a>
+                                               ng-model="newProject.Name"
+                                               required />
                                     </div>
                                 </form>
                             </div>
-
                             <div class="modal-footer">
                                 <button type="button" ng-click="save()" class="btn btn-success"
-                                        ng-disabled="topicForm.$invalid || isBusy">
-                                    <span ng-show=" !isbusy">Save</span>
+                                        ng-disabled="projectForm.$invalid || isBusy">
+                                    <span ng-show="!isbusy">Save</span>
                                     <span ng-show="isBusy">
                                         <i class="fa fa-spinner fa-spin"></i>
                                     </span>
@@ -200,55 +126,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" id="deleteTopic" tabindex="-1" role="dialog">
+                <div class="modal fade" id="deleteProject" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">
-                                    Delete Topic
+                                    Delete project
                                 </h4>
                             </div>
 
                             <div class="modal-body">
-                                Are you sure you want to delete the topic?
+                                Are you sure you want to delete the project?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" ng-click="topicDelete()" ng-disabled="isBusy" class="btn btn-danger">
+                                <button type="button" ng-click="projectDelete()" ng-disabled="isBusy" class="btn btn-danger">
                                     <span ng-show="!isBusy">Delete</span>
                                     <span ng-show="isBusy">
                                         <i class="fa fa-spinner fa-spin"></i>
                                     </span>
                                 </button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal" tabindex="2">Cancel</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="UpgradeModal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">
-                                    Upgrade Topic
-                                </h4>
-                            </div>
-
-                            <div class="modal-body">
-                                Are you sure you want to upgrade this topic into LOOP?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" ng-click="upgradeTopic()" ng-disabled="isUpgrading" class="btn btn-danger">
-                                    <span ng-show="!isUpgrading">Upgrade</span>
-                                    <span ng-show="isUpgrading">
-                                        <i class="fa fa-spinner fa-spin"></i>
-                                    </span>
-                                </button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal" tabindex="2">Cancel</button>
-
                             </div>
                         </div>
                     </div>

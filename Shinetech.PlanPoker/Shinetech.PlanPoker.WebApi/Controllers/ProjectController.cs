@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
+using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
@@ -20,12 +21,13 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpGet]
         [Route("projects")]
+        [BasicAuthorize]
         public ProjectsViewModel GetProjects(int pageNumber, int pageCount, string queryText = "")
         {
             var result = new ProjectsViewModel
             {
                 Pages = _projectLogic.GetPages(LoginUserId,pageNumber, pageCount, queryText),
-                ProjectViewModels = _projectLogic.GetByUser(LoginUserId, pageNumber, pageCount, queryText).Select(x => new ProjectViewModel
+                ProjectViewModels = _projectLogic.GetProjectByUser(LoginUserId, pageNumber, pageCount, queryText).Select(x => new ProjectViewModel
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -35,6 +37,30 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             };
 
             return result;
+        }
+
+        [HttpDelete]
+        [Route("project")]
+        [BasicAuthorize]
+        public void DeleteProject(int projectId)
+        {
+            _projectLogic.Delete(projectId);
+        }
+
+        [HttpPost]
+        [Route("project")]
+        [BasicAuthorize]
+        public void CreateProject(ProjectViewModel project)
+        {
+            _projectLogic.Create(LoginUser.ToLogicModel(),project.ToLogicModel());
+        }
+
+        [HttpPut]
+        [Route("project")]
+        [BasicAuthorize]
+        public void EditProject(ProjectViewModel project)
+        {
+            _projectLogic.Edit(project.ToLogicModel());
         }
 
     }

@@ -12,5 +12,31 @@
             errorCallback(error);
         });
     }
+
+    this.deleteProject = function (projectId, successCallback, errorCallback) {
+        httpProxy.Delete("api/project?projectId=" + projectId).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    }
+
+    this.editProject = function (project, successCallback, errorCallback) {
+        httpProxy.put("api/project",project).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    }
+
+    this.createProject = function (project, successCallback, errorCallback) {
+        httpProxy.post("api/project",project).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    }
+    
+
 }]);
 

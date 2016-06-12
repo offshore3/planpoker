@@ -41,7 +41,7 @@ namespace Shinetech.PlanPoker.LogicModel
             {
                 Id = project.Id,
                 Name = project.Name,
-                OwnerLogicModel = project.Owner.ToLogicModel(),
+                OwnerLogicModel = project.Owner?.ToLogicModel(),
                 Participates = project.Participates?.Select(x=>x.ToLogicModel())
             };
         }
@@ -52,7 +52,7 @@ namespace Shinetech.PlanPoker.LogicModel
             {
                 Id = project.Id,
                 Name = project.Name,
-                Owner = project.OwnerLogicModel.ToModel(),
+                Owner = project.OwnerLogicModel?.ToModel(),
                 Participates = project.Participates?.Select(x => x.ToModel())
             };
         }
