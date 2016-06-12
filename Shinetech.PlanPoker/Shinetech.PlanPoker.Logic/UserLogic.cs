@@ -43,6 +43,17 @@ namespace Shinetech.PlanPoker.Logic
             }
         }
 
+        public void EditPassword(UserLogicModel model)
+        {
+            var userModel = _userRepository.GetForUpdate(model.Id);
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                userModel.Password = model.Password;
+
+                unitOfwork.Commit();
+            }
+        }
+
         public void Delete(int id)
         {
             throw new System.NotImplementedException();
