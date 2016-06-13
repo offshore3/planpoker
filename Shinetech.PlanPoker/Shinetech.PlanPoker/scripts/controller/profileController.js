@@ -4,10 +4,6 @@
     $scope.getUserInfo = function () {
         loginService.getUser(function (data) {
             $scope.user = data;
-            if ($scope.user.ImagePath != null || $scope.user.ImagePath != undefined) {
-                $scope.user.ImagePath = webAPI + $scope.user.ImagePath;
-            }
-
         }, function () {
         });
     }

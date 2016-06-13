@@ -63,7 +63,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             Bitmap imageBitmap = new Bitmap(stream);
             var imagePath = path + "\\" + fileSaveName;
             imageBitmap.Save(imagePath, System.Drawing.Imaging.ImageFormat.Jpeg);
-            return imagePath.Substring(imagePath.LastIndexOf("Image", StringComparison.Ordinal));
+            return System.Web.Configuration.WebConfigurationManager.AppSettings["ApiPath"] + imagePath.Substring(imagePath.LastIndexOf("Image", StringComparison.Ordinal));
         }
     }
 }
