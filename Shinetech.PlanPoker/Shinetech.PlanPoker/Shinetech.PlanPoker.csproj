@@ -133,6 +133,9 @@
     <Content Include="scripts\controller\registerController.js" />
     <Content Include="scripts\controller\loginController.js" />
     <Content Include="scripts\controller\shinetechController.js" />
+    <Content Include="scripts\directive\file-reader.js" />
+    <Content Include="scripts\directive\file-services.js" />
+    <Content Include="scripts\directive\ng-image-reader.js" />
     <Content Include="scripts\directive\profileDirective.js" />
     <Content Include="scripts\directive\registerDirective.js" />
     <Content Include="scripts\jquery\jquery.js" />

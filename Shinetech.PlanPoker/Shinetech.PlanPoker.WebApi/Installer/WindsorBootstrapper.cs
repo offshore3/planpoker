@@ -3,6 +3,7 @@ using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Shinetech.PlanPoker.Logic.Installer;
 using Shinetech.PlanPoker.Repository.Installer;
+using Shinetech.PlanPoker.WebApi.Tools;
 
 namespace Shinetech.PlanPoker.WebApi.Installer
 {
