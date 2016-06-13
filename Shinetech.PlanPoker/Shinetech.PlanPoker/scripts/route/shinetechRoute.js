@@ -21,20 +21,20 @@
             controller:"dashboardController"
         })
 
-        .when("/profile", {
-            templateUrl: "template/profile.html",
-            controller:"profileController"
-        })
+        //.when("/profile", {
+        //    templateUrl: "template/profile.html",
+        //    controller:"profileController"
+        //})
 
-        .when("/changePassword", {
-            templateUrl: "template/ChangePassword.html",
-            controller:"changePasswordController"
-        })
+        //.when("/changePassword", {
+        //    templateUrl: "template/ChangePassword.html",
+        //    controller:"changePasswordController"
+        //})
 
-        .when("/projects", {
-            templateUrl: "template/project.html",
-            controller:"projectController"
-        })
+        //.when("/projects", {
+        //    templateUrl: "template/project.html",
+        //    controller:"projectController"
+        //})
 
         .otherwise("/login");
 });
