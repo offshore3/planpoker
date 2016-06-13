@@ -30,6 +30,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 Name = user.Name,
                 Password = user.Password,
                 Email = user.Email,
+                ImagePath = user.ImagePath,
                 Projects = user.Projects?.Select(x => x.ToViewModel())
             };
         }
