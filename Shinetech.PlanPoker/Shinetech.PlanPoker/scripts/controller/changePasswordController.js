@@ -9,7 +9,7 @@
                 changePasswordService.editUser(data, function () {
                     $cookieStore.remove("Authorization");
                     $cookieStore.remove("LoginUserId");
-                    $location.path("/login");
+                    //$location.path("/login");
                 });
             } else {
                 $scope.message = "Old password is wrong";

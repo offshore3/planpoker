@@ -17,6 +17,7 @@
                 $scope.pages = range(1, data.Pages);
             }, function() {
             });
+
         }
         $scope.loadProjects();
         $scope.gotoPage = function(page) {
@@ -74,5 +75,17 @@
             }
 
         };
+
+        $scope.cancleProjectModal = function () {
+            $(".cancle-project").click(function () {
+                $("#projectCreateAndEdit").modal("hide");
+            });
+        };
+
+        $scope.deleteProjectModal = function () {
+            $(".delete-project").click(function () {
+                $("#deleteProject").modal("hide");
+            });
+        }; 
     }
 ])
