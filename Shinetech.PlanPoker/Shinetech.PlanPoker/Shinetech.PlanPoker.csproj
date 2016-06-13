@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\boostrap.min.css" />
+    <Content Include="css\estimatestyle.css" />
     <Content Include="css\style.css" />
     <Content Include="fonts\css\font-awesome.css" />
     <Content Include="fonts\css\font-awesome.min.css" />

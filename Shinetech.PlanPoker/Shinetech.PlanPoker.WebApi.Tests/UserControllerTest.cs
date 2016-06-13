@@ -93,7 +93,6 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             //Assert
             _iuserLogicMock.Verify(x => x.Login(It.IsAny<string>(),It.IsAny<string>()), Times.Once);
         }
-
         [Test]
         public void Edit_user_name_and_imagepath_should_edit_user()
         {
