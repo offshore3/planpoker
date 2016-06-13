@@ -6,6 +6,8 @@
                 var resultArray = token.data.split('&');
                 $cookieStore.put('Authorization', resultArray[0]);
                 $cookieStore.put('LoginUserId', resultArray[1]);
+                $http.defaults.headers.common['Authorization'] = $cookieStore.get('Authorization');
+                $http.defaults.headers.common['LoginUserId'] = $cookieStore.get('LoginUserId');
                 successCallback();
             } else {
                 errorCallback();

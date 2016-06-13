@@ -1,11 +1,12 @@
-﻿appModule.controller('profileController', ['$scope', 'profileService', function ($scope, profileService) {
+﻿appModule.controller('profileController', ['$scope', 'profileService', 'loginService', function ($scope, profileService, loginService) {
     $scope.user = {};
 
-    profileService.getUser(function (data) {
-        $scope.user = data;
-    }, function () {
-
-    });
+    $scope.getUserInfo = function() {
+        loginService.getUser(function (data) {
+            $scope.user = data;
+        }, function () {
+        });
+    }
 
     $scope.uploadUserPicture = function () {
         $scope.user.ImagePath = $scope.imagepPath;
