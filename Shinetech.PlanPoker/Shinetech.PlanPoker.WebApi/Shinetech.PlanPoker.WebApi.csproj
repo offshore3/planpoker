@@ -253,6 +253,7 @@
     <Compile Include="Tools\BasicAuthorizeAttribute.cs" />
     <Compile Include="Tools\FileTypeFilter.cs" />
     <Compile Include="ViewModels\Convert.cs" />
+    <Compile Include="ViewModels\InviteParticipateViewModel.cs" />
     <Compile Include="ViewModels\InviteViewModel.cs" />
     <Compile Include="ViewModels\ParticipatesViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />

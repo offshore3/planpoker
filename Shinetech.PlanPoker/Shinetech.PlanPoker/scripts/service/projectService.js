@@ -53,8 +53,12 @@
         });
     }
 
-    
-    
-
+    this.inviteUser = function (inviteParticipate, successCallback, errorCallback) {
+        httpProxy.post("api/invite-participate", inviteParticipate).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    }
 }]);
 

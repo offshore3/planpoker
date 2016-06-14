@@ -6,5 +6,6 @@
         public ProjectLogicModel Project { get; set; }
         public UserLogicModel User { get; set; }
         public bool IsRegister { get; set; }
+        public string InviteEmail { get; set; }
     }
 }

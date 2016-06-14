@@ -11,6 +11,7 @@ namespace Shinetech.PlanPoker.Data.Maps
             LazyLoad();
             Id(x => x.Id);
             Map(m => m.IsRegister);
+            Map(m => m.InviteEmail);
             References(x => x.User).Column("UserId");
             References(x => x.Project).Column("ProjectId");
         }

@@ -48,6 +48,7 @@
         }
 
         $scope.showParticipateModal = function (projectId) {
+            $scope.currentProjectId = projectId;
             $scope.loadParticipates(projectId);
             $("#participatesProject").modal("show");
         };
@@ -61,6 +62,17 @@
             projectService.deleteParticipate($scope.deleteParticipate.Id, function () {
                 $scope.loadParticipates($scope.deleteParticipate.ProjectId);
                 $("#deleteParticipatesModal").modal("hide");
+            }, function () {
+            });
+        }
+
+        $scope.inviteUser = function() {
+            var command = {
+                ProjectId: $scope.currentProjectId,
+                Email: $scope.InviteEmail
+            }
+            projectService.inviteUser(command, function () {
+                $scope.loadParticipates($scope.currentProjectId);
             }, function () {
             });
         }

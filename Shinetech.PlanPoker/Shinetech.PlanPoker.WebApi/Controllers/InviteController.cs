@@ -11,10 +11,12 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
     public class InviteController : BaseController
     {
         private readonly IInviteLogic _inviteLogic;
+        private readonly IUserLogic _userLogic;
 
         public InviteController(IUserLogic userLogic, IInviteLogic inviteLogic) : base(userLogic)
         {
             _inviteLogic = inviteLogic;
+            _userLogic = userLogic;
         }
 
         [HttpGet]
@@ -31,6 +33,20 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         public void DeleteParticipates(int participateId)
         {
             _inviteLogic.Delete(participateId);
+        }
+
+        [HttpPost]
+        [Route("invite-participate")]
+        [BasicAuthorize]
+        public bool DeleteParticipates(InviteParticipateViewModel inviteParticipateViewModel)
+        {
+            var isSendEmailSuccess = true;
+            _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
+            if (!_userLogic.CheckEmailExist(inviteParticipateViewModel.Email))
+            {
+                //TODO add send email.
+            }
+            return isSendEmailSuccess;
         }
     }
 }

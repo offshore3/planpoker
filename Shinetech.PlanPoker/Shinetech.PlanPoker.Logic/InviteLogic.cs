@@ -31,6 +31,24 @@ namespace Shinetech.PlanPoker.Logic
             throw new NotImplementedException();
         }
 
+        public void Create(int projectId, string email)
+        {
+
+            var inviteModel = new InviteModel()
+            {
+                InviteEmail = email,
+                Project = _projectRepository.Get(projectId),
+                IsRegister = _userRepository.Query().Any(x=>x.Email==email),
+                User = _userRepository.Query().FirstOrDefault(x=>x.Email==email)
+            };
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                _inviteRepository.Save(inviteModel);
+
+                unitOfwork.Commit();
+            }
+        }
+
         public void Delete(int id)
         {
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
@@ -53,7 +71,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public IEnumerable<ParticipatesLogicModel> GetParticipatesByProjectId(int projectId)
         {
-            var invites = _inviteRepository.Query().Where(x => x.Project.Id == projectId);
+            var invites = _inviteRepository.Query().Where(x => x.Project.Id == projectId&&x.IsRegister);
             var users = _userRepository.Query().Where(x => invites.Select(y => y.User.Id).Contains(x.Id)).ToList();
 
             return GetParticipateLogicModel(users, invites.ToList());
