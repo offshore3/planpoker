@@ -11,9 +11,9 @@
             controller: "registerController"
         })
 
-        .when("/resetpassword", {
-            templateUrl: "template/ResetPassword.html",
-            controller:"resetPasswordController"
+        .when("/retrievepassword", {
+            templateUrl: "template/RetrievePassword.html",
+            controller:"retrievePasswordController"
         })
 
         .when("/dashboard", {
