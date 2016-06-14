@@ -40,6 +40,7 @@ namespace Shinetech.PlanPoker.Repository.Installer
             container.Register(Component.For<IUnitOfWork>().ImplementedBy<NHibernateUnitOfWork>().LifestylePerWebRequest());
             container.Register(Component.For<IUserRepository>().ImplementedBy<UserRepository>().LifestylePerWebRequest());
             container.Register(Component.For<IProjectRepository>().ImplementedBy<ProjectRepository>().LifestylePerWebRequest());
+            container.Register(Component.For<IInviteRepository>().ImplementedBy<InviteRepository>().LifestylePerWebRequest());
         }
         public static void InstallForTest(IWindsorContainer container)
         {

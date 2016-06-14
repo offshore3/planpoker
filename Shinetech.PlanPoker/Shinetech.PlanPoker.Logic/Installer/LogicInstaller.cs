@@ -11,6 +11,7 @@ namespace Shinetech.PlanPoker.Logic.Installer
         {
             container.Register(Component.For<IUserLogic>().ImplementedBy<UserLogic>().LifestylePerWebRequest());
             container.Register(Component.For<IProjectLogic>().ImplementedBy<ProjectLogic>().LifestylePerWebRequest());
+            container.Register(Component.For<IInviteLogic>().ImplementedBy<InviteLogic>().LifestylePerWebRequest());
         }
     }
 }

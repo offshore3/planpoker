@@ -38,7 +38,21 @@
             $scope.newProject = {};
         };
 
-        $scope.showEditModal = function(project) {
+        $scope.showParticipateModal = function (projectId) {
+            projectService.getProjectParticipates(projectId, function (data) {
+                $scope.participates = data;
+                $("#participatesProject").modal("show");
+            }, function() {
+
+            });
+            
+        };
+
+        $scope.closeParticipatesModal = function() {
+            $("#participatesProject").modal("hide");
+        }
+
+        $scope.showEditModal = function (project) {
             $scope.newProject = angular.copy(project);
 
             $("#projectCreateAndEdit").modal("show");
