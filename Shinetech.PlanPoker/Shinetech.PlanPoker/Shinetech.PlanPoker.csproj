@@ -149,6 +149,7 @@
     <Content Include="scripts\service\loginService.js" />
     <Content Include="scripts\tools\emailTemplate.js" />
     <Content Include="scripts\tools\config.js" />
+    <Content Include="scripts\tools\moment.min.js" />
     <Content Include="template\ChangePassword.html" />
     <Content Include="template\dashboard.html" />
     <Content Include="template\login.html" />

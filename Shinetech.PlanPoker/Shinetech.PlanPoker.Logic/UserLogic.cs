@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shinetech.PlanPoker.Data.Models;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
 using Shinetech.PlanPoker.Logic.Tools;
@@ -56,7 +55,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public UserLogicModel Get(int id)

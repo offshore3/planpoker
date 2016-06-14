@@ -38,15 +38,36 @@
             $scope.newProject = {};
         };
 
-        $scope.showParticipateModal = function (projectId) {
+        $scope.loadParticipates = function (projectId) {
             projectService.getProjectParticipates(projectId, function (data) {
                 $scope.participates = data;
-                $("#participatesProject").modal("show");
-            }, function() {
+                $scope.isShowParticipates = data.length > 0;
+            }, function () {
 
             });
-            
+        }
+
+        $scope.showParticipateModal = function (projectId) {
+            $scope.loadParticipates(projectId);
+            $("#participatesProject").modal("show");
         };
+
+        $scope.showDeleteParticipateModal = function (participate) {
+            $scope.deleteParticipate = participate;
+            $("#deleteParticipatesModal").modal("show");
+        };
+
+        $scope.participateDelete = function () {
+            projectService.deleteParticipate($scope.deleteParticipate.Id, function () {
+                $scope.loadParticipates($scope.deleteParticipate.ProjectId);
+                $("#deleteParticipatesModal").modal("hide");
+            }, function () {
+            });
+        }
+
+        $scope.closeDeleteParticipateModal= function() {
+            $("#deleteParticipatesModal").modal("hide");
+        }
 
         $scope.closeParticipatesModal = function() {
             $("#participatesProject").modal("hide");
@@ -72,7 +93,7 @@
             });
         }
 
-        $scope.save = function () {
+        $scope.saveProject = function () {
             var project = angular.copy($scope.newProject);
             if (project.Id) {
                 projectService.editProject(project, function () {

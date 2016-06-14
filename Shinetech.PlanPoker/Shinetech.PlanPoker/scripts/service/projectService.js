@@ -44,6 +44,15 @@
             errorCallback(error);
         });
     }
+
+    this.deleteParticipate = function (participateId, successCallback, errorCallback) {
+        httpProxy.Delete("api/participates?participateId=" + participateId).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    }
+
     
     
 
