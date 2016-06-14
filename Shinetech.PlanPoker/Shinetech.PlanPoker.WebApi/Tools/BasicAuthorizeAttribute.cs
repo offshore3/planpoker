@@ -26,15 +26,15 @@ namespace Shinetech.PlanPoker.WebApi.Tools
 
         private bool CheckTokenIsValidAndManageCache(string tokenStr)
         {
-            _userLogic= WindsorBootstrapper.Container.Resolve<IUserLogic>();
-            bool result = false;
+            _userLogic = WindsorBootstrapper.Container.Resolve<IUserLogic>();
+            var result = false;
             var credentialstring = TokenGenerator.DecodeToken(tokenStr);
 
             var datas = credentialstring.Split('&');
-            string userEmail = datas[0];
-            string password = datas[1];
+            var userEmail = datas[0];
+            var password = datas[1];
             var isUserExist = _userLogic.CheckToken(userEmail, password);
-            if (string.IsNullOrEmpty(userEmail)|| string.IsNullOrEmpty(password)||!isUserExist)
+            if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(password) || !isUserExist)
             {
                 result = true;
             }

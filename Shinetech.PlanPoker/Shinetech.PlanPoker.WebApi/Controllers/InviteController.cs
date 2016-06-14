@@ -11,6 +11,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
     public class InviteController : BaseController
     {
         private readonly IInviteLogic _inviteLogic;
+
         public InviteController(IUserLogic userLogic, IInviteLogic inviteLogic) : base(userLogic)
         {
             _inviteLogic = inviteLogic;

@@ -11,17 +11,18 @@ namespace Shinetech.PlanPoker.Logic
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserRepository _userRepository;
         private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IUserRepository _userRepository;
 
         public UserLogic(IUserRepository userRepository, IUnitOfWorkFactory unitOfWorkFactory)
         {
             _userRepository = userRepository;
             _unitOfWorkFactory = unitOfWorkFactory;
         }
+
         public void Create(UserLogicModel model)
         {
-            var userModel= model.ToModel();
+            var userModel = model.ToModel();
 
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
@@ -37,7 +38,7 @@ namespace Shinetech.PlanPoker.Logic
             {
                 userModel.Name = model.Name;
                 userModel.ImagePath = model.ImagePath;
-                
+
                 unitOfwork.Commit();
             }
         }
@@ -65,11 +66,12 @@ namespace Shinetech.PlanPoker.Logic
 
         public string Login(string email, string password)
         {
-            var user = _userRepository.Query().FirstOrDefault(x=>x.Email== email&& password==x.Password);
-            var isLoginSuccess= user != null;
+            var user = _userRepository.Query().FirstOrDefault(x => x.Email == email && password == x.Password);
+            var isLoginSuccess = user != null;
 
             return isLoginSuccess
-                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm"))+"&"+ user.Id
+                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + "&" +
+                  user.Id
                 : string.Empty;
         }
 
@@ -90,7 +92,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public bool CheckToken(string email, string password)
         {
-            return _userRepository.Query().Any(x => x.Email == email&&x.Password==password);
+            return _userRepository.Query().Any(x => x.Email == email && x.Password == password);
         }
     }
 }

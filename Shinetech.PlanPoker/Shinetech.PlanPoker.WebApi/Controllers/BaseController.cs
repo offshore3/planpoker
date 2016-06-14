@@ -23,6 +23,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                 return _userLogic.Get(LoginUserId).ToViewModel();
             }
         }
+
         public int LoginUserId
         {
             get

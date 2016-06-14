@@ -10,6 +10,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
     public class ProjectController : BaseController
     {
         private readonly IProjectLogic _projectLogic;
+
         public ProjectController(IUserLogic userLogic, IProjectLogic projectLogic) : base(userLogic)
         {
             _projectLogic = projectLogic;
@@ -22,14 +23,16 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         {
             var result = new ProjectsViewModel
             {
-                Pages = _projectLogic.GetPages(LoginUserId,pageNumber, pageCount, queryText),
-                ProjectViewModels = _projectLogic.GetProjectByUser(LoginUserId, pageNumber, pageCount, queryText).Select(x => new ProjectViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    OwnerViewModel = x.OwnerLogicModel.ToViewModel(),
-                    //Participates = x.Participates?.Select(y => y.ToViewModel())
-                }).ToList()
+                Pages = _projectLogic.GetPages(LoginUserId, pageNumber, pageCount, queryText),
+                ProjectViewModels =
+                    _projectLogic.GetProjectByUser(LoginUserId, pageNumber, pageCount, queryText)
+                        .Select(x => new ProjectViewModel
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            OwnerViewModel = x.OwnerLogicModel.ToViewModel()
+                            //Participates = x.Participates?.Select(y => y.ToViewModel())
+                        }).ToList()
             };
 
             return result;
@@ -48,7 +51,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [BasicAuthorize]
         public void CreateProject(ProjectViewModel project)
         {
-            _projectLogic.Create(LoginUser.ToLogicModel(),project.ToLogicModel());
+            _projectLogic.Create(LoginUser.ToLogicModel(), project.ToLogicModel());
         }
 
         [HttpPut]
@@ -58,9 +61,5 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         {
             _projectLogic.Edit(project.ToLogicModel());
         }
-
-       
-        
-
     }
 }

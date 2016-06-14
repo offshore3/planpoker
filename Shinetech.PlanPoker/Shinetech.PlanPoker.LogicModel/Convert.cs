@@ -14,9 +14,8 @@ namespace Shinetech.PlanPoker.LogicModel
                 Password = user.Password,
                 Email = user.Email,
                 ImagePath = user.ImagePath,
-                Projects = user.Projects?.Select(x=>x.ToLogicModel())
+                Projects = user.Projects?.Select(x => x.ToLogicModel())
             };
-
         }
 
         public static UserModel ToModel(this UserLogicModel user)
@@ -38,7 +37,7 @@ namespace Shinetech.PlanPoker.LogicModel
                 Id = project.Id,
                 Name = project.Name,
                 OwnerLogicModel = project.Owner?.ToLogicModel(),
-                Participates = project.Participates?.Select(x=>x.ToLogicModel())
+                Participates = project.Participates?.Select(x => x.ToLogicModel())
             };
         }
 

@@ -43,6 +43,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         {
             return _userLogic.CheckEmailExist(email);
         }
+
         [HttpGet]
         [Route("login")]
         public string Login(string email, string password)
@@ -73,7 +74,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         {
             _userLogic.EditPassword(userViewModel.ToLogicModel());
 
-           return Login(userViewModel.Email, userViewModel.Password);
-        }        
+            return Login(userViewModel.Email, userViewModel.Password);
+        }
     }
 }

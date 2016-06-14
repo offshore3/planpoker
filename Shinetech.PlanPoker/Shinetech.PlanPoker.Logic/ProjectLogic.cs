@@ -8,7 +8,7 @@ using Shinetech.PlanPoker.Repository.UnitOfWork;
 
 namespace Shinetech.PlanPoker.Logic
 {
-    public class ProjectLogic:IProjectLogic
+    public class ProjectLogic : IProjectLogic
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IUnitOfWorkFactory _unitOfWorkFactory;
@@ -19,7 +19,7 @@ namespace Shinetech.PlanPoker.Logic
             _unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public void Create(UserLogicModel user,ProjectLogicModel model)
+        public void Create(UserLogicModel user, ProjectLogicModel model)
         {
             var projectModel = model.ToModel();
             projectModel.Owner = user.ToModel();
@@ -36,7 +36,7 @@ namespace Shinetech.PlanPoker.Logic
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
                 userModel.Name = model.Name;
-                userModel.Participates = model.Participates?.Select(x=>x.ToModel());
+                userModel.Participates = model.Participates?.Select(x => x.ToModel());
 
                 unitOfwork.Commit();
             }
@@ -46,7 +46,7 @@ namespace Shinetech.PlanPoker.Logic
         {
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
-               _projectRepository.Delete(id);
+                _projectRepository.Delete(id);
 
                 unitOfwork.Commit();
             }
@@ -64,34 +64,35 @@ namespace Shinetech.PlanPoker.Logic
                 Id = x.Id,
                 Name = x.Name,
                 OwnerLogicModel = x.Owner.ToLogicModel(),
-                Participates = x.Participates.Select(y=>y.ToLogicModel())
+                Participates = x.Participates.Select(y => y.ToLogicModel())
             });
         }
 
-        public IEnumerable<ProjectLogicModel> GetProjectByUser(int userId, int pageNumber, int pageCount, string queryText)
+        public IEnumerable<ProjectLogicModel> GetProjectByUser(int userId, int pageNumber, int pageCount,
+            string queryText)
         {
-            var skipCount = (pageNumber - 1) * pageCount;
+            var skipCount = (pageNumber - 1)*pageCount;
             var isQueryByText = !string.IsNullOrEmpty(queryText);
-            return _projectRepository.Query()?.Where(x=>x.Owner.Id== userId &&
-            (!isQueryByText || x.Name.Contains(queryText)))
-            .OrderBy(x=>x.Name)
-            .Skip(skipCount)
-            .Take(pageCount)
-            .Select(x => new ProjectLogicModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                OwnerLogicModel = x.Owner.ToLogicModel(),
+            return _projectRepository.Query()?.Where(x => x.Owner.Id == userId &&
+                                                          (!isQueryByText || x.Name.Contains(queryText)))
+                .OrderBy(x => x.Name)
+                .Skip(skipCount)
+                .Take(pageCount)
+                .Select(x => new ProjectLogicModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    OwnerLogicModel = x.Owner.ToLogicModel()
 //                Participates = x.Participates?.Select(y => y.ToLogicModel())
-            });
+                });
         }
 
         public int GetPages(int userId, int pageNumber, int pageCount, string queryText)
         {
             var isQueryByText = !string.IsNullOrEmpty(queryText);
             var projectCounts = _projectRepository.Query()
-                .Count(x => x.Owner.Id == userId &&(!isQueryByText || x.Name.Contains(queryText)));
-            return (int)Math.Ceiling((decimal)projectCounts / pageCount);
+                .Count(x => x.Owner.Id == userId && (!isQueryByText || x.Name.Contains(queryText)));
+            return (int) Math.Ceiling((decimal) projectCounts/pageCount);
         }
     }
 }

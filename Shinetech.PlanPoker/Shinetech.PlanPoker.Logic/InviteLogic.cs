@@ -9,14 +9,15 @@ using Shinetech.PlanPoker.Repository.UnitOfWork;
 
 namespace Shinetech.PlanPoker.Logic
 {
-    public class InviteLogic:IInviteLogic
+    public class InviteLogic : IInviteLogic
     {
+        private readonly IInviteRepository _inviteRepository;
         private readonly IProjectRepository _projectRepository;
         private readonly IUnitOfWorkFactory _unitOfWorkFactory;
-        private readonly IInviteRepository _inviteRepository;
         private readonly IUserRepository _userRepository;
 
-        public InviteLogic(IProjectRepository projectRepository, IUnitOfWorkFactory unitOfWorkFactory, IInviteRepository inviteRepository, IUserRepository userRepository)
+        public InviteLogic(IProjectRepository projectRepository, IUnitOfWorkFactory unitOfWorkFactory,
+            IInviteRepository inviteRepository, IUserRepository userRepository)
         {
             _projectRepository = projectRepository;
             _unitOfWorkFactory = unitOfWorkFactory;
@@ -58,11 +59,17 @@ namespace Shinetech.PlanPoker.Logic
             return GetParticipateLogicModel(users, invites.ToList());
         }
 
-        private IEnumerable<ParticipatesLogicModel> GetParticipateLogicModel(List<UserModel> userModels,List<InviteModel> inviteModels)
+        private IEnumerable<ParticipatesLogicModel> GetParticipateLogicModel(List<UserModel> userModels,
+            List<InviteModel> inviteModels)
         {
             return inviteModels.Select((t, i) => new ParticipatesLogicModel
             {
-                Id = t.Id, Email = userModels[i].Email, IsRegister = t.IsRegister, ProjectId = t.Project.Id, UserName = userModels[i].Name, UserId = userModels[i].Id
+                Id = t.Id,
+                Email = userModels[i].Email,
+                IsRegister = t.IsRegister,
+                ProjectId = t.Project.Id,
+                UserName = userModels[i].Name,
+                UserId = userModels[i].Id
             }).ToList();
         }
     }

@@ -16,7 +16,6 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 ImagePath = user.ImagePath,
                 Projects = user.Projects?.Select(x => x.ToLogicModel())
             };
-
         }
 
         public static UserViewModel ToViewModel(this UserLogicModel user)
