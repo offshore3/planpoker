@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using Shinetech.PlanPoker.LogicModel;
 
 namespace Shinetech.PlanPoker.WebApi.ViewModels
@@ -61,6 +58,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
         {
             return new ParticipatesViewModel
             {
+                Id = participates.Id,
                 UserId = participates.UserId,
                 UserName = participates.UserName,
                 ProjectId = participates.ProjectId,

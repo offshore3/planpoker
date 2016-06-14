@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
+using Shinetech.PlanPoker.Data.Models;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
 using Shinetech.PlanPoker.LogicModel;
@@ -35,7 +32,12 @@ namespace Shinetech.PlanPoker.Logic
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                _inviteRepository.Delete(id);
+
+                unitOfwork.Commit();
+            }
         }
 
         public InviteLogicModel Get(int id)
@@ -51,23 +53,17 @@ namespace Shinetech.PlanPoker.Logic
         public IEnumerable<ParticipatesLogicModel> GetParticipatesByProjectId(int projectId)
         {
             var invites = _inviteRepository.Query().Where(x => x.Project.Id == projectId);
-            var users = _userRepository.Query().Where(x => invites.Select(y => y.User.Id).Contains(x.Id));
-            var participatesLogicModels = new List<ParticipatesLogicModel>();
-            var invitesList = invites.ToList();
-            var usersList = users.ToList();
-            for (int i = 0; i < invites.Count(); i++)
+            var users = _userRepository.Query().Where(x => invites.Select(y => y.User.Id).Contains(x.Id)).ToList();
+
+            return GetParticipateLogicModel(users, invites.ToList());
+        }
+
+        private IEnumerable<ParticipatesLogicModel> GetParticipateLogicModel(List<UserModel> userModels,List<InviteModel> inviteModels)
+        {
+            return inviteModels.Select((t, i) => new ParticipatesLogicModel
             {
-                var participatesLogicModel = new ParticipatesLogicModel
-                {
-                    Email = usersList[i].Email,
-                    IsRegister = invitesList[i].IsRegister,
-                    ProjectId = invitesList[i].Project.Id,
-                    UserName = usersList[i].Name,
-                    UserId = usersList[i].Id
-                };
-                participatesLogicModels.Add(participatesLogicModel);
-            }
-            return participatesLogicModels;
+                Id = t.Id, Email = userModels[i].Email, IsRegister = t.IsRegister, ProjectId = t.Project.Id, UserName = userModels[i].Name, UserId = userModels[i].Id
+            }).ToList();
         }
     }
 }

@@ -204,7 +204,7 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" ng-click="save()" class="btn btn-primary"
+                                <button type="button" ng-click="saveProject()" class="btn btn-primary"
                                         ng-disabled="projectForm.$invalid || isBusy">
                                     <span ng-show="!isbusy">Save</span>
                                     <span ng-show="isBusy">
@@ -251,17 +251,17 @@
                                 </h4>
                             </div>
 
-                            <div class="modal-body">
+                            <div class="modal-body" ng-show="isShowParticipates">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                            <tr>
-                                                <th>Participates name</th>
-                                                <th>Participates email</th>
-                                                <th>
-                                                    <div class="pull-right">Operation</div>
-                                                </th>
-                                            </tr>
+                                        <tr>
+                                            <th>Participates name</th>
+                                            <th>Participates email</th>
+                                            <th>
+                                                <div class="pull-right">Operation</div>
+                                            </th>
+                                        </tr>
                                         </thead>
                                         <tr ng-repeat="participate in participates">
                                             <td>
@@ -273,7 +273,7 @@
 
                                             <td style="width: 150px;">
                                                 <div class="pull-right">
-                                                    <button ng-click="showDeleteParticipatesModal(participate,$index)" class="btn btn-danger">
+                                                    <button ng-click="showDeleteParticipateModal(participate)" class="btn btn-danger">
                                                         <span class="fa fa-remove"></span>
                                                     </button>
                                                 </div>
@@ -281,6 +281,51 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <div class="modal fade" id="deleteParticipatesModal" tabindex="-10" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close delete-project" aria-label="Close" ng-click="closeDeleteParticipateModal()"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">
+                                                    Delete participate
+                                                </h4>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                Are you sure you want to delete the participate?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" ng-click="participateDelete()" ng-disabled="isBusy" class="btn btn-danger">
+                                                    <span ng-show="!isBusy">Delete</span>
+                                                    <span ng-show="isBusy">
+                                                        <i class="fa fa-spinner fa-spin"></i>
+                                                    </span>
+                                                </button>
+                                                <button type="button" class="btn btn-default delete-project" tabindex="2" ng-click="closeDeleteParticipateModal()">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="text-align: left;">
+                                <form name="participatesForm">
+                                    <h3>
+                                        Invite other people?
+                                    </h3>
+                                    <div class="form-group">
+                                        <input class="form-control" type="email" name="Email" ng-model="InviteEmail" placeholder="Input other people email address" required/>
+                                        <span class="error" ng-show="participatesForm.Email.$dirty && participatesForm.Email.$invalid">
+                                            <span ng-show="participatesForm.Email.$error.required">Email address is required.</span>
+                                            <span ng-show="participatesForm.Email.$error.email">Invalid email address.</span>
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-primary btn-info" ng-disabled="participatesForm.$invalid" ng-click="InviteUser()"> Invite </button>
+                                        <span class="error" ng-show="isExist">
+                                            <span>The email has been registered.</span>
+                                        </span>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

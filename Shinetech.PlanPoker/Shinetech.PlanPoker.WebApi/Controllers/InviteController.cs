@@ -19,9 +19,17 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [HttpGet]
         [Route("participates")]
         [BasicAuthorize]
-        public List<ParticipatesViewModel> EditProject(int projectId)
+        public List<ParticipatesViewModel> GetParticipatesByProjectId(int projectId)
         {
             return _inviteLogic.GetParticipatesByProjectId(projectId).Select(x => x.ToViewModel()).ToList();
+        }
+
+        [HttpDelete]
+        [Route("participates")]
+        [BasicAuthorize]
+        public void DeleteParticipates(int participateId)
+        {
+            _inviteLogic.Delete(participateId);
         }
     }
 }
