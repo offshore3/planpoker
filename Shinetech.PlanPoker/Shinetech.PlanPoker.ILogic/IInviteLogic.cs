@@ -9,5 +9,6 @@ namespace Shinetech.PlanPoker.ILogic
         void Delete(int id);
         InviteLogicModel Get(int id);
         IEnumerable<InviteLogicModel> GetAll();
+        IEnumerable<ParticipatesLogicModel> GetParticipatesByProjectId(int projectId);
     }
 }

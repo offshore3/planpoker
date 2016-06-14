@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Convert.cs" />
     <Compile Include="InviteLogicModel.cs" />
+    <Compile Include="ParticipatesLogicModel.cs" />
     <Compile Include="ProjectLogicModel.cs" />
     <Compile Include="UserLogicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

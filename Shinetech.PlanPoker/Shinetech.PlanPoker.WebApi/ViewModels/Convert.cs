@@ -56,5 +56,17 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 Participates = project.Participates?.Select(x => x.ToViewModel())
             };
         }
+
+        public static ParticipatesViewModel ToViewModel(this ParticipatesLogicModel participates)
+        {
+            return new ParticipatesViewModel
+            {
+                UserId = participates.UserId,
+                UserName = participates.UserName,
+                ProjectId = participates.ProjectId,
+                IsRegister = participates.IsRegister,
+                Email = participates.Email
+            };
+        }
     }
 }

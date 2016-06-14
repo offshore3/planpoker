@@ -36,6 +36,15 @@
             errorCallback(error);
         });
     }
+
+    this.getProjectParticipates = function (projectId, successCallback, errorCallback) {
+        httpProxy.get("api/participates?projectId=" + projectId).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    }
+    
     
 
 }]);
