@@ -1,109 +1,14 @@
-﻿.img-responsive {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
-
-[ng\:cloak],
-[ng-cloak],
-[data-ng-cloak],
-[x-ng-cloak],
-.ng-cloak,
-.x-ng-cloak {
-  display: none !important;
-}
-@media (min-width: 768px) and (max-width: 992px) {
+﻿@media (min-width: 768px) and (max-width: 992px) {
   .container {
     width: 100%;
   }
 }
-
-
-/* Large desktop */
-@media (min-width: 1200px) {
-  .hidden-tablet,
-  .hidden-phone {
-    display: inline-block;
-  }
-}
-/* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
-  .hidden-tablet,
-  .hidden-phone {
-    display: inline-block;
-  }
-}
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) {
-  .hidden-tablet,
-  .hidden-phone {
-    display: none;
-  }
-}
-/* Landscape phones and down */
-@media (max-width: 480px) {
-  .hidden-tablet,
-  .hidden-phone {
-    display: none;
-  }
-}
-
-
-
-
-
-
 
 .all-players-cards-selected {
   padding-top: 20px;
   padding-left: 20px;
   overflow-y: scroll;
 }
-.edit-score-wrapper {
-  position: absolute;
-  width: 100%;
-  bottom: 7px;
-}
-.editing-score {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.score-title {
-  line-height: 12px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-.score-container {
-  display: inline-block;
-  width: 156px;
-  vertical-align: top;
-  margin-bottom: 12px;
-}
-.score-container .score-area {
-  line-height: 82px;
-}
-
-
-.tabbed-box a,
-.tabbed-box {
-  color: #fff;
-}
-
-
-
-
-
-
-.player-list ul.pane-list .li-content > *:first-child {
-  padding-left: 16px;
-}
-
-.hide-keep-space {
-  visibility: hidden;
-}
-
-
-
 .card-rig {
   width: 100px;
   text-align: center;
@@ -134,15 +39,16 @@
     position: relative;
     left: -20px;
   }
-  .no-flexbox .player-area {
+  /*.no-flexbox .player-area {
     width: 12%;
     float: left;
     margin-left: 12px;
-  }
+  }*/
 }
-.player-area-card {
+/*.player-area-card {
   margin-left: 13px;
-}
+}*/
+
 .card-placement {
   height: 70px;
   margin-bottom: 8px;
@@ -264,7 +170,6 @@
   position: relative;
   padding-top: 34px;
 }
-
 .small-card-id {
   float: left;
   padding-left: 7px;
@@ -331,180 +236,6 @@
   -ms-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
-}
-body,
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  -webkit-overflow-scrolling: touch;
-  overflow-y: auto;
-}
-@font-face {
-  font-family: 'robotolight';
-  src: url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Light-webfont.eot');
-  src: url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Light-webfont.woff') format('woff'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Light-webfont.ttf') format('truetype'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Light-webfont.svg#robotolight') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'robotoregular';
-  src: url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Regular-webfont.eot');
-  src: url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Regular-webfont.woff') format('woff'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Regular-webfont.ttf') format('truetype'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Regular-webfont.svg#robotoregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'robotobold';
-  src: url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Bold-webfont.eot');
-  src: url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Bold-webfont.woff') format('woff'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Bold-webfont.ttf') format('truetype'), url('//d285fxnb20xv8r.cloudfront.net/fonts/Roboto-Bold-webfont.svg#robotobold') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-
-
-
-
-
-
-
-
-@media (max-width: 871px) {
-  .inner-page .header-nav {
-    height: auto;
-    padding-bottom: 20px;
-  }
-  .nav-logo {
-    height: 60px;
-    margin-left: 0px;
-    text-align: center;
-    width: 100%;
-  }
-  .header .help-container,
-  .header .page-nav {
-    height: 32px;
-    line-height: 14px;
-    margin-left: 6px;
-  }
-}
-@media (max-width: 603px) {
-  .header-nav .nav-link {
-    font-size: 12px;
-    margin: 0px;
-    padding: 10px 6px;
-  }
-  .header .page-nav {
-    padding-left: 0;
-    margin-left: 0;
-  }
-}
-@media (min-width: 871px) AND (max-width: 1200px) {
-  .home .tagline {
-    font-size: 42px;
-  }
-}
-@media (min-width: 768px) AND (max-width: 871px) {
-  .home .tagline {
-    font-size: 34px;
-    line-height: 40px;
-  }
-}
-.form-group input[type='text'],
-.form-group input[type='password'] {
-  font-size: 20px;
-}
-.feedback-link {
-  display: none;
-  margin-top: 10px;
-}
-@media (min-width: 768px) {
-  .feedback-link {
-    display: block;
-  }
-}
-.logo-container {
-  margin-bottom: 70px;
-}
-@media (max-width: 767px) {
-  .logo-container {
-    margin-bottom: 10px;
-  }
-}
-.main-content .content {
-  margin-bottom: 40px;
-}
-.main-content-header {
-  margin-bottom: 30px;
-  margin-top: 35px;
-}
-.main-content-header .btn-sm {
-  width: 100%;
-}
-.main-content-header p {
-  margin-left: 0;
-  margin-top: 0px;
-  line-height: 1.2;
-  font-size: 20px;
-  margin-right: 0;
-  padding-right: 0;
-}
-@media (max-width: 991px) {
-  .main-content-header img {
-    margin-right: 10px;
-  }
-}
-.main-footer {
-  padding-bottom: 60px;
-}
-.intercom-button-container a {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  z-index: 9999;
-  opacity: .7;
-  transition: all .25s ease;
-}
-.intercom-button-container a img {
-  max-height: 40px;
-}
-.intercom-button-container a:hover {
-  opacity: 1;
-  bottom: 13px;
-  left: 13px;
-}
-.home .header-form-container .form-container {
-  margin-bottom: 200px;
-}
-.home .header-form-container .old {
-  color: #ffffff;
-  font-size: 14px;
-}
-.thank-you .main-header {
-  position: relative;
-  padding-bottom: 105px;
-  margin-bottom: 0;
-  z-index: 1;
-}
-@media (min-width: 768px) {
-  .thank-you .main-header .feedback-link {
-    display: none;
-  }
-}
-.thank-you .main-content:before,
-.thank-you .main-content:after {
-  z-index: 1;
-}
-.form-group .error {
-  background-color: #f2dede;
-}
-.logo-container {
-  margin-bottom: 70px;
-}
-@media (max-width: 767px) {
-  .logo-container {
-    margin-bottom: 10px;
-  }
 }
 .up-float{
   animation:pokermove 0.5s;

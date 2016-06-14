@@ -9,7 +9,7 @@
     }
 
     $scope.uploadUserPicture = function () {
-        $scope.user.ImagePath = $scope.imagepPath;
+        $('#imageUpload').click();
     };
 
     $scope.saveUserInfo = function () {
@@ -23,19 +23,12 @@
 
     $scope.updateUser = function () {
         profileService.editUser($scope.user, function (data) {
-            $scope.message = "update sucess";
-            $scope.isStatus = true;
+            $("#profileModal").modal("hide");
         }, function () {
             $scope.message = "update fail";
             $scope.isStatus = false;
         });
     }
-
-    $scope.uploadFile = function () {
-        var file = $scope.myFile;
-        console.log(file);
-        profileService.uploadFileToUrl(file);
-    };
 
     $scope.uploadPicture = function (successCallback) {
         $scope.userPicture = userImagePath;

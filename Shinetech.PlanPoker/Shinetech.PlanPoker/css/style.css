@@ -120,6 +120,7 @@
 }
 
 .user-image {
-    width:80px;
-    height:80px;
+    width:120px;
+    height:150px;
+    max-width: 240px;
 }

@@ -1,6 +1,4 @@
 ﻿
-
-
 <div class="container">
     <div ng-controller="dashboardController">
         <div class="all-players-cards-selected row" ng-show="selectedPoker.data!=''">
@@ -46,7 +44,6 @@
         </div>
     </div>
 </div>
-<link href="css/estimatestyle.css" rel="stylesheet" />
 
 
 <div class="container modal fade model-responsive" id="profileModal" tabindex="-1" role="dialog"
@@ -81,15 +78,14 @@
                         <label class="col-md-3 control-label">User Picture</label>
                         <div class="col-md-9">
                             <div class="img-upload-block">
-                                <img class="img-responsive img-user" style="max-width: 240px;" ng-src="{{user.ImagePath}}" alt="User Picture" />
-                                <input type="file" accept="image/*" file-reader ng-model="user.ImagePath" />
+                                <img class="img-responsive user-image" ng-src="{{user.ImagePath?user.ImagePath:'/images/user.png'}}" ng-click="uploadUserPicture()" />
+                                <input id="imageUpload" class="hide" type="file" accept="image/*" file-reader ng-model="user.ImagePath" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-9">
                             <button type="button" class="btn btn-primary btn-info" ng-disabled="updateForm.$invalid" ng-click="saveUserInfo()"> Save </button>
-                            <label ng-show="isStatus" class="text-success" ng-bind="message"></label>
                             <label ng-show="!isStatus" class="text-danger" ng-bind="message"></label>
                         </div>
                     </div>
@@ -381,7 +377,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-9">
-                            <button type="button" class="btn btn-primary btn-info" data-dismiss="modal" ng-disabled="changePasswordForm.$invalid" ng-click="changePassword()"> Save </button>
+                            <button type="button" class="btn btn-primary btn-info" ng-disabled="changePasswordForm.$invalid" ng-click="changePassword()"> Save </button>
                             <label ng-show="isStatus" class="text-danger" ng-bind="message"></label>
                         </div>
                     </div>
