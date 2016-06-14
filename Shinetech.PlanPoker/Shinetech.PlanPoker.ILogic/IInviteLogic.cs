@@ -11,5 +11,6 @@ namespace Shinetech.PlanPoker.ILogic
         InviteLogicModel Get(int id);
         IEnumerable<InviteLogicModel> GetAll();
         IEnumerable<ParticipatesLogicModel> GetParticipatesByProjectId(int projectId);
+        bool CheckInviteExist(int projectId, string email);
     }
 }

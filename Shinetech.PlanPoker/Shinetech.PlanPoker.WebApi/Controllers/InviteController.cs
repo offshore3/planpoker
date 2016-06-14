@@ -41,7 +41,10 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         public bool DeleteParticipates(InviteParticipateViewModel inviteParticipateViewModel)
         {
             var isSendEmailSuccess = true;
-            _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
+            if (!_inviteLogic.CheckInviteExist(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email))
+            {
+                _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
+            }
             if (!_userLogic.CheckEmailExist(inviteParticipateViewModel.Email))
             {
                 //TODO add send email.

@@ -77,6 +77,11 @@ namespace Shinetech.PlanPoker.Logic
             return GetParticipateLogicModel(users, invites.ToList());
         }
 
+        public bool CheckInviteExist(int projectId, string email)
+        {
+            return _inviteRepository.Query().Any(x => x.InviteEmail == email && x.Project.Id == projectId);
+        }
+
         private IEnumerable<ParticipatesLogicModel> GetParticipateLogicModel(List<UserModel> userModels,
             List<InviteModel> inviteModels)
         {
