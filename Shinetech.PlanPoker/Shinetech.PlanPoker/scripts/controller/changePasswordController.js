@@ -7,9 +7,7 @@
             if (data != null && data.Password === $scope.user.oldpassword) {
                 data.Password = $scope.user.password;
                 changePasswordService.editUser(data, function () {
-                    $cookieStore.remove("Authorization");
-                    $cookieStore.remove("LoginUserId");
-                    //$location.path("/login");
+                    $("#changePasswordModal").modal("hide");
                 });
             } else {
                 $scope.message = "Old password is wrong";

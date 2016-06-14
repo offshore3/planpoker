@@ -69,9 +69,11 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [HttpPut]
         [Route("changepassword")]
         [BasicAuthorize]
-        public void EditUserPassword(UserViewModel userViewModel)
+        public string EditUserPassword(UserViewModel userViewModel)
         {
             _userLogic.EditPassword(userViewModel.ToLogicModel());
+
+           return Login(userViewModel.Email, userViewModel.Password);
         }        
     }
 }
