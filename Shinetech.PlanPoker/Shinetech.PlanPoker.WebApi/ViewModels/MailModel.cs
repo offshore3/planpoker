@@ -16,5 +16,6 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
         public string EmailUserName { get; set; }
         public string EmailPassWord { get; set; }
         public string EmailNickName { get; set; }
+        public string AbsUrl { get; set; }
     }
 }

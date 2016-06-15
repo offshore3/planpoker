@@ -1,6 +1,6 @@
 ﻿appModule.controller('resetPasswordController', ['$scope', 'resetPasswordService', '$location', function ($scope, resetPasswordService, $location) {
     $scope.user = {};
-    $scope.resetPasswordEmail = getQueryVariable('email');
+    $scope.resetPasswordEmail = getQueryVariable('code');
     
     $scope.initialize= function() {
         resetPasswordService.getUserByEmail($scope.resetPasswordEmail, function(data) {

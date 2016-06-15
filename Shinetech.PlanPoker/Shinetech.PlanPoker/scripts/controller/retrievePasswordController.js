@@ -1,28 +1,17 @@
-﻿appModule.controller('retrievePasswordController', ['$scope', 'retrievePasswordService', 'registerService', 'emailtemplate', 'mailtemplatecontent', function ($scope, retrievePasswordService, registerService, emailtemplate, mailtemplatecontent) {
+﻿appModule.controller('retrievePasswordController', ['$scope','$location', 'retrievePasswordService', 'registerService', 'emailtemplate', 'mailtemplatecontent', function ($scope,$location, retrievePasswordService, registerService, emailtemplate, mailtemplatecontent) {
     $scope.emailtemplate = emailtemplate;
     $scope.mailtemplatecontent = mailtemplatecontent;
+
     $scope.isExistEmail = true;
 
     $scope.retrievePassword = function () {
-
-        
-        //registerService.checkEmailExist($scope.user.email).then(function (response) {
-        //    if (response.data) {
-        //        $scope.isExist = response.data;
-        //    }
-        //    else {
-        //        registerService.createUser($scope.user).then(function (response) {
-        //            $location.path('/login');
-        //        });
-        //    }
-        //});
-        console.log($scope.emailtemplate.emailto);
+        $scope.emailtemplate.absUrl = $location.absUrl().replace('retrievepassword', 'resetpassword');
         registerService.checkEmailExist($scope.emailtemplate.emailto).then(function (response) {
             console.log(response.data);
             if (response.data)
             {
-                retrievePasswordService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function () {
-
+                retrievePasswordService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function (response) {
+                    console.log(response.data);
                 }, function () {
 
                 });
