@@ -3,7 +3,7 @@ using Shinetech.PlanPoker.Data.Models;
 
 namespace Shinetech.PlanPoker.LogicModel
 {
-    public static class Convert
+    public static class ConvertModel
     {
         public static UserLogicModel ToLogicModel(this UserModel user)
         {

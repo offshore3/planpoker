@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Convert.cs" />
+    <Compile Include="ConvertModel.cs" />
     <Compile Include="InviteLogicModel.cs" />
     <Compile Include="ParticipatesLogicModel.cs" />
     <Compile Include="ProjectLogicModel.cs" />
