@@ -7,7 +7,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
     {
         public static UserLogicModel ToLogicModel(this UserViewModel user)
         {
-            return new UserLogicModel
+            return user == null ? null : new UserLogicModel
             {
                 Id = user.Id,
                 Name = user.Name,
@@ -20,7 +20,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
 
         public static UserViewModel ToViewModel(this UserLogicModel user)
         {
-            return new UserViewModel
+            return user == null ? null : new UserViewModel
             {
                 Id = user.Id,
                 Name = user.Name,
@@ -33,7 +33,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
 
         public static ProjectLogicModel ToLogicModel(this ProjectViewModel project)
         {
-            return new ProjectLogicModel
+            return project == null ? null : new ProjectLogicModel
             {
                 Id = project.Id,
                 Name = project.Name,
@@ -44,7 +44,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
 
         public static ProjectViewModel ToViewModel(this ProjectLogicModel project)
         {
-            return new ProjectViewModel
+            return project == null ? null : new ProjectViewModel
             {
                 Id = project.Id,
                 Name = project.Name,
@@ -55,7 +55,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
 
         public static ParticipatesViewModel ToViewModel(this ParticipatesLogicModel participates)
         {
-            return new ParticipatesViewModel
+            return participates == null ? null : new ParticipatesViewModel
             {
                 Id = participates.Id,
                 UserId = participates.UserId,

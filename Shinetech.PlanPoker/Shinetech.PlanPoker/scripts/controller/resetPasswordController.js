@@ -9,9 +9,6 @@
 
         });
     }
-    if ($scope.resetPasswordEmail != null) {
-        $scope.initialize();
-    }
 
     $scope.resetPassword= function() {
         $scope.user.password = $scope.newPassword;

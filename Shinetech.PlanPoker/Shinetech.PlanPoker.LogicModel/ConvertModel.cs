@@ -7,7 +7,7 @@ namespace Shinetech.PlanPoker.LogicModel
     {
         public static UserLogicModel ToLogicModel(this UserModel user)
         {
-            return new UserLogicModel
+            return user==null?null: new UserLogicModel
             {
                 Id = user.Id,
                 Name = user.Name,
@@ -20,7 +20,7 @@ namespace Shinetech.PlanPoker.LogicModel
 
         public static UserModel ToModel(this UserLogicModel user)
         {
-            return new UserModel
+            return user == null ? null : new UserModel
             {
                 Id = user.Id,
                 Name = user.Name,
@@ -32,7 +32,7 @@ namespace Shinetech.PlanPoker.LogicModel
 
         public static ProjectLogicModel ToLogicModel(this ProjectModel project)
         {
-            return new ProjectLogicModel
+            return project == null ? null : new ProjectLogicModel
             {
                 Id = project.Id,
                 Name = project.Name,
@@ -43,7 +43,7 @@ namespace Shinetech.PlanPoker.LogicModel
 
         public static ProjectModel ToModel(this ProjectLogicModel project)
         {
-            return new ProjectModel
+            return project == null ? null : new ProjectModel
             {
                 Id = project.Id,
                 Name = project.Name,
