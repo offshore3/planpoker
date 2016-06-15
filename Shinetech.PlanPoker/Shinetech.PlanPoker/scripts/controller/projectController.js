@@ -48,6 +48,7 @@
         }
 
         $scope.showParticipateModal = function (projectId) {
+            $scope.InviteEmail = '';
             $scope.currentProjectId = projectId;
             $scope.loadParticipates(projectId);
             $("#participatesProject").modal("show");

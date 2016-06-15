@@ -94,5 +94,10 @@ namespace Shinetech.PlanPoker.Logic
         {
             return _userRepository.Query().Any(x => x.Email == email && x.Password == password);
         }
+
+        public UserLogicModel GetUserByEmail(string email)
+        {
+            return _userRepository.Query().FirstOrDefault(x => x.Email == email).ToLogicModel();
+        }
     }
 }
