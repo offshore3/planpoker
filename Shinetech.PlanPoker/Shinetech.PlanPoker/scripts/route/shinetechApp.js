@@ -9,7 +9,7 @@ angular.module("shinetech-app").run([
 
         function routeChangeSuccess() {
             $rootScope.isSettingsShow = true;
-            if ($location.path() === "/login" || $location.path() === "/register" || $location.path() === "/retrievepassword") {
+            if ($location.path() === "/login" || $location.path() === "/register" || $location.path() === "/retrievepassword" || $location.path() === "/resetpassword") {
                 $rootScope.isSettingsShow = false;
             } else {
                 if ($cookieStore.get("LoginUserId") === undefined || $cookieStore.get("LoginUserId") === null) {

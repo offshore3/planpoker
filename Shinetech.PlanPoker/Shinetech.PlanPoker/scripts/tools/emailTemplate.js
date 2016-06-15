@@ -8,9 +8,9 @@
     emailsmtp: 'smtp.163.com',
     emailssl:'1',
     emailport:'25',
-    emailfrom:'skiller1651@163.com',
+    emailfrom: 'skiller1651@163.com',
     emailusername:'skiller1651@163.com',
-    emailpassword:'69ABC218163C973B56B4DBA99C26B73D',
+    emailpassword:'qwwlzz0224',
     emailnickname:'Shinetech'
 
 });

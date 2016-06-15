@@ -130,6 +130,7 @@
     <Content Include="scripts\controller\projectController.js" />
     <Content Include="scripts\controller\profileController.js" />
     <Content Include="scripts\controller\dashboardController.js" />
+    <Content Include="scripts\controller\resetPasswordController.js" />
     <Content Include="scripts\controller\retrievePasswordController.js" />
     <Content Include="scripts\controller\registerController.js" />
     <Content Include="scripts\controller\loginController.js" />
@@ -144,9 +145,11 @@
     <Content Include="scripts\service\projectService.js" />
     <Content Include="scripts\service\profileService.js" />
     <Content Include="scripts\service\dashboardService.js" />
+    <Content Include="scripts\service\resetPasswordService.js" />
     <Content Include="scripts\service\retrievePasswordService.js" />
     <Content Include="scripts\service\registerService.js" />
     <Content Include="scripts\service\loginService.js" />
+    <Content Include="scripts\tools\mailTemplateContent.js" />
     <Content Include="scripts\tools\emailTemplate.js" />
     <Content Include="scripts\tools\config.js" />
     <Content Include="scripts\tools\moment.min.js" />
@@ -156,6 +159,7 @@
     <Content Include="template\profile.html" />
     <Content Include="template\project.html" />
     <Content Include="template\register.html" />
+    <Content Include="template\ResetPassword.html" />
     <Content Include="template\RetrievePassword.html" />
     <Content Include="scripts\tools\dateFormatter.js" />
     <Content Include="scripts\tools\httpProxy.js" />
