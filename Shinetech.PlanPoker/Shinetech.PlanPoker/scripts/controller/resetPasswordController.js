@@ -16,6 +16,7 @@
     $scope.resetPassword= function() {
         $scope.user.password = $scope.newPassword;
         resetPasswordService.resetUserPassword($scope.user, function () {
+            $location.url("");
             $location.path("/login");
         }, function () {
         });

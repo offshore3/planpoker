@@ -97,7 +97,8 @@ namespace Shinetech.PlanPoker.Logic
 
         public UserLogicModel GetUserByEmail(string email)
         {
-            return _userRepository.Query().FirstOrDefault(x => x.Email == email).ToLogicModel();
+            var deCodeEmail = TokenGenerator.DecodeToken(email);
+            return _userRepository.Query().FirstOrDefault(x => x.Email == deCodeEmail).ToLogicModel();
         }
     }
 }
