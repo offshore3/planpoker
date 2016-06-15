@@ -2,8 +2,8 @@
     
     this.sendEmail = function (emailtemplate, mailtemplatecontent) {
         var sendEmailViewModel = {
-            mailModel: emailtemplate,
-            mailContentModel: mailtemplatecontent
+            mailViewModel: emailtemplate,
+            mailContentViewModel: mailtemplatecontent
         };
         return $http({
             method: "POST",

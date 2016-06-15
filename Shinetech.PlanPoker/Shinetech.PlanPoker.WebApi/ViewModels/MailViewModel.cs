@@ -1,7 +1,7 @@
 ﻿
 namespace Shinetech.PlanPoker.WebApi.ViewModels
 {
-    public class MailModel
+    public class MailViewModel
     {
         public string WebName { get; set; }
         public string WebUrl { get; set; }

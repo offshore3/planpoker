@@ -256,12 +256,11 @@
     <Compile Include="ViewModels\DESEncrypt.cs" />
     <Compile Include="ViewModels\InviteParticipateViewModel.cs" />
     <Compile Include="ViewModels\InviteViewModel.cs" />
-    <Compile Include="ViewModels\MailContentModel.cs" />
-    <Compile Include="ViewModels\MailModel.cs" />
+    <Compile Include="ViewModels\MailContentViewModel.cs" />
+    <Compile Include="ViewModels\MailViewModel.cs" />
     <Compile Include="ViewModels\ParticipatesViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\SendEmailViewModel.cs" />
-    <Compile Include="ViewModels\ShinetechMail.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

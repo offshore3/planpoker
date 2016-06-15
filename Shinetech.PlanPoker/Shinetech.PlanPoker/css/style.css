@@ -124,3 +124,7 @@
     height:150px;
     max-width: 240px;
 }
+
+.success {
+    color:green;
+}

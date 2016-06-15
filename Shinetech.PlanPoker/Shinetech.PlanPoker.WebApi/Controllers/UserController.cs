@@ -97,27 +97,24 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         public bool SendEmail(SendEmailViewModel sendEmailViewModel)
         {
             //replace template content
-            var titletxt = sendEmailViewModel.mailContentModel.MailTitle;
-            var bodytxt = sendEmailViewModel.mailContentModel.Content;
+            var titletxt = sendEmailViewModel.mailContentViewModel.MailTitle;
+            var bodytxt = sendEmailViewModel.mailContentViewModel.Content;
 
-            titletxt = titletxt.Replace("{webname}", sendEmailViewModel.mailModel.WebName);
-            titletxt = titletxt.Replace("{username}", "hello");
-            bodytxt = bodytxt.Replace("{webname}", sendEmailViewModel.mailModel.WebName);
-            bodytxt = bodytxt.Replace("{weburl}", sendEmailViewModel.mailModel.WebUrl);
-            bodytxt = bodytxt.Replace("{webtel}", sendEmailViewModel.mailModel.WebTel);
-            bodytxt = bodytxt.Replace("{username}", "hello");
-            bodytxt = bodytxt.Replace("{linkurl}", sendEmailViewModel.mailModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(sendEmailViewModel.mailModel.EmailTo));
+            bodytxt = bodytxt.Replace("{webname}", sendEmailViewModel.mailViewModel.WebName);
+            bodytxt = bodytxt.Replace("{weburl}", sendEmailViewModel.mailViewModel.WebUrl);
+            bodytxt = bodytxt.Replace("{webtel}", sendEmailViewModel.mailViewModel.WebTel);
+            bodytxt = bodytxt.Replace("{linkurl}", sendEmailViewModel.mailViewModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(sendEmailViewModel.mailViewModel.EmailTo));
             
             //send email
             try
             {
-                ShinetechMail.sendMail(sendEmailViewModel.mailModel.EmailSmtp,
-                    sendEmailViewModel.mailModel.EmailSsl,
-                    sendEmailViewModel.mailModel.EmailUserName,
-                    DESEncrypt.Decrypt(sendEmailViewModel.mailModel.EmailPassWord),
-                    sendEmailViewModel.mailModel.EmailNickName,
-                    sendEmailViewModel.mailModel.EmailFrom,
-                    sendEmailViewModel.mailModel.EmailTo,
+                SendEmailViewModel.sendMail(sendEmailViewModel.mailViewModel.EmailSmtp,
+                    sendEmailViewModel.mailViewModel.EmailSsl,
+                    sendEmailViewModel.mailViewModel.EmailUserName,
+                    DESEncrypt.Decrypt(sendEmailViewModel.mailViewModel.EmailPassWord),
+                    sendEmailViewModel.mailViewModel.EmailNickName,
+                    sendEmailViewModel.mailViewModel.EmailFrom,
+                    sendEmailViewModel.mailViewModel.EmailTo,
                     titletxt, bodytxt);
             }
             catch
