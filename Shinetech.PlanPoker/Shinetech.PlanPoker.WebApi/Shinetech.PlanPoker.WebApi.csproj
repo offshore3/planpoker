@@ -252,8 +252,9 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\BasicAuthorizeAttribute.cs" />
     <Compile Include="Tools\FileTypeFilter.cs" />
+    <Compile Include="Tools\SendEmailHelper.cs" />
     <Compile Include="ViewModels\ConvertModel.cs" />
-    <Compile Include="ViewModels\DESEncrypt.cs" />
+    <Compile Include="Tools\DESEncrypt.cs" />
     <Compile Include="ViewModels\InviteParticipateViewModel.cs" />
     <Compile Include="ViewModels\InviteViewModel.cs" />
     <Compile Include="ViewModels\MailContentViewModel.cs" />
@@ -354,7 +355,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>25455</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

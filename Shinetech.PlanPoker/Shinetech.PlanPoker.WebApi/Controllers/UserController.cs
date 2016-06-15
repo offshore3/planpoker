@@ -96,33 +96,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [Route("sendemail")]
         public bool SendEmail(SendEmailViewModel sendEmailViewModel)
         {
-            //replace template content
-            var titletxt = sendEmailViewModel.mailContentViewModel.MailTitle;
-            var bodytxt = sendEmailViewModel.mailContentViewModel.Content;
-
-            bodytxt = bodytxt.Replace("{webname}", sendEmailViewModel.mailViewModel.WebName);
-            bodytxt = bodytxt.Replace("{weburl}", sendEmailViewModel.mailViewModel.WebUrl);
-            bodytxt = bodytxt.Replace("{webtel}", sendEmailViewModel.mailViewModel.WebTel);
-            bodytxt = bodytxt.Replace("{linkurl}", sendEmailViewModel.mailViewModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(sendEmailViewModel.mailViewModel.EmailTo));
-            
-            //send email
-            try
-            {
-                SendEmailViewModel.sendMail(sendEmailViewModel.mailViewModel.EmailSmtp,
-                    sendEmailViewModel.mailViewModel.EmailSsl,
-                    sendEmailViewModel.mailViewModel.EmailUserName,
-                    DESEncrypt.Decrypt(sendEmailViewModel.mailViewModel.EmailPassWord),
-                    sendEmailViewModel.mailViewModel.EmailNickName,
-                    sendEmailViewModel.mailViewModel.EmailFrom,
-                    sendEmailViewModel.mailViewModel.EmailTo,
-                    titletxt, bodytxt);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;
+            return SendEmailHelper.SendEmail(sendEmailViewModel);
         }
     }
 }

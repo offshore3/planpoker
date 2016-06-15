@@ -31,7 +31,6 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                             Id = x.Id,
                             Name = x.Name,
                             OwnerViewModel = x.OwnerLogicModel.ToViewModel()
-                            //Participates = x.Participates?.Select(y => y.ToViewModel())
                         }).ToList()
             };
 
