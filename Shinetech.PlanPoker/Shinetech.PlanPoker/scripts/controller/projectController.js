@@ -1,6 +1,7 @@
 ﻿appModule.controller('projectController', [
-    '$scope', 'projectService', function($scope, projectService) {
+    '$scope', 'projectService', '$cookieStore', function ($scope, projectService, $cookieStore) {
         $scope.projects = {};
+        $scope.LoginUserId = $cookieStore.get("LoginUserId");
 
         $scope.currentPage = 1;
         $scope.loadProjects = function(isSearch) {

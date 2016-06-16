@@ -12,11 +12,13 @@ namespace Shinetech.PlanPoker.Logic
     {
         private readonly IProjectRepository _projectRepository;
         private readonly IUnitOfWorkFactory _unitOfWorkFactory;
+        private readonly IInviteRepository _inviteRepository;
 
-        public ProjectLogic(IProjectRepository projectRepository, IUnitOfWorkFactory unitOfWorkFactory)
+        public ProjectLogic(IProjectRepository projectRepository, IUnitOfWorkFactory unitOfWorkFactory, IInviteRepository inviteRepository)
         {
             _projectRepository = projectRepository;
             _unitOfWorkFactory = unitOfWorkFactory;
+            _inviteRepository = inviteRepository;
         }
 
         public void Create(UserLogicModel user, ProjectLogicModel model)
@@ -73,7 +75,9 @@ namespace Shinetech.PlanPoker.Logic
         {
             var skipCount = (pageNumber - 1)*pageCount;
             var isQueryByText = !string.IsNullOrEmpty(queryText);
-            return _projectRepository.Query()?.Where(x => x.Owner.Id == userId &&
+            var participateProjectIds =
+                _inviteRepository.Query().Where(x => x.User.Id == userId).Select(x => x.Project.Id).ToList();
+            return _projectRepository.Query()?.Where(x => (x.Owner.Id == userId || participateProjectIds.Contains(x.Id)) &&
                                                           (!isQueryByText || x.Name.Contains(queryText)))
                 .OrderBy(x => x.Name)
                 .Skip(skipCount)
@@ -83,15 +87,16 @@ namespace Shinetech.PlanPoker.Logic
                     Id = x.Id,
                     Name = x.Name,
                     OwnerLogicModel = x.Owner.ToLogicModel()
-//                Participates = x.Participates?.Select(y => y.ToLogicModel())
                 });
         }
 
         public int GetPages(int userId, int pageNumber, int pageCount, string queryText)
         {
             var isQueryByText = !string.IsNullOrEmpty(queryText);
+            var participateProjectIds =
+                _inviteRepository.Query().Where(x => x.User.Id == userId).Select(x => x.Project.Id).ToList();
             var projectCounts = _projectRepository.Query()
-                .Count(x => x.Owner.Id == userId && (!isQueryByText || x.Name.Contains(queryText)));
+                .Count(x => (x.Owner.Id == userId || participateProjectIds.Contains(x.Id)) && (!isQueryByText || x.Name.Contains(queryText)));
             return (int) Math.Ceiling((decimal) projectCounts/pageCount);
         }
     }

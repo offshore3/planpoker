@@ -127,6 +127,7 @@
                             <thead>
                                 <tr>
                                     <th>Project name</th>
+                                    <th>Owner name</th>
                                     <th>
                                         <div class="pull-right">Operation</div>
                                     </th>
@@ -136,16 +137,18 @@
                                 <td>
                                     <span>{{project.Name}}</span>
                                 </td>
-
+                                <td>
+                                    <span>{{project.OwnerViewModel.Name}}</span>
+                                </td>
                                 <td style="width: 150px;">
                                     <div class="pull-right">
-                                        <button ng-click="showParticipateModal(project.Id)" class="btn btn-info">
+                                        <button ng-click="showParticipateModal(project.Id)" ng-show="project.OwnerViewModel.Id==LoginUserId" class="btn btn-info">
                                             <span class="fa fa-users"></span>
                                         </button>
-                                        <button ng-click="showEditModal(project)" class="btn btn-success">
+                                        <button ng-click="showEditModal(project)" ng-show="project.OwnerViewModel.Id==LoginUserId" class="btn btn-success">
                                             <span class="fa fa-edit"></span>
                                         </button>
-                                        <button ng-click="showDeleteModal(project,$index)" class="btn btn-danger">
+                                        <button ng-click="showDeleteModal(project,$index)" ng-show="project.OwnerViewModel.Id==LoginUserId" class="btn btn-danger">
                                             <span class="fa fa-remove"></span>
                                         </button>
                                     </div>

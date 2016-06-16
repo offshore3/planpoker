@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
 using Shinetech.PlanPoker.Data.Models;
 using Shinetech.PlanPoker.ILogic;
@@ -14,6 +12,7 @@ namespace Shinetech.PlanPoker.Logic.Tests
     public class ProjectLogicTest
     {
         private Mock<IProjectRepository> _projectRepository;
+        private Mock<IInviteRepository> _inviteRepository;
         private Mock<IUnitOfWorkFactory> _unitOfWorkFactory;
         private Mock<IUnitOfWork> _uniteOfWorkMock;
         private IProjectLogic _projectLogic;
@@ -22,9 +21,10 @@ namespace Shinetech.PlanPoker.Logic.Tests
         public void SetUp()
         {
             _projectRepository = new Mock<IProjectRepository>();
+            _inviteRepository = new Mock<IInviteRepository>();
             _unitOfWorkFactory = new Mock<IUnitOfWorkFactory>();
             _uniteOfWorkMock = new Mock<IUnitOfWork>();
-            _projectLogic = new ProjectLogic(_projectRepository.Object, _unitOfWorkFactory.Object);
+            _projectLogic = new ProjectLogic(_projectRepository.Object, _unitOfWorkFactory.Object, _inviteRepository.Object);
             _unitOfWorkFactory.Setup(x => x.GetCurrentUnitOfWork()).Returns(_uniteOfWorkMock.Object);
         }
 
