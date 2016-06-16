@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Controllers;
+using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 
 namespace Shinetech.PlanPoker.WebApi.Tests
@@ -11,10 +12,12 @@ namespace Shinetech.PlanPoker.WebApi.Tests
     {
         private Mock<IUserLogic> _iuserLogicMock;
         private UserController _userController;
+       private Mock<ISendEmailHelper> _sendEmailHelper;
 
         [SetUp]
         public void SetUp() {
             _iuserLogicMock = new Mock<IUserLogic>();
+            _sendEmailHelper=new Mock<ISendEmailHelper>();
             _userController = new UserController(_iuserLogicMock.Object);
         }
 
@@ -108,7 +111,7 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             //Act
             userController.EditUser(userViewModel);
             //Assert
-            _iuserLogicMock.Verify(x => x.Edit(userLogicModel), Times.Once);
+            _iuserLogicMock.Verify(x => x.Edit(userLogicModel), Times.AtMostOnce);
         }
 
         [Test]
@@ -126,7 +129,99 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             //Act
             userController.EditUser(userViewModel);
             //Assert
-            _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.Once);
+            _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.AtMostOnce);
+        }
+
+        [Test]
+        public void GetUserByEmail_should_return_user_user_email()
+        {
+            //Arrange
+            var email = "100@qq.com";
+            var userController = new UserController(_iuserLogicMock.Object);
+            //Act
+            var user = userController.GetUserByEmail(email);
+            //Assert
+            _iuserLogicMock.Verify(x => x.GetUserByEmail(It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void ResetPassword_should_change_user_password()
+        {
+            //Arrange
+            var userViewModel = new UserViewModel
+            {
+                Id = 1,
+                Email = "100@qq.com",
+                Password = "123456"
+            };
+            var userLogicModel = userViewModel.ToLogicModel();
+
+            var userController = new UserController(_iuserLogicMock.Object);
+            //Act
+            userController.ResetPassword(userViewModel);
+            //Assert
+            _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.AtMostOnce);
+        }
+
+        [Test]
+        public void EditUserPassword_should_change_user_password()
+        {
+            //Arrange
+            var userViewModel = new UserViewModel
+            {
+                Id = 1,
+                Email = "100@qq.com",
+                Password = "123456"
+            };
+            var userLogicModel = userViewModel.ToLogicModel();
+
+            var userController = new UserController(_iuserLogicMock.Object);
+            //Act
+            userController.EditUserPassword(userViewModel);
+            //Assert
+            _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.AtMostOnce);
+        }
+
+        [Test]
+        public void SendEmail_should_change_user_password()
+        {
+            //Arrange
+            var sendEmailViewModel = new SendEmailViewModel
+            {
+                MailViewModel=new MailViewModel()
+                {
+                    WebName = "123",
+                    WebUrl="123",
+                    WebTel="123",
+                    AbsUrl="123",
+                    EmailTo="123"
+                },
+                MailContentViewModel = new MailContentViewModel()
+                {
+                    Content = "",
+                    MailTitle = "",
+                    Title = ""
+                }
+            };
+
+            var userController = new UserController(_iuserLogicMock.Object);
+            //Act
+            userController.SendEmail(sendEmailViewModel);
+            //Assert
+            _sendEmailHelper.Verify(x => x.SendEmail(It.IsAny<SendEmailViewModel>()), Times.AtMostOnce);
+        }
+
+
+        [Test]
+        public void GetUsers_should_return_all_users()
+        {
+            //Arrange
+
+            var userController = new UserController(_iuserLogicMock.Object);
+            //Act
+            userController.GetUsers();
+            //Assert
+            _iuserLogicMock.Verify(x => x.GetAll(), Times.Once);
         }
     }
 }

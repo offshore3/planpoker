@@ -1,13 +1,13 @@
-﻿using Shinetech.PlanPoker.Logic.Tools;
+﻿using Microsoft.Owin.Security.Provider;
+using Shinetech.PlanPoker.Logic.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 
 namespace Shinetech.PlanPoker.WebApi.Tools
 {
-    public class SendEmailHelper
+    public class SendEmailHelper:ISendEmailHelper
     {
         public static bool SendEmail(SendEmailViewModel sendEmailViewModel)
         {
-
             var titletxt = sendEmailViewModel.MailContentViewModel.MailTitle;
             var bodytxt = sendEmailViewModel.MailContentViewModel.Content;
 
@@ -33,6 +33,11 @@ namespace Shinetech.PlanPoker.WebApi.Tools
             }
 
             return true;
+        }
+
+        bool ISendEmailHelper.SendEmail(SendEmailViewModel sendEmailViewModel)
+        {
+            return SendEmail(sendEmailViewModel);
         }
     }
 }

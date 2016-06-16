@@ -252,6 +252,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\BasicAuthorizeAttribute.cs" />
     <Compile Include="Tools\FileTypeFilter.cs" />
+    <Compile Include="Tools\ISendEmailHelper.cs" />
     <Compile Include="Tools\SendEmailHelper.cs" />
     <Compile Include="ViewModels\ConvertModel.cs" />
     <Compile Include="Tools\DESEncrypt.cs" />
