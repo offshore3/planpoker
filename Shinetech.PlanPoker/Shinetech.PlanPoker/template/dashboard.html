@@ -1,9 +1,29 @@
 ﻿
 <div class="container">
-    <div ng-controller="dashboardController">
+    <div ng-controller="dashboardController" ng-init="loadProjects()">
+        <div class="all-players-cards-selected text-center row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="project-select col-md-3">
+                        <label class="text-success">Please select:&nbsp;</label>
+                    </div>
+                    <div class="project-select col-md-9">
+                        <select class="form-control" ng-model="seletedId" ng-change="changeProject()">
+                            <!--<option value="">Select Project</option>-->
+                            <option ng-selected="projectId==project.Id" ng-repeat="project in projects" value="{{project.Id}}">{{project.Name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary btn-info" ng-click="saveUserInfo()"> Next </button>
+                    <button type="button" class="btn btn-primary btn-info" ng-click="saveUserInfo()"> Save </button>
+                    <button type="button" class="btn btn-primary btn-info" ng-click="saveUserInfo()"> Show </button>
+                </div>
+            </div>
+        </div>
         <div class="all-players-cards-selected row" ng-show="selectedPoker.data!=''">
             <div class="scroll-container flex">
-                <div class="card-rig card-in-hand card-flipped">
+                <div class="card-rig card-in-hand-in-hand card-flipped">
                     <div class="animation-wrapper">
                         <div class="card-container rotate face-up card-blue">
                             <div class="card card-back"></div>
@@ -17,24 +37,21 @@
                     </div>
                     <div class="label label-inverse label-name">Joy</div>
                 </div>
-
             </div>
         </div>
-        <div>
-            <div class="row" style="margin-top: 750px;">
-                <div ng-repeat="poker in pokers.poker" ng-click="cardSelect(poker)">
-                    <div class="card-rig card-in-hand card-flipped" ng-style="{{poker.myStyle}}"
-                         ng-class="isFloat=='{{poker.data}}'?'up-float':''">
-                        <div class="card-wrapper perspective-wrapper">
-                            <div class="animation-wrapper">
-                                <div class="card-container rotate face-up card-blue">
-                                    <div class="card card-back"></div>
-                                    <div class="card card-face">
-                                        <div class="small-card-id">
-                                            <span>{{poker.data}}</span>
-                                        </div>
-                                        <div class="text-center player-vote"><span>{{poker.data}}</span></div>
+        <div class="row" style="margin-top: 500px; ">
+            <div ng-repeat="poker in pokers.poker" ng-click="cardSelect(poker)">
+                <div class="card-rig card-in-hand card-flipped" ng-style="{{poker.myStyle}}"
+                     ng-class="isFloat=='{{poker.data}}'?'up-float':''">
+                    <div class="card-wrapper perspective-wrapper">
+                        <div class="animation-wrapper">
+                            <div class="card-container rotate face-up card-blue">
+                                <div class="card card-back"></div>
+                                <div class="card card-face">
+                                    <div class="small-card-id">
+                                        <span>{{poker.data}}</span>
                                     </div>
+                                    <div class="text-center player-vote"><span>{{poker.data}}</span></div>
                                 </div>
                             </div>
                         </div>

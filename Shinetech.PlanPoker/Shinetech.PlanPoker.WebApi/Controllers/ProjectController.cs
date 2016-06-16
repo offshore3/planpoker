@@ -3,6 +3,7 @@ using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
+using Shinetech.PlanPoker.Logic.Tools;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
@@ -59,6 +60,14 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         public void EditProject(ProjectViewModel project)
         {
             _projectLogic.Edit(project.ToLogicModel());
+        }
+
+        [HttpGet]
+        [Route("projectcode")]
+        [BasicAuthorize]
+        public string DecryptProjectCode(string projectCode)
+        {
+            return TokenGenerator.DecodeToken(projectCode);
         }
     }
 }

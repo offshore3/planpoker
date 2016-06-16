@@ -7,7 +7,7 @@
 .all-players-cards-selected {
   padding-top: 20px;
   padding-left: 20px;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
 }
 .card-rig {
   width: 100px;
@@ -199,13 +199,20 @@
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
+.card-in-hand-in-hand.card-flipped .animation-wrapper {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
 .card-in-hand:hover .card-container,
 .card-in-hand.selected .card-container {
   -webkit-transform: scale(1.5);
   -moz-transform: scale(1.5);
   -ms-transform: scale(1.5);
   -o-transform: scale(1.5);
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 .card-in-hand .card-container {
   -webkit-transition: -webkit-transform 0.3s ease;
@@ -244,11 +251,15 @@
 }
 @keyframes pokermove
 {
-  from {bottom:0em;}
-  to {bottom:6em;}
+  from {bottom:5em;}
+  to {bottom:11em;}
 }
 @-webkit-keyframes pokermove 
 {
-  from {bottom:0em;}
-  to {bottom:6em;}
+  from {bottom:5em;}
+  to {bottom:11em;}
+}
+
+.label-inverse {
+    color:#000;
 }
