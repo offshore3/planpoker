@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ICacheManager.cs" />
+    <Compile Include="Common\MemoryCacheManager.cs" />
     <Compile Include="INHibernatePersistenceSession.cs" />
     <Compile Include="INHibernateSessionSource.cs" />
     <Compile Include="ConnectStringProvider.cs" />

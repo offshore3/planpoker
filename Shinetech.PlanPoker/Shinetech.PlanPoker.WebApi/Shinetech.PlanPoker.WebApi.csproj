@@ -251,6 +251,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\BasicAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\EstimateController.cs" />
     <Compile Include="Tools\FileTypeFilter.cs" />
     <Compile Include="Tools\FileUpload.cs" />
     <Compile Include="Tools\IFileUpload.cs" />
@@ -258,6 +259,10 @@
     <Compile Include="Tools\SendEmailHelper.cs" />
     <Compile Include="ViewModels\ConvertModel.cs" />
     <Compile Include="Tools\DESEncrypt.cs" />
+    <Compile Include="ViewModels\Estimate.cs" />
+    <Compile Include="ViewModels\Estimates.cs" />
+    <Compile Include="ViewModels\EstimatesViewModel.cs" />
+    <Compile Include="ViewModels\EstimateViewModel.cs" />
     <Compile Include="ViewModels\InviteParticipateViewModel.cs" />
     <Compile Include="ViewModels\InviteViewModel.cs" />
     <Compile Include="ViewModels\MailContentViewModel.cs" />
