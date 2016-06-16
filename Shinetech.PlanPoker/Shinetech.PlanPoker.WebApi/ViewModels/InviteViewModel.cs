@@ -6,5 +6,6 @@
         public ProjectViewModel Project { get; set; }
         public UserViewModel User { get; set; }
         public bool IsRegister { get; set; }
+        public string InviteEmail { get; set; }
     }
 }

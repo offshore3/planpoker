@@ -36,20 +36,36 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("invite-participate")]
+        [Route("participate")]
         [BasicAuthorize]
-        public bool DeleteParticipates(InviteParticipateViewModel inviteParticipateViewModel)
+        public void Create(InviteParticipateViewModel inviteParticipateViewModel)
         {
-            var isSendEmailSuccess = true;
-            if (!_inviteLogic.CheckInviteExist(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email))
-            {
-                _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
-            }
-            if (!_userLogic.CheckEmailExist(inviteParticipateViewModel.Email))
-            {
-                //TODO add send email.
-            }
-            return isSendEmailSuccess;
+            _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
         }
+
+        [HttpGet]
+        [Route("get-invite-by-projectid-email")]
+        [BasicAuthorize]
+        public InviteViewModel Get(int projectId,string email)
+        {
+            return _inviteLogic.Get(projectId, email).ToViewModel();
+        }
+
+        //[HttpPost]
+        //[Route("invite-participate")]
+        //[BasicAuthorize]
+        //public bool InviteParticipates(InviteParticipateViewModel inviteParticipateViewModel)
+        //{
+        //    var isSendEmailSuccess = true;
+        //    if (!_inviteLogic.CheckInviteExist(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email))
+        //    {
+        //        _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
+        //    }
+        //    if (!_userLogic.CheckEmailExist(inviteParticipateViewModel.Email))
+        //    {
+        //        //TODO add send email.
+        //    }
+        //    return isSendEmailSuccess;
+        //}
     }
 }

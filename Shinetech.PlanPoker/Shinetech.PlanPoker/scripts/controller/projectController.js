@@ -1,7 +1,9 @@
 ﻿appModule.controller('projectController', [
-    '$scope', 'projectService', '$cookieStore', function ($scope, projectService, $cookieStore) {
+    '$scope', 'projectService', 'loginService', 'retrievePasswordService', '$cookieStore', 'emailtemplate', 'mailtemplatecontent', function ($scope, projectService, loginService, retrievePasswordService,$cookieStore, emailtemplate, mailtemplatecontent) {
         $scope.projects = {};
         $scope.LoginUserId = $cookieStore.get("LoginUserId");
+        $scope.emailtemplate = emailtemplate;
+        $scope.mailtemplatecontent = mailtemplatecontent.invitemail;
 
         $scope.currentPage = 1;
         $scope.loadProjects = function(isSearch) {
@@ -73,11 +75,48 @@
                 ProjectId: $scope.currentProjectId,
                 Email: $scope.InviteEmail
             }
-            projectService.inviteUser(command, function () {
-                $scope.loadParticipates($scope.currentProjectId);
+            //begin  add by Jimbo 2016-06-16 09:48:33
+            loginService.getUser(function (data) {
+                if (data.Email.toLowerCase() == $scope.InviteEmail.toLowerCase())
+                {
+                    $scope.isInviteSelf = true;
+                    return;
+                }
+            });
+
+            projectService.getInvite(command.ProjectId,command.Email, function (data) {
+                if (data === null) {
+                    projectService.createInvite(command, function () {
+                        $scope.loadParticipates($scope.currentProjectId);
+                        $scope.sendEmail();
+                    }, function () {
+
+                    });
+                } else if (data !== null && data.IsRegister){
+                    $scope.isInvted = true;
+                } else if (data !== null && !data.IsRegister) {
+                    $scope.sendEmail();
+                }
+
             }, function () {
             });
+            //end  add by Jimbo 2016-06-16 09:48:33
         }
+
+        $scope.changeEmail = function () {
+            $scope.isSendEmail = false;
+            $scope.isInviteSelf = false;
+            $scope.isInvted = false;
+        };
+
+        $scope.sendEmail = function () {
+            $scope.emailtemplate.emailto = $scope.InviteEmail;
+            retrievePasswordService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function (response) {
+                $scope.isSendEmail = true;
+            }, function () {
+
+            });
+        };
 
         $scope.closeDeleteParticipateModal= function() {
             $("#deleteParticipatesModal").modal("hide");
@@ -135,6 +174,6 @@
             $(".delete-project").click(function () {
                 $("#deleteProject").modal("hide");
             });
-        }; 
+        };
     }
 ])
