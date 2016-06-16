@@ -312,7 +312,7 @@
                                         Invite other people?
                                     </h3>
                                     <div class="form-group">
-                                        <input class="form-control" type="email" name="Email" ng-model="InviteEmail" placeholder="Input other people email address" required/>
+                                        <input class="form-control" type="email" name="Email" ng-model="InviteEmail" ng-change="changeEmail()" placeholder="Input other people email address" required/>
                                         <span class="error" ng-show="participatesForm.Email.$dirty && participatesForm.Email.$invalid">
                                             <span ng-show="participatesForm.Email.$error.required">Email address is required.</span>
                                             <span ng-show="participatesForm.Email.$error.email">Invalid email address.</span>
@@ -320,9 +320,16 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary btn-info" ng-disabled="participatesForm.$invalid" ng-click="inviteUser()"> Invite </button>
-                                        <span class="error" ng-show="isExist">
-                                            <span>The email has been registered.</span>
+                                        <span class="error" ng-show="isInviteSelf">
+                                            <span>You cann't invite yourself.</span>
                                         </span>
+                                        <span class="error" ng-show="isInvted">
+                                            <span>You have invited it.</span>
+                                        </span>
+                                        <span class="success" ng-show="isSendEmail">
+                                            <span>The email send successfully.</span>
+                                        </span>
+                                        
                                     </div>
                                 </form>
                             </div>

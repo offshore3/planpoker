@@ -53,8 +53,35 @@
         });
     }
 
-    this.inviteUser = function (inviteParticipate, successCallback, errorCallback) {
-        httpProxy.post("api/invite-participate", inviteParticipate).then(function (data) {
+    //begin  add by Jimbo 2016-06-16 09:48:33
+
+    this.getInvite = function (projectId, email, successCallback, errorCallback) {
+        httpProxy.get("api/get-invite-by-projectid-email?projectId=" + projectId + "&email=" + email).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    };
+
+    //this.inviteUser = function (inviteParticipate, successCallback, errorCallback) {
+    //    httpProxy.post("api/invite-participate", inviteParticipate).then(function (data) {
+    //        successCallback(data);
+    //    }, function (error) {
+    //        errorCallback(error);
+    //    });
+    //}
+
+    this.createInvite = function (invite, successCallback, errorCallback) {
+        httpProxy.post("api/participate", invite).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    };
+    //end  add by Jimbo 2016-06-16 09:48:33
+
+    this.createProject = function (project, successCallback, errorCallback) {
+        httpProxy.post("api/project", project).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);

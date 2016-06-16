@@ -1,6 +1,6 @@
 ﻿appModule.controller('retrievePasswordController', ['$scope', '$location', 'retrievePasswordService', 'registerService', 'emailtemplate', 'mailtemplatecontent', function ($scope, $location, retrievePasswordService, registerService, emailtemplate, mailtemplatecontent) {
     $scope.emailtemplate = emailtemplate;
-    $scope.mailtemplatecontent = mailtemplatecontent;
+    $scope.mailtemplatecontent = mailtemplatecontent.retrievepassword;
 
     $scope.isExistEmail = true;
 
@@ -13,8 +13,7 @@
                     $scope.isExistEmail = true;
                     $scope.isSendEmail = true;
                 }, function () {
-                    $scope.isExistEmail = true;
-                    $scope.isSendEmail = false;
+
                 });
             } else {
                 $scope.isExistEmail = false;

@@ -64,6 +64,11 @@ namespace Shinetech.PlanPoker.Logic
             throw new NotImplementedException();
         }
 
+        public InviteLogicModel Get(int projectId, string email)
+        {
+            return _inviteRepository.Query().FirstOrDefault(x => x.Project.Id == projectId && x.InviteEmail==email).ToLogicModel();
+        }
+
         public IEnumerable<InviteLogicModel> GetAll()
         {
             throw new NotImplementedException();

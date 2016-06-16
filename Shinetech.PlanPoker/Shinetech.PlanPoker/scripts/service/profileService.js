@@ -12,7 +12,6 @@
     this.uploadFileToUrl = function (file) {
         var fd = new FormData();
         fd.append('file', file);
-        console.log(fd);
         httpProxy.post("api/uploadImage", fd).then(function (data) {
             successCallback(data);
         }, function (error) {

@@ -51,5 +51,17 @@ namespace Shinetech.PlanPoker.LogicModel
                 Participates = project.Participates?.Select(x => x.ToModel())
             };
         }
+
+        public static InviteLogicModel ToLogicModel(this InviteModel invite)
+        {
+            return invite == null ? null : new InviteLogicModel
+            {
+                Id=invite.Id,
+                InviteEmail= invite.InviteEmail,
+                IsRegister=invite.IsRegister,
+                Project=invite.Project.ToLogicModel(),
+                User=invite.User.ToLogicModel()
+            };
+        }
     }
 }
