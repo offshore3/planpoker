@@ -252,6 +252,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Tools\BasicAuthorizeAttribute.cs" />
     <Compile Include="Tools\FileTypeFilter.cs" />
+    <Compile Include="Tools\FileUpload.cs" />
+    <Compile Include="Tools\IFileUpload.cs" />
     <Compile Include="Tools\ISendEmailHelper.cs" />
     <Compile Include="Tools\SendEmailHelper.cs" />
     <Compile Include="ViewModels\ConvertModel.cs" />

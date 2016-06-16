@@ -29,39 +29,14 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
             await Request.Content.ReadAsMultipartAsync(provider);
 
-
-            foreach (var p in provider.Contents.Where(x => x.Headers.ContentType != null))
+            var content = provider.Contents.FirstOrDefault(x => x.Headers.ContentType != null);
+            if (content != null)
             {
-                var stream = await p.ReadAsStreamAsync();
-                return ImgUpload(p.Headers.ContentDisposition.FileName, stream);
-            }
+                var stream = await content.ReadAsStreamAsync();
 
-            throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
-        }
-
-        private string ImgUpload(string fileNameStr, Stream stream)
-        {
-            var dateTime = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-            fileNameStr = fileNameStr.Replace('"', ' ').Trim();
-            var lastDot = fileNameStr.LastIndexOf('.');
-            var type = fileNameStr.Substring(lastDot + 1).ToLower();
-            var fileName = fileNameStr.Substring(0, lastDot);
-            var fileSaveName = dateTime + "_" + fileName + "." + type;
-            if (fileSaveName.FileIsImage() && !fileSaveName.FileIsPNG())
-            {
-                stream = stream.StreamChangeOrientationAndSize();
+                return FileUpload.ImgUpload(content.Headers.ContentDisposition.FileName, stream);
             }
-            var path = HttpContext.Current.Server.MapPath("\\Image");
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            var imageBitmap = new Bitmap(stream);
-            var imagePath = path + "\\" + fileSaveName;
-            imageBitmap.Save(imagePath, ImageFormat.Jpeg);
-            return WebConfigurationManager.AppSettings["ApiPath"] +
-                   imagePath.Substring(imagePath.LastIndexOf("Image", StringComparison.Ordinal));
+            return string.Empty;
         }
     }
 }
