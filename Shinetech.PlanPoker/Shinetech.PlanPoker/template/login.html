@@ -12,7 +12,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
-                        <input type="email" class="form-control" name="userEmail" placeholder="somebody@example.com" ng-model="user.email" required />
+                        <input type="email" class="form-control" name="userEmail" placeholder="somebody@example.com" ng-model="user.email" required/>
                     </div>
                     <span class="error" ng-show="signInForm.userEmail.$dirty && signInForm.userEmail.$invalid">
                         <span ng-show="signInForm.userEmail.$error.required">Email is required.</span>
@@ -52,6 +52,14 @@
                         </div>
                     </div>
                 </form>
+                <div>
+                    <span>UserId</span><input type="text" style="width: 80%" class="form-control" ng-model="UserId" />
+                    <span>ProjectId</span><input type="text" style="width: 80%" class="form-control" ng-model="ProjectId" />
+                    <span>SelectPoker</span><input type="text" style="width: 80%" class="form-control" ng-model="SelectPoker"/>
+                    <button class="btn btn-block btn-primary" ng-click="TestEstimate()">
+                        TestEstimate
+                    </button>
+                </div>
             </div>
         </div>
     </div>

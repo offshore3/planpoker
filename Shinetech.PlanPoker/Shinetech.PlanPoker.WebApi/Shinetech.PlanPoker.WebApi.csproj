@@ -243,6 +243,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Installer\ApiControllersInstaller.cs" />
+    <Compile Include="Installer\CacheInstaller.cs" />
     <Compile Include="Installer\WindsorBootstrapper.cs" />
     <Compile Include="Installer\WindsorCompositionRoot.cs" />
     <Compile Include="Installer\WindsorDependencyResolver.cs" />

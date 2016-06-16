@@ -42,6 +42,18 @@
         });
     }
     
+    $scope.TestEstimate= function() {
+        var command = {
+            ProjectId: $scope.ProjectId,
+            UserId: $scope.UserId,
+            SelectedPoker:$scope.SelectPoker
+        };
+        loginService.TestEstimate(command, function () {
+            
+        }, function () {
+
+        });
+    }
 
 }]);
 
