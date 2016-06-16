@@ -36,12 +36,13 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Email="123456@qq.com",
                 Password="123456"
             };
-            var userController = new UserController(_iuserLogicMock.Object);
             _iuserLogicMock.Setup(x => x.CheckEmailExist(userViewModelMock.Email)).Returns(true);
+
             //Act
-            var result = userController.CheckEmailExist(userViewModelMock.Email);
+            var result = _userController.CheckEmailExist(userViewModelMock.Email);
+
             //Assert
-            _iuserLogicMock.Verify(x => x.CheckEmailExist(userViewModelMock.Email), Times.Once);
+            _iuserLogicMock.Verify(x => x.CheckEmailExist(It.IsAny<string>()), Times.Once);
             Assert.IsTrue(result);
         }
 
@@ -53,12 +54,13 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Email = "123456@qq.com",
                 Password = "123456"
             };
-            var userController = new UserController(_iuserLogicMock.Object);
             _iuserLogicMock.Setup(x => x.CheckEmailExist(userViewModelMock.Email)).Returns(false);
+
             //Act
-            var result = userController.CheckEmailExist(userViewModelMock.Email);
+            var result = _userController.CheckEmailExist(userViewModelMock.Email);
+
             //Assert
-            _iuserLogicMock.Verify(x => x.CheckEmailExist(userViewModelMock.Email), Times.Once);
+            _iuserLogicMock.Verify(x => x.CheckEmailExist(It.IsAny<string>()), Times.Once);
             Assert.IsFalse(result);
         }
 
@@ -71,14 +73,17 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Email = "123456@qq.com",
                 Password = "123456"
             };
-            var userController = new UserController(_iuserLogicMock.Object);
             _iuserLogicMock.Setup(x => x.CheckEmailExist(userViewModelMock.Email)).Returns(false);
             var userLogicModel = userViewModelMock.ToLogicModel();
             _iuserLogicMock.Setup(x=>x.Create(userLogicModel));
+
             //Act
-            var result = userController.CheckEmailExist(userViewModelMock.Email);
-            userController.Create(userViewModelMock);
+            var result = _userController.CheckEmailExist(userViewModelMock.Email);
+            _userController.Create(userViewModelMock);
+
             //Assert
+            _iuserLogicMock.Verify(x => x.CheckEmailExist(It.IsAny<string>()), Times.Once);
+            Assert.IsFalse(result);
         }
 
         [Test]
@@ -92,9 +97,11 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             };
 
             //Act
-            _userController.Login(userViewModel.Email, userViewModel.Password);
+            var result = _userController.Login(userViewModel.Email, userViewModel.Password);
+
             //Assert
             _iuserLogicMock.Verify(x => x.Login(It.IsAny<string>(),It.IsAny<string>()), Times.Once);
+            Assert.IsNotEmpty(result);
         }
         [Test]
         public void Edit_user_name_and_imagepath_should_edit_user()
@@ -106,10 +113,11 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Name = "Bill Gates",
                 ImagePath = "/upload/aaa.jpg"
             };
-            var userController = new UserController(_iuserLogicMock.Object);
             var userLogicModel = userViewModel.ToLogicModel();
+
             //Act
-            userController.EditUser(userViewModel);
+            _userController.EditUser(userViewModel);
+
             //Assert
             _iuserLogicMock.Verify(x => x.Edit(userLogicModel), Times.AtMostOnce);
         }
@@ -124,10 +132,11 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Email="4324@qq.com",
                 Password = "123456"
             };
-            var userController = new UserController(_iuserLogicMock.Object);
             var userLogicModel = userViewModel.ToLogicModel();
+
             //Act
-            userController.EditUser(userViewModel);
+            _userController.EditUser(userViewModel);
+
             //Assert
             _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.AtMostOnce);
         }
@@ -137,11 +146,13 @@ namespace Shinetech.PlanPoker.WebApi.Tests
         {
             //Arrange
             var email = "100@qq.com";
-            var userController = new UserController(_iuserLogicMock.Object);
+
             //Act
-            var user = userController.GetUserByEmail(email);
+            var user = _userController.GetUserByEmail(email);
+
             //Assert
-            _iuserLogicMock.Verify(x => x.GetUserByEmail(It.IsAny<string>()), Times.Once);
+            _iuserLogicMock.Verify(x => x.GetUserByEmail(It.IsAny<string>()), Times.AtMostOnce);
+            Assert.IsNull(user);
         }
 
         [Test]
@@ -155,10 +166,10 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Password = "123456"
             };
             var userLogicModel = userViewModel.ToLogicModel();
-
-            var userController = new UserController(_iuserLogicMock.Object);
+            
             //Act
-            userController.ResetPassword(userViewModel);
+            _userController.ResetPassword(userViewModel);
+
             //Assert
             _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.AtMostOnce);
         }
@@ -174,10 +185,10 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Password = "123456"
             };
             var userLogicModel = userViewModel.ToLogicModel();
-
-            var userController = new UserController(_iuserLogicMock.Object);
+            
             //Act
-            userController.EditUserPassword(userViewModel);
+            _userController.EditUserPassword(userViewModel);
+
             //Assert
             _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.AtMostOnce);
         }
@@ -204,9 +215,9 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 }
             };
 
-            var userController = new UserController(_iuserLogicMock.Object);
             //Act
-            userController.SendEmail(sendEmailViewModel);
+            _userController.SendEmail(sendEmailViewModel);
+
             //Assert
             _sendEmailHelper.Verify(x => x.SendEmail(It.IsAny<SendEmailViewModel>()), Times.AtMostOnce);
         }
@@ -220,6 +231,7 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             var userController = new UserController(_iuserLogicMock.Object);
             //Act
             userController.GetUsers();
+
             //Assert
             _iuserLogicMock.Verify(x => x.GetAll(), Times.Once);
         }
@@ -230,8 +242,10 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             //Arrange
 
             var userController = new UserController(_iuserLogicMock.Object);
+
             //Act
             var result = userController.GetUserViewModel();
+
             //Assert
             Assert.IsNull(result);
         }
