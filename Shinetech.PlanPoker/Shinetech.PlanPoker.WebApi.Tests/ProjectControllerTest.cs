@@ -7,6 +7,7 @@ using Shinetech.PlanPoker.WebApi.ViewModels;
 
 namespace Shinetech.PlanPoker.WebApi.Tests
 {
+    [TestFixture]
     public class ProjectControllerTest
     {
         private Mock<IProjectLogic> _projectLogicMock;
@@ -35,12 +36,12 @@ namespace Shinetech.PlanPoker.WebApi.Tests
 
             //Act
             _projectController.DeleteProject(It.IsAny<int>());
+
             //Assert
             _projectLogicMock.Verify(x => x.Delete(It.IsAny<int>()), Times.Once);
         }
 
         [Test]
-        [Ignore("This call is a web request.")]
         public void CreateProject_should_call_CreateProject_method_once_in_project_controller()
         {
             //Arrange
@@ -49,8 +50,10 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Name = "Test1",
                 Id = 5
             };
+
             //Act
             _projectController.CreateProject(model.ToViewModel());
+
             //Assert
             _projectLogicMock.Verify(x => x.Create(It.IsAny<UserLogicModel>(),It.IsAny<ProjectLogicModel>()), Times.Once);
         }
@@ -64,11 +67,26 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                 Name = "Test1",
                 Id = 5
             };
+
             //Act
             _projectController.EditProject(model.ToViewModel());
+
             //Assert
             _projectLogicMock.Verify(x => x.Edit(It.IsAny<ProjectLogicModel>()), Times.Once);
         }
+
+        [Test]
+        public void GetProjects_return_projects_with_page_and_search_condition()
+        {
+            //Arrange
+
+            //Act
+            _projectController.GetProjects(1,20,"");
+            //Assert
+            _projectLogicMock.Verify(x => x.GetPages(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()), Times.Once);
+            _projectLogicMock.Verify(x => x.GetProjectByUser(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()), Times.Once);
+        }
+        
 
     }
 }

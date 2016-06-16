@@ -223,5 +223,18 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             //Assert
             _iuserLogicMock.Verify(x => x.GetAll(), Times.Once);
         }
+
+        [Test]
+        public void GetUserViewModel_should_return_logged_user()
+        {
+            //Arrange
+
+            var userController = new UserController(_iuserLogicMock.Object);
+            //Act
+            var result = userController.GetUserViewModel();
+            //Assert
+            Assert.IsNull(result);
+        }
+        
     }
 }

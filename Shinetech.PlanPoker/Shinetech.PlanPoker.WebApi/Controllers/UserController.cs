@@ -4,7 +4,6 @@ using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
-using Shinetech.PlanPoker.Logic.Tools;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {

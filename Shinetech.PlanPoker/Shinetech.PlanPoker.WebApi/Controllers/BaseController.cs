@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
@@ -28,8 +29,15 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         {
             get
             {
-                if (!HttpContext.Current.Request.Headers.AllKeys.Contains("LoginUserId")) return 0;
-                return int.Parse(HttpContext.Current.Request.Headers["LoginUserId"]);
+                try
+                {
+                    if (!HttpContext.Current.Request.Headers.AllKeys.Contains("LoginUserId")) return 0;
+                    return int.Parse(HttpContext.Current.Request.Headers["LoginUserId"]);
+                }
+                catch (Exception)
+                {
+                    return 0;
+                }
             }
         }
     }
