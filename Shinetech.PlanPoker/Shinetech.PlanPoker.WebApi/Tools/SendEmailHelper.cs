@@ -14,7 +14,7 @@ namespace Shinetech.PlanPoker.WebApi.Tools
             bodytxt = bodytxt.Replace("{webname}", sendEmailViewModel.MailViewModel.WebName);
             bodytxt = bodytxt.Replace("{weburl}", sendEmailViewModel.MailViewModel.WebUrl);
             bodytxt = bodytxt.Replace("{webtel}", sendEmailViewModel.MailViewModel.WebTel);
-            bodytxt = bodytxt.Replace("{linkurl}", sendEmailViewModel.MailViewModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(sendEmailViewModel.MailViewModel.EmailTo));
+            bodytxt = bodytxt.Replace("{linkurl}", sendEmailViewModel.MailViewModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(sendEmailViewModel.MailViewModel.EmailCode));
 
             try
             {

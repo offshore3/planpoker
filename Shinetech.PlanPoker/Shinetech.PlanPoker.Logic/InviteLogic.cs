@@ -4,6 +4,7 @@ using System.Linq;
 using Shinetech.PlanPoker.Data.Models;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
+using Shinetech.PlanPoker.Logic.Tools;
 using Shinetech.PlanPoker.LogicModel;
 using Shinetech.PlanPoker.Repository.UnitOfWork;
 
@@ -38,8 +39,8 @@ namespace Shinetech.PlanPoker.Logic
             {
                 InviteEmail = email,
                 Project = _projectRepository.Get(projectId),
-                IsRegister = _userRepository.Query().Any(x=>x.Email==email),
-                User = _userRepository.Query().FirstOrDefault(x=>x.Email==email)
+                IsRegister = _userRepository.Query().Any(x => x.Email == email),
+                User = _userRepository.Query().FirstOrDefault(x => x.Email == email)
             };
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
@@ -66,7 +67,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public InviteLogicModel Get(int projectId, string email)
         {
-            return _inviteRepository.Query().FirstOrDefault(x => x.Project.Id == projectId && x.InviteEmail==email).ToLogicModel();
+            return _inviteRepository.Query().FirstOrDefault(x => x.Project.Id == projectId && x.InviteEmail == email).ToLogicModel();
         }
 
         public IEnumerable<InviteLogicModel> GetAll()
@@ -76,7 +77,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public IEnumerable<ParticipatesLogicModel> GetParticipatesByProjectId(int projectId)
         {
-            var invites = _inviteRepository.Query().Where(x => x.Project.Id == projectId&&x.IsRegister);
+            var invites = _inviteRepository.Query().Where(x => x.Project.Id == projectId && x.IsRegister);
             var users = _userRepository.Query().Where(x => invites.Select(y => y.User.Id).Contains(x.Id)).ToList();
 
             return GetParticipateLogicModel(users, invites.ToList());
@@ -85,6 +86,27 @@ namespace Shinetech.PlanPoker.Logic
         public bool CheckInviteExist(int projectId, string email)
         {
             return _inviteRepository.Query().Any(x => x.InviteEmail == email && x.Project.Id == projectId);
+        }
+
+        public void Edit(string enCodeProjectId, string email)
+        {
+            int projectId;
+            int.TryParse(TokenGenerator.DecodeToken(enCodeProjectId), out projectId);
+            var invite =
+                _inviteRepository.Query().FirstOrDefault(x => x.Project.Id == projectId && x.InviteEmail == email);
+            if (invite == null) return;
+
+            var user = _userRepository.Query().FirstOrDefault(x => x.Email == email);
+            
+
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                invite.IsRegister = true;
+                invite.User = user;
+                _inviteRepository.Save(invite);
+
+                unitOfwork.Commit();
+            }
         }
 
         private IEnumerable<ParticipatesLogicModel> GetParticipateLogicModel(List<UserModel> userModels,

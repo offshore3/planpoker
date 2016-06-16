@@ -38,9 +38,16 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [HttpPost]
         [Route("participate")]
         [BasicAuthorize]
-        public void Create(InviteParticipateViewModel inviteParticipateViewModel)
+        public void CreateInvite(InviteParticipateViewModel inviteParticipateViewModel)
         {
             _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
+        }
+
+        [HttpPut]
+        [Route("participate")]
+        public void UpdateInvite(InviteParticipateViewModel inviteParticipateViewModel)
+        {
+            _inviteLogic.Edit(inviteParticipateViewModel.EndCodeProjectId, inviteParticipateViewModel.Email);
         }
 
         [HttpGet]

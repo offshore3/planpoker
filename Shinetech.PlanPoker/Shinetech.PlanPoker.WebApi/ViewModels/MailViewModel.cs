@@ -13,6 +13,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
         public string EmailPort { get; set; }
         public string EmailFrom { get; set; }
         public string EmailTo { get; set; }
+        public string EmailCode { get; set; }
         public string EmailUserName { get; set; }
         public string EmailPassWord { get; set; }
         public string EmailNickName { get; set; }

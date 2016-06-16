@@ -18,5 +18,14 @@
             return $q.when(response);
         });
     };
+    this.inviteUser = function (invite) {
+        return $http({
+            method: "PUT",
+            url: webAPI + "api/participate",
+            data: invite
+        }).then(function (response) {
+            return $q.when(response);
+        });
+    };
 
 }])

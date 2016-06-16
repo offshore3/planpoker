@@ -1,5 +1,5 @@
 ﻿appModule.controller('projectController', [
-    '$scope', 'projectService', 'loginService', 'retrievePasswordService', '$cookieStore', 'emailtemplate', 'mailtemplatecontent', function ($scope, projectService, loginService, retrievePasswordService,$cookieStore, emailtemplate, mailtemplatecontent) {
+    '$scope','$location', 'projectService', 'loginService', 'retrievePasswordService', '$cookieStore', 'emailtemplate', 'mailtemplatecontent', function ($scope,$location, projectService, loginService, retrievePasswordService,$cookieStore, emailtemplate, mailtemplatecontent) {
         $scope.projects = {};
         $scope.LoginUserId = $cookieStore.get("LoginUserId");
         $scope.emailtemplate = emailtemplate;
@@ -92,9 +92,9 @@
                     }, function () {
 
                     });
-                } else if (data !== null && data.IsRegister){
+                } else if (data != null && data.IsRegister){
                     $scope.isInvted = true;
-                } else if (data !== null && !data.IsRegister) {
+                } else if (data != null && !data.IsRegister) {
                     $scope.sendEmail();
                 }
 
@@ -110,7 +110,9 @@
         };
 
         $scope.sendEmail = function () {
+            $scope.emailtemplate.absUrl = $location.absUrl();
             $scope.emailtemplate.emailto = $scope.InviteEmail;
+            $scope.emailtemplate.emailcode = $scope.currentProjectId;
             retrievePasswordService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function (response) {
                 $scope.isSendEmail = true;
             }, function () {

@@ -1,6 +1,7 @@
 ﻿appModule.controller('registerController', ['$scope', '$location', 'registerService', function ($scope, $location, registerService) {
 
     $scope.user = {};
+    $scope.inviteProjectId = getQueryVariable('code');
 
     $scope.registerUser = function () {
         registerService.checkEmailExist($scope.user.email).then(function (response) {
@@ -9,7 +10,16 @@
             }
             else
             {
-                registerService.createUser($scope.user).then(function (response) {
+                registerService.createUser($scope.user).then(function () {
+                    if ($scope.inviteProjectId != null || $scope.inviteProjectId != undefined) {
+                        var command = {
+                            EndCodeProjectId: $scope.inviteProjectId,
+                            Email: $scope.user.email
+                        };
+                        registerService.inviteUser(command).then(function () {
+
+                        });
+                    }
                     $location.path('/login');
                 });
             }

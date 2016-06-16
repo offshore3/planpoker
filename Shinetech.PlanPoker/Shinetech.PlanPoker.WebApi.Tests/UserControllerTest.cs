@@ -205,7 +205,8 @@ namespace Shinetech.PlanPoker.WebApi.Tests
                     WebUrl="123",
                     WebTel="123",
                     AbsUrl="123",
-                    EmailTo="123"
+                    EmailTo="123",
+                    EmailCode="123"
                 },
                 MailContentViewModel = new MailContentViewModel()
                 {

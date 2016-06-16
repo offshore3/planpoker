@@ -18,9 +18,22 @@ angular.module("shinetech-app").run([
             if ($location.path() === "/dashboard") {
                 if ($cookieStore.get("LoginUserId") === undefined || $cookieStore.get("LoginUserId") === null) {
                     console.log(11);
-                    $location.path("/login");
+                    $rootScope.gotoLogin();
                 }
             }
         }
+
+        $rootScope.gotoLogin= function() {
+            $location.path("login");
+        }
+
+        $rootScope.gotoRegister= function() {
+            $location.path("register");
+        }
+
+        $rootScope.gotoRetrievePassword = function () {
+            $location.path("retrievepassword");
+        }
+
     }
 ]);
