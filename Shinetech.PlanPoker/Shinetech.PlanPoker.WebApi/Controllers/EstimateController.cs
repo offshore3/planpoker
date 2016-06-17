@@ -4,11 +4,12 @@ using Shinetech.PlanPoker.Data.Common;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Controllers;
 using Shinetech.PlanPoker.WebApi.ViewModels;
+using Shinetech.PlanPoker.WebApi.Hubs;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
     [RoutePrefix("api")]
-    public class EstimateController : BaseController
+    public class EstimateController : ApiControllerWithHub<ShinetechPlanPokerHub>
     {
         private readonly ICacheManager _cacheManager;
         private readonly IUserLogic _userLogic;

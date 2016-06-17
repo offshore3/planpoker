@@ -139,6 +139,8 @@
     <Content Include="scripts\directive\file-services.js" />
     <Content Include="scripts\directive\registerDirective.js" />
     <Content Include="scripts\jquery\jquery.js" />
+    <Content Include="scripts\jquery\jquery.signalR-2.2.0.js" />
+    <Content Include="scripts\jquery\jquery.signalR-2.2.0.min.js" />
     <Content Include="scripts\route\shinetechApp.js" />
     <Content Include="scripts\route\shinetechRoute.js" />
     <Content Include="scripts\service\changePasswordService.js" />
