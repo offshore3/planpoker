@@ -24,5 +24,13 @@
         });
     };
 
+    this.getEstimateUsers = function (seletedId, successCallback, errorCallback) {
+        httpProxy.get("api/estimates?projectId=" + seletedId).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+    };
+
 
 }]);

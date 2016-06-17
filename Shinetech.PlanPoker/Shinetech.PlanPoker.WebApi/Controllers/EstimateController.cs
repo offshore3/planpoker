@@ -5,6 +5,7 @@ using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Controllers;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 using Shinetech.PlanPoker.WebApi.Hubs;
+using Shinetech.PlanPoker.WebApi.Tools;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
@@ -22,6 +23,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [Route("estimate")]
         [HttpPost]
+        [BasicAuthorize]
         public IHttpActionResult Insert(Estimate estimate)
         {
             if (_cacheManager.KeyExist(estimate.ProjectId))
@@ -52,8 +54,9 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
 
-        [Route("estimate")]
+        [Route("estimates")]
         [HttpGet]
+        [BasicAuthorize]
         public IHttpActionResult Get(string projectId)
         {
             if (!_cacheManager.KeyExist(projectId)) return NotFound();

@@ -1,7 +1,7 @@
-﻿var webAPI = "http://localhost:25455/";
-var Token = "Token";
-var userImagePath = "";
-var appModule = angular.module("shinetech-app", ["ngRoute", "ngCookies"]);
+﻿var webAPI = "http://localhost:25455/",
+    Token = "Token",
+    userImagePath = "",
+    appModule = angular.module("shinetech-app", ["ngRoute", "ngCookies"]);
 
 angular.module("shinetech-app").run([
     "$rootScope", "$location", "$routeParams", "$cookieStore", function($rootScope, $location, $routeParams, $cookieStore) {

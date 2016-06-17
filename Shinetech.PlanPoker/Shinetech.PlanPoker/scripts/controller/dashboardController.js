@@ -1,4 +1,15 @@
 ﻿appModule.controller('dashboardController', ['$scope', '$cookieStore', 'dashboardService', 'projectService', function ($scope,$cookieStore, dashboardService, projectService) {
+     
+    // create a proxy to signalr hub on web server
+    var hub = $.connection.shinetechPlanPokerHub;
+    $scope.estimates = [];
+    $scope.customerIdSubscribed;
+
+    $scope.selectedPoker = {
+        text: "?",
+        data: ""
+    };
+
     $scope.pokers = {
         poker: [
             { data: 1, myStyle: { "left": "20%" } },
@@ -20,11 +31,6 @@
         ]
     };
 
-    $scope.selectedPoker = {
-        text: "?",
-        data: ""
-    };
-
     $scope.loadProjects = function () {
         var command = {
             queryText: '',
@@ -33,10 +39,14 @@
         };
 
         $scope.projectCode = getQueryVariable('code');
-        dashboardService.decryptProjectCode($scope.projectCode, function (data) {
-            console.log(data);
-            $scope.projectId = data;
-        });
+
+        if ($scope.projectCode) {
+            dashboardService.decryptProjectCode($scope.projectCode, function (data) {
+                console.log(data);
+                $scope.projectId = data;
+            });
+        }
+        
 
         projectService.queryProjects(command, function (data) {
             $scope.projects = data.ProjectViewModels;
@@ -46,24 +56,67 @@
     };
 
     $scope.cardSelect = function (poker) {
+
+        if ($scope.seletedProjectId == undefined) return;
         console.log(poker);
-        console.log($scope.projectId);
+        console.log($scope.seletedProjectId);
         $scope.isFloat = poker.data;
         $scope.selectedPoker.data = poker.data;
         $scope.selectedPoker.text = "√";
 
         var command = {
-            ProjectId: $scope.projectId,
+            ProjectId: $scope.seletedProjectId,
             UserId: $cookieStore.get("LoginUserId"),
             SelectedPoker: poker.data
         };
 
-        dashboardService.selectCard(command, function () {
+        dashboardService.selectCard(command, function (data) {
+            console.log(data);
 
         }, function () {
 
         });
+    };
+
+    $scope.changeProject = function () {
+        if ($scope.seletedProjectId == undefined) return;
+
+        dashboardService.getEstimateUsers($scope.seletedProjectId, function (data) {
+            $scope.estimates = data;
+
+            if ($scope.customerIdSubscribed &&
+                    $scope.customerIdSubscribed.length > 0 &&
+                    $scope.customerIdSubscribed !== $scope.seletedProjectId) {
+                // unsubscribe to stope to get notifications for old customer
+                hub.server.unsubscribe($scope.customerIdSubscribed);
+            }
+            // subscribe to start to get notifications for new customer
+            hub.server.subscribe($scope.seletedProjectId);
+            $scope.customerIdSubscribed = $scope.seletedProjectId;
+        }, function () {
+            $scope.estimates = [];
+        });        
+    };
+
+
+    // signalr client functions
+    hub.client.addItem = function (item) {
+        $scope.estimates.push(item);
+        // this is outside of angularjs, so need to apply
+        $scope.$apply(); 
     }
+
+    //ShinetechPlanPokerHub.client.updateItem = function (item) {
+    //    var array = $scope.complaints;
+    //    for (var i = array.length - 1; i >= 0; i--) {
+    //        if (array[i].COMPLAINT_ID === item.COMPLAINT_ID) {
+    //            array[i].DESCRIPTION = item.DESCRIPTION;
+    //            $scope.$apply();
+    //        }
+    //    }
+    //}
+
+    $.connection.hub.start(); // connect to signalr hub
 
 }]);
 
