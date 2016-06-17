@@ -22,17 +22,21 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [Route("estimate")]
         [HttpPost]
-        public void Insert(Estimate estimate)
+        public IHttpActionResult Insert(Estimate estimate)
         {
             if (_cacheManager.KeyExist(estimate.ProjectId))
             {
                 UpdateEsitmate(estimate);
-
             }
             else
             {
                 InsertEstimate(estimate);
             }
+            var estimateViewModel = GetEstimateViewModel(estimate);
+            var subscribed = Hub.Clients.Group(estimate.ProjectId);
+            subscribed.addItem(estimateViewModel);
+
+            return CreatedAtRoute("DefaultApi", new { id = estimate.ProjectId }, estimate);
         }
 
 
@@ -50,12 +54,12 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [Route("estimate")]
         [HttpGet]
-        public EstimatesViewModel Get(string projectId)
+        public IHttpActionResult Get(string projectId)
         {
-            if (!_cacheManager.KeyExist(projectId)) return null;
-            var estimatesViewModel = GetEstimateViewModel(projectId);
+            if (!_cacheManager.KeyExist(projectId)) return NotFound();
+            var estimatesViewModel = GetEstimatesViewModel(projectId);
 
-            return estimatesViewModel;
+            return Ok(estimatesViewModel);
         }
 
         [Route("estimateShowCard")]
@@ -96,7 +100,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             _cacheManager.Add(estimate.ProjectId, estimates);
         }
 
-        private EstimatesViewModel GetEstimateViewModel(string projectId)
+        private EstimatesViewModel GetEstimatesViewModel(string projectId)
         {
             var estimatesViewModel = new EstimatesViewModel();
             var estimates = _cacheManager.Get<Estimates>(projectId);
@@ -116,6 +120,19 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                 });
             }
             return estimatesViewModel;
+        }
+
+        private EstimateViewModel GetEstimateViewModel(Estimate estimate)
+        {
+            var user = _userLogic.Get(estimate.UserId);
+            var estimateViewModel = new EstimateViewModel
+            {
+                ProjectId = estimate.ProjectId,
+                SelectedPoker = estimate.SelectedPoker,
+                UserImage = user.ImagePath,
+                UserName = user.Name
+            };
+            return estimateViewModel;
         }
     }
 }
