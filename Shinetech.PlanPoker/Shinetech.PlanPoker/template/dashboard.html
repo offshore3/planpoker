@@ -1,54 +1,48 @@
 ﻿
 <div class="container">
     <div ng-controller="dashboardController" ng-init="loadProjects()">
-        <div class="all-players-cards-selected text-center row">
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <div class="project-select col-md-3">
+        <div class="all-players-cards-selected all-players-cards-content text-center row">
+            <div class="row">
+                <div class="col-md-6  col-sm-6 col-xs-6">
+                    <div class="project-select col-md-3  col-sm-4 col-xs-4">
                         <label class="text-success">Please select:&nbsp;</label>
                     </div>
-                    <div class="project-select col-md-9">
+                    <div class="project-select col-md-9  col-sm-8 col-xs-8">
                         <select class="form-control" ng-model="seletedProjectId" ng-change="changeProject(seletedProjectId)">
-                            <!--<option value="">Select Project</option>-->
+                            <option value="">Select Project</option>
                             <option ng-selected="projectId==project.Id" ng-repeat="project in projects" value="{{project.Id}}">{{project.Name}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-primary btn-info" ng-click="saveUserInfo()"> Next </button>
-                    <button type="button" class="btn btn-primary btn-info" ng-click="saveUserInfo()"> Save </button>
-                    <button type="button" class="btn btn-primary btn-info" ng-click="saveUserInfo()"> Show </button>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <button type="button" class="btn btn-primary btn-info" ng-disabled="!isShowResult" ng-click="saveUserInfo()"> Next </button>
+                    <button type="button" class="btn btn-primary btn-info" ng-disabled="isShowResult" ng-click="showEstimate()"> Show </button>
                 </div>
             </div>
-        </div>
-        <div class="all-players-cards-selected row" ng-show="estimates.length">
-            <div class="scroll-container flex">
-                <div class="card-in-hand-in-hand card-flipped">
-                    <div class="row">
-                        <div class="col-sm-2 col-xs-4"  ng-repeat="estimate in estimates">
-                            <div class="animation-wrapper">
-                                <div class="card-container rotate face-up card-blue">
-                                    <div class="card card-back">
-                                        <div class="small-card-id">
-                                            <span>{{estimate.SelectedPoker}}</span>
+
+            <div class="all-players-cards-selected row" ng-show="estimates.length">
+                <div class="scroll-container flex">
+                    <div class="card-in-hand-in-hand card-flipped">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-4" ng-repeat="estimate in estimates">
+                                <div class="animation-wrapper">
+                                    <div class="card-container rotate face-up card-blue">
+                                        <div class="card card-face">
+                                            <div class="small-card-id">
+                                                <span>{{isShowResult?estimate.SelectedPoker:selectedPoker.text}}</span>
+                                            </div>
+                                            <div class="text-center player-vote"><span>{{isShowResult?estimate.SelectedPoker:selectedPoker.text}}</span></div>
                                         </div>
-                                        <div class="text-center player-vote"><span>{{estimate.SelectedPoker}}</span></div>
-                                    </div>
-                                    <div class="card card-face">
-                                        <div class="small-card-id">
-                                            <span>{{selectedPoker.text}}</span>
-                                        </div>
-                                        <div class="text-center player-vote"><span>{{selectedPoker.text}}</span></div>
                                     </div>
                                 </div>
+                                <div class="label label-inverse label-name pull-right">{{estimate.UserName}}</div>
                             </div>
-                            <div class="label label-inverse label-name pull-right">{{estimate.UserName}}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 500px; ">
+        <div class="row">
             <div ng-repeat="poker in pokers.poker" ng-click="cardSelect(poker)">
                 <div class="card-rig card-in-hand card-flipped" ng-style="{{poker.myStyle}}"
                      ng-class="isFloat=='{{poker.data}}'?'up-float':''">

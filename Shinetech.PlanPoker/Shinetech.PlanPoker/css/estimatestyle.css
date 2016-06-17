@@ -263,3 +263,7 @@
 .label-inverse {
     color:#000;
 }
+
+.all-players-cards-content {
+    min-height:750px;
+}

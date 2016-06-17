@@ -1,6 +1,5 @@
 ﻿appModule.controller('dashboardController', ['$scope', '$cookieStore', 'dashboardService', 'projectService', function ($scope,$cookieStore, dashboardService, projectService) {
      
-    // create a proxy to signalr hub on web server
     $scope.estimates = [];
     $scope.customerIdSubscribed;
 
@@ -34,18 +33,16 @@
         var command = {
             queryText: '',
             pageNumber: 1,
-            pageCount: 12
+            pageCount: 100
         };
 
         $scope.projectCode = getQueryVariable('code');
 
         if ($scope.projectCode) {
             dashboardService.decryptProjectCode($scope.projectCode, function (data) {
-                console.log(data);
                 $scope.projectId = data;
             });
-        }
-        
+        }        
 
         projectService.queryProjects(command, function (data) {
             $scope.projects = data.ProjectViewModels;
@@ -79,8 +76,8 @@
         if ($scope.seletedProjectId == undefined) return;
 
         dashboardService.getEstimateUsers($scope.seletedProjectId, function (data) {
-            $scope.estimates = data;
-
+            $scope.estimates = data.EstimateViewModel;
+            $scope.isShowResult = data.IsShow;
             if ($scope.customerIdSubscribed &&
                     $scope.customerIdSubscribed.length > 0 &&
                     $scope.customerIdSubscribed !== $scope.seletedProjectId) {
@@ -97,6 +94,11 @@
         });        
     };
 
+    $scope.showEstimate = function () {
+        dashboardService.showEstimate($scope.seletedProjectId, function () {
+            $scope.isShowResult = true;
+        }, function () { });
+    }
 
     // signalr client functions
     hub.client.addItem = function (item) {
@@ -104,16 +106,6 @@
         // this is outside of angularjs, so need to apply
         $scope.$apply(); 
     }
-
-    //ShinetechPlanPokerHub.client.updateItem = function (item) {
-    //    var array = $scope.complaints;
-    //    for (var i = array.length - 1; i >= 0; i--) {
-    //        if (array[i].COMPLAINT_ID === item.COMPLAINT_ID) {
-    //            array[i].DESCRIPTION = item.DESCRIPTION;
-    //            $scope.$apply();
-    //        }
-    //    }
-    //}
     
 }]);
 

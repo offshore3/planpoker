@@ -24,13 +24,20 @@
         });
     };
 
-    this.getEstimateUsers = function (seletedId, successCallback, errorCallback) {
-        httpProxy.get("api/estimates?projectId=" + seletedId).then(function (data) {
+    this.getEstimateUsers = function (projectId, successCallback, errorCallback) {
+        httpProxy.get("api/estimates?projectId=" + projectId).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);
         });
     };
 
+    this.showEstimate = function (projectId,successCallback, errorCallback) {
+        httpProxy.get("api/estimateShowCard?projectId=" + projectId).then(function () {
+            successCallback();
+        }, function (error) {
+            errorCallback();
+        });
+    }
 
 }]);

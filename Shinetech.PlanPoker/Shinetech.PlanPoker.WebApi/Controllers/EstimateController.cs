@@ -59,10 +59,9 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [BasicAuthorize]
         public IHttpActionResult Get(string projectId)
         {
-            if (!_cacheManager.KeyExist(projectId)) return NotFound();
             var estimatesViewModel = GetEstimatesViewModel(projectId);
 
-            return Ok(estimatesViewModel.EstimateViewModel);
+            return Ok(estimatesViewModel);
         }
 
         [Route("estimateShowCard")]

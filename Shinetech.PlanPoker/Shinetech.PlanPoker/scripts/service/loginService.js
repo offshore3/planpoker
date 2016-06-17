@@ -47,14 +47,5 @@
         });
     }
 
-    this.TestEstimate = function (command, successCallback, errorCallback) {
-        httpProxy.post("api/estimate", command
-        ).then(function (data) {
-            successCallback(data);
-        }, function (error) {
-            errorCallback(error);
-        });
-    }
-
     
 }])
