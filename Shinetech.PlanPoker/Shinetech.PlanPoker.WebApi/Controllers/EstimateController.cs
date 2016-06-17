@@ -38,7 +38,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             var subscribed = Hub.Clients.Group(estimate.ProjectId);
             subscribed.addItem(estimateViewModel);
 
-            return CreatedAtRoute("DefaultApi", new { id = estimate.ProjectId }, estimate);
+            return CreatedAtRoute("DefaultApi", new { id = estimate.ProjectId }, estimateViewModel);
         }
 
 
@@ -62,7 +62,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             if (!_cacheManager.KeyExist(projectId)) return NotFound();
             var estimatesViewModel = GetEstimatesViewModel(projectId);
 
-            return Ok(estimatesViewModel);
+            return Ok(estimatesViewModel.EstimateViewModel);
         }
 
         [Route("estimateShowCard")]

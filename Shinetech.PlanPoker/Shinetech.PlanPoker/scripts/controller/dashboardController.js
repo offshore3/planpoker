@@ -1,7 +1,6 @@
 ﻿appModule.controller('dashboardController', ['$scope', '$cookieStore', 'dashboardService', 'projectService', function ($scope,$cookieStore, dashboardService, projectService) {
      
     // create a proxy to signalr hub on web server
-    var hub = $.connection.shinetechPlanPokerHub;
     $scope.estimates = [];
     $scope.customerIdSubscribed;
 
@@ -91,8 +90,10 @@
                 hub.server.unsubscribe($scope.customerIdSubscribed);
             }
             // subscribe to start to get notifications for new customer
-            hub.server.subscribe($scope.seletedProjectId);
-            $scope.customerIdSubscribed = $scope.seletedProjectId;
+            $.connection.hub.start().done(function () {
+                hub.server.subscribe($scope.seletedProjectId);
+                $scope.customerIdSubscribed = $scope.seletedProjectId;
+            });
         }, function () {
             $scope.estimates = [];
         });        
@@ -115,9 +116,7 @@
     //        }
     //    }
     //}
-
-    $.connection.hub.start(); // connect to signalr hub
-
+    
 }]);
 
 
