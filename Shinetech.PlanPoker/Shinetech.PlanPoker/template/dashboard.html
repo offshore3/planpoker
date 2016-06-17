@@ -21,26 +21,31 @@
                 </div>
             </div>
         </div>
-        <div class="all-players-cards-selected row" ng-show="selectedPoker.data!=''">
+        <div class="all-players-cards-selected row" ng-show="estimates.length">
             <div class="scroll-container flex">
-                <div class="card-rig card-in-hand-in-hand card-flipped" ng-repeat="estimate in estimates">
-                    <div class="animation-wrapper">
-                        <div class="card-container rotate face-up card-blue">
-                            <div class="card card-back">
-                                <div class="small-card-id">
-                                    <span>{{estimate.SelectedPoker}}</span>
+                <div class="card-in-hand-in-hand card-flipped">
+                    <div class="row">
+                        <div class="col-md-2"  ng-repeat="estimate in estimates">
+                            <div class="animation-wrapper">
+                                <div class="card-container rotate face-up card-blue">
+                                    <div class="card card-back">
+                                        <div class="small-card-id">
+                                            <span>{{estimate.SelectedPoker}}</span>
+                                        </div>
+                                        <div class="text-center player-vote"><span>{{estimate.SelectedPoker}}</span></div>
+                                    </div>
+                                    <div class="card card-face">
+                                        <div class="small-card-id">
+                                            <span>{{selectedPoker.text}}</span>
+                                        </div>
+                                        <div class="text-center player-vote"><span>{{selectedPoker.text}}</span></div>
+                                    </div>
                                 </div>
-                                <div class="text-center player-vote"><span>{{estimate.SelectedPoker}}</span></div>
                             </div>
-                            <div class="card card-face">
-                                <div class="small-card-id">
-                                    <span>{{selectedPoker.text}}</span>
-                                </div>
-                                <div class="text-center player-vote"><span>{{selectedPoker.text}}</span></div>
-                            </div>
+                            <div class="label label-inverse label-name">Joy</div>
+
                         </div>
                     </div>
-                    <div class="label label-inverse label-name">{{estimate.UserId}}</div>
                 </div>
             </div>
         </div>

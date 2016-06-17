@@ -5,7 +5,7 @@
     $scope.customerIdSubscribed;
 
     $scope.selectedPoker = {
-        text: "?",
+        text: "√",
         data: ""
     };
 
@@ -60,8 +60,6 @@
         console.log(poker);
         console.log($scope.seletedProjectId);
         $scope.isFloat = poker.data;
-        $scope.selectedPoker.data = poker.data;
-        $scope.selectedPoker.text = "√";
 
         var command = {
             ProjectId: $scope.seletedProjectId,
