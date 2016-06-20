@@ -24,6 +24,10 @@ namespace Shinetech.PlanPoker.Data
         public void Save<TEntity>(TEntity entity) => _session.Save(entity);
 
         public void Delete<TEntity>(object id) => _session.Delete(Get<TEntity>(id));
+        public ISession GetSession()
+        {
+            return _session;
+        }
 
         public void Dispose() { _session?.Dispose(); }
 

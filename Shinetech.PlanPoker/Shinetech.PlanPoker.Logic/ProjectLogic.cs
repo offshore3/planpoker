@@ -48,11 +48,7 @@ namespace Shinetech.PlanPoker.Logic
         {
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
-                var invites = _inviteRepository.Query().Where(x => x.Project.Id == id);
-                foreach (var invite in invites)
-                {
-                    _inviteRepository.Delete(invite.Id);
-                }
+                _inviteRepository.DeleteByProjectId(id);
                 _projectRepository.Delete(id);
 
                 unitOfwork.Commit();
@@ -78,7 +74,7 @@ namespace Shinetech.PlanPoker.Logic
         public IEnumerable<ProjectLogicModel> GetProjectByUser(int userId, int pageNumber, int pageCount,
             string queryText)
         {
-            var skipCount = (pageNumber - 1)*pageCount;
+            var skipCount = (pageNumber - 1) * pageCount;
             var isQueryByText = !string.IsNullOrEmpty(queryText);
             var participateProjectIds =
                 _inviteRepository.Query().Where(x => x.User.Id == userId).Select(x => x.Project.Id).ToList();
@@ -102,7 +98,7 @@ namespace Shinetech.PlanPoker.Logic
                 _inviteRepository.Query().Where(x => x.User.Id == userId).Select(x => x.Project.Id).ToList();
             var projectCounts = _projectRepository.Query()
                 .Count(x => (x.Owner.Id == userId || participateProjectIds.Contains(x.Id)) && (!isQueryByText || x.Name.Contains(queryText)));
-            return (int) Math.Ceiling((decimal) projectCounts/pageCount);
+            return (int)Math.Ceiling((decimal)projectCounts / pageCount);
         }
     }
 }

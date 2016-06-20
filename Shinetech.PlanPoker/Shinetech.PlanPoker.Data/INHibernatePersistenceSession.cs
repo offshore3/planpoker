@@ -1,4 +1,5 @@
 using System.Linq;
+using NHibernate;
 
 namespace Shinetech.PlanPoker.Data
 {
@@ -11,5 +12,6 @@ namespace Shinetech.PlanPoker.Data
         bool TryGetForUpdate<TEntity>(object id, out TEntity model);
         void Save<TEntity>(TEntity entity);
         void Delete<TEntity>(object id);
+        ISession GetSession();
     }
 }
