@@ -3,21 +3,29 @@
     <div ng-controller="dashboardController" ng-init="loadProjects()">
         <div class="all-players-cards-selected all-players-cards-content text-center row">
             <div class="row">
-                <div class="col-md-6  col-sm-6 col-xs-5">
-                    <div class="project-select col-md-3  col-sm-4 col-xs-4">
+                <div>
+                    <div class="project-select col-md-4 col-sm-4 col-xs-4">
                         <label class="text-success">Please select:&nbsp;</label>
                     </div>
-                    <div class="project-select col-md-9  col-sm-8 col-xs-8">
+                    <div class="project-select col-md-8 col-sm-8 col-xs-8">
                         <select class="form-control" ng-model="seletedProjectId" ng-change="changeProject(seletedProjectId)">
                             <option value="">Select Project</option>
                             <option ng-selected="projectId==project.Id" ng-repeat="project in projects" value="{{project.Id}}">{{project.Name}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-7">
-                    <a target="_blank" href="javascript:void(0)" ng-href={{href}}>View</a>
-                    <button type="button" class="btn btn-primary btn-info btn-sm" ng-disabled="!isShowResult" ng-click="clearEstimate()"> Clean </button>
-                    <button type="button" class="btn btn-primary btn-info btn-sm" ng-disabled="isShowResult" ng-click="showEstimate()"> Show </button>
+            </div>
+            <div class="row">
+                <div class="operation">
+                    <div class="col-xs-5">
+                        <button type="button" class="btn btn-primary btn-info btn-lg" ng-disabled="!isShowResult" ng-click="clearEstimate()"> Clean </button>
+                    </div>
+                    <div class="col-xs-2">
+                        <a class="btn btn-primary btn-info btn-lg" target="_blank" href="javascript:void(0)" ng-href={{href}}>View</a>
+                    </div>
+                    <div class="col-xs-5">
+                        <button type="button" class="btn btn-primary btn-info btn-lg" ng-disabled="isShowResult" ng-click="showEstimate()"> Show </button>
+                    </div>
                 </div>
             </div>
 

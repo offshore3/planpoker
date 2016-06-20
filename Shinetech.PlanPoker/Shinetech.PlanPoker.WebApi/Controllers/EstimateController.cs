@@ -84,7 +84,8 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                     }
                     sum += int.Parse(estimate.SelectedPoker);
                 }
-                estimates.AveragePoint = (int)Math.Ceiling((decimal)sum / (estimates.EstimateList.Count + notNum));
+                var numCount = (estimates.EstimateList.Count + notNum);
+                estimates.AveragePoint = numCount==0?0:(int)Math.Ceiling((decimal)sum / (estimates.EstimateList.Count + notNum));
                 estimates.IsShow = true;
 
                 var subscribed = Hub.Clients.Group(projectId);
