@@ -58,8 +58,15 @@ angular.module("shinetech-app").run([
         };
 
         hub.client.addItem = function (item) {
-            $rootScope.estimates.push(item);
-            // this is outside of angularjs, so need to apply
+            
+            var existItem = E($rootScope.estimates).FirstOrDefault(undefined, function (t) {
+                return t.UserId === item.UserId;
+            });
+            if (existItem) {
+                existItem.SelectedPoker = item.SelectedPoker;
+            } else {
+                $rootScope.estimates.push(item);
+            }
             $rootScope.$apply();
         }
     }

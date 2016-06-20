@@ -1,5 +1,5 @@
 ﻿appModule.controller('dashboardController', ['$rootScope', '$scope', '$cookieStore', 'dashboardService', 'projectService', function ($rootScope, $scope, $cookieStore, dashboardService, projectService) {
-    
+
     $scope.customerIdSubscribed;
 
     $scope.selectedPoker = {
@@ -41,7 +41,7 @@
             dashboardService.decryptProjectCode($scope.projectCode, function (data) {
                 $scope.projectId = data;
             });
-        }        
+        }
 
         projectService.queryProjects(command, function (data) {
             $scope.projects = data.ProjectViewModels;
@@ -72,25 +72,28 @@
     };
 
     $scope.changeProject = function () {
-        if ($scope.seletedProjectId == undefined) return;
+        if ($scope.seletedProjectId == undefined || $scope.seletedProjectId == null || $scope.seletedProjectId == "") {
+            $rootScope.estimates = [];
+            return;
+        }
 
         dashboardService.getEstimateUsers($scope.seletedProjectId, function (data) {
-            $rootScope.estimates = data.EstimateViewModel;
-            $rootScope.isShowResult = data.IsShow;
             if ($scope.customerIdSubscribed &&
                     $scope.customerIdSubscribed.length > 0 &&
                     $scope.customerIdSubscribed !== $scope.seletedProjectId) {
-                // unsubscribe to stope to get notifications for old customer
                 hub.server.unsubscribe($scope.customerIdSubscribed);
             }
-            // subscribe to start to get notifications for new customer
-            //$.connection.hub.start().done(function () {
-                hub.server.subscribe($scope.seletedProjectId);
-                $scope.customerIdSubscribed = $scope.seletedProjectId;
-            //});
+            hub.server.subscribe($scope.seletedProjectId);
+            $scope.customerIdSubscribed = $scope.seletedProjectId;
+            if (data == null) {
+                $rootScope.estimates = [];
+                return;
+            }
+            $rootScope.estimates = data.EstimateViewModel;
+            $rootScope.isShowResult = data.IsShow;
         }, function () {
             $rootScope.estimates = [];
-        });        
+        });
     };
 
     $scope.showEstimate = function () {
@@ -100,8 +103,8 @@
     }
 
     // signalr client functions
-    
-    
+
+
 }]);
 
 

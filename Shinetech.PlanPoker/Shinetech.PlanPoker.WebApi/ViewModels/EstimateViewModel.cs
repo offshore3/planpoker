@@ -6,5 +6,6 @@
         public string UserName { get; set; }
         public string UserImage { get; set; }
         public string SelectedPoker { get; set; }
+        public string UserId { get; set; }
     }
 }

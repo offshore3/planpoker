@@ -38,7 +38,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             var subscribed = Hub.Clients.Group(estimate.ProjectId);
             subscribed.addItem(estimateViewModel);
 
-            return CreatedAtRoute("DefaultApi", new { id = estimate.ProjectId }, estimateViewModel);
+            return CreatedAtRoute("DefaultApi", new { controller = "estimate", id = estimate.ProjectId }, estimate);
         }
 
 
@@ -122,7 +122,8 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                     ProjectId = item.ProjectId,
                     SelectedPoker = item.SelectedPoker,
                     UserImage = user.ImagePath,
-                    UserName = user.Name
+                    UserName = user.Name,
+                    UserId = user.Id.ToString()
                 });
             }
             return estimatesViewModel;
@@ -136,7 +137,8 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                 ProjectId = estimate.ProjectId,
                 SelectedPoker = estimate.SelectedPoker,
                 UserImage = user.ImagePath,
-                UserName = user.Name
+                UserName = user.Name,
+                UserId = user.Id.ToString()
             };
             return estimateViewModel;
         }

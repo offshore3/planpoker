@@ -16,3 +16,7 @@ function getQueryVariable(name) {
     }
     return (false);
 }
+
+E = function (array) {
+    return Enumerable.From(array);
+};
