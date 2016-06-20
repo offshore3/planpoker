@@ -71,6 +71,7 @@
     $scope.changeProject = function () {
         $rootScope.isShowResult = false;
         $rootScope.averagePoint = "";
+        $scope.isFloat = "";
         if ($scope.seletedProjectId == undefined || $scope.seletedProjectId == null || $scope.seletedProjectId == "") {
             $rootScope.estimates = [];
             return;
@@ -108,6 +109,7 @@
     }
 
     $scope.clearEstimate = function () {
+        $scope.isFloat = "";
         dashboardService.removeEstimate($scope.seletedProjectId, function () {
 
         }, function () {
