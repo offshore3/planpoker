@@ -52,7 +52,7 @@
 
     $scope.cardSelect = function (poker) {
 
-        if ($scope.seletedProjectId == undefined) return;
+        if ($scope.seletedProjectId == undefined || $scope.seletedProjectId == null || $scope.seletedProjectId == "" || $rootScope.isShowResult) return;
         $scope.isFloat = poker.data;
 
         var command = {
@@ -62,7 +62,6 @@
         };
 
         dashboardService.selectCard(command, function (data) {
-            console.log(data);
 
         }, function () {
 
