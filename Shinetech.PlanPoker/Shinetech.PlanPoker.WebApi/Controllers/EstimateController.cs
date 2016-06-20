@@ -51,7 +51,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             if (_cacheManager.KeyExist(projectId)) _cacheManager.Remove(projectId);
 
             var subscribed = Hub.Clients.Group(projectId);
-            subscribed.clearEstimate(null);
+            subscribed.clearEstimate();
         }
 
 
