@@ -77,8 +77,8 @@ angular.module("shinetech-app").run([
             $rootScope.$apply();
         };
         
-        hub.client.clearEstimate = function (data) {
-            $rootScope.estimates = data;
+        hub.client.clearEstimate = function () {
+            $rootScope.estimates = [];
             $rootScope.isShowResult = false;
             $rootScope.$apply();
         };

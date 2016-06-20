@@ -95,6 +95,7 @@
             }
             $rootScope.estimates = data.EstimateViewModel;
             $rootScope.isShowResult = data.IsShow;
+            $rootScope.averagePoint = data.AveragePoint;
         }, function () {
             $rootScope.estimates = [];
         });

@@ -59,7 +59,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [HttpGet]
         public IHttpActionResult Get(string projectId)
         {
-            var estimatesViewModel = GetEstimatesViewModel(projectId);
+            var estimatesViewModel = GetEstimatesViewModel(HubHelper.GetProjectId(projectId));
 
             return Ok(estimatesViewModel);
         }

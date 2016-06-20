@@ -3,7 +3,7 @@
     <div ng-controller="dashboardController" ng-init="loadProjects()">
         <div class="all-players-cards-selected all-players-cards-content text-center row">
             <div class="row">
-                <div class="col-md-6  col-sm-6 col-xs-6">
+                <div class="col-md-6  col-sm-6 col-xs-5">
                     <div class="project-select col-md-3  col-sm-4 col-xs-4">
                         <label class="text-success">Please select:&nbsp;</label>
                     </div>
@@ -14,10 +14,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6 col-xs-6">
-                    <a target="_blank" href="javascript:void(0)" ng-href={{href}}>Monitor</a>
-                    <button type="button" class="btn btn-primary btn-info" ng-disabled="!isShowResult" ng-click="clearEstimate()"> Clean </button>
-                    <button type="button" class="btn btn-primary btn-info" ng-disabled="isShowResult" ng-click="showEstimate()"> Show </button>
+                <div class="col-md-6 col-sm-6 col-xs-7">
+                    <a target="_blank" href="javascript:void(0)" ng-href={{href}}>View</a>
+                    <button type="button" class="btn btn-primary btn-info btn-sm" ng-disabled="!isShowResult" ng-click="clearEstimate()"> Clean </button>
+                    <button type="button" class="btn btn-primary btn-info btn-sm" ng-disabled="isShowResult" ng-click="showEstimate()"> Show </button>
                 </div>
             </div>
 
