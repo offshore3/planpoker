@@ -56,7 +56,6 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [Route("estimates")]
         [HttpGet]
-        [BasicAuthorize]
         public IHttpActionResult Get(string projectId)
         {
             var estimatesViewModel = GetEstimatesViewModel(projectId);

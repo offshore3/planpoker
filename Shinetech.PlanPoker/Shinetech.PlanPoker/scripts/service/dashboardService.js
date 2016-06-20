@@ -8,7 +8,16 @@
         });
     }
     this.decryptProjectCode = function (projectCode, successCallback, errorCallback) {
-        httpProxy.get("api/projectcode?projectCode=" + projectCode).then(function (data) {
+        httpProxy.get("api/projectDeCode?projectCode=" + projectCode).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
+        });
+
+    };
+
+    this.encryptProjectCode = function (projectId, successCallback, errorCallback) {
+        httpProxy.get("api/projectEnCode?projectId=" + projectId).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);
@@ -34,6 +43,14 @@
 
     this.showEstimate = function (projectId,successCallback, errorCallback) {
         httpProxy.get("api/estimateShowCard?projectId=" + projectId).then(function () {
+            successCallback();
+        }, function (error) {
+            errorCallback();
+        });
+    }
+
+    this.getMonitorUrl = function (projectId, successCallback, errorCallback) {
+        httpProxy.get("api/monitor?projectId=" + projectId).then(function () {
             successCallback();
         }, function (error) {
             errorCallback();

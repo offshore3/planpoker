@@ -6,14 +6,14 @@ namespace Shinetech.PlanPoker.WebApi.Hubs
     [HubName("ShinetechPlanPokerHub")]
     public class ShinetechPlanPokerHub : Hub
     {
-        public void Subscribe(string customerId)
+        public void Subscribe(string projectId)
         {
-            Groups.Add(Context.ConnectionId, customerId);
+            Groups.Add(Context.ConnectionId, HubHelper.GetProjectId(projectId));
         }
 
-        public void Unsubscribe(string customerId)
+        public void Unsubscribe(string projectId)
         {
-            Groups.Remove(Context.ConnectionId, customerId);
+            Groups.Remove(Context.ConnectionId, HubHelper.GetProjectId(projectId));
         }
     }
 }

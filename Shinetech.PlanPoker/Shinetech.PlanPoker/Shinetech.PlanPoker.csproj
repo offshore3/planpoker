@@ -127,6 +127,7 @@
     <Content Include="scripts\angular\angular.min.js" />
     <Content Include="scripts\bootstrap\bootstrap.min.js" />
     <Content Include="scripts\controller\changePasswordController.js" />
+    <Content Include="scripts\controller\monitorController.js" />
     <Content Include="scripts\controller\projectController.js" />
     <Content Include="scripts\controller\profileController.js" />
     <Content Include="scripts\controller\dashboardController.js" />
@@ -159,6 +160,7 @@
     <Content Include="template\ChangePassword.html" />
     <Content Include="template\dashboard.html" />
     <Content Include="template\login.html" />
+    <Content Include="template\monitor.html" />
     <Content Include="template\profile.html" />
     <Content Include="template\project.html" />
     <Content Include="template\register.html" />

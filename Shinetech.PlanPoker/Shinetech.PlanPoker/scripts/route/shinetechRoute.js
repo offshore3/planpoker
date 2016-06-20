@@ -26,5 +26,10 @@
             controller:"dashboardController"
         })
 
+        .when("/monitor", {
+            templateUrl: "template/monitor.html",
+            controller: "monitorController"
+        })
+
         .otherwise("/login");
 });

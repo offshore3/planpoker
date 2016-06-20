@@ -76,6 +76,10 @@
             $rootScope.estimates = [];
             return;
         }
+        dashboardService.encryptProjectCode($scope.seletedProjectId, function (data) {
+            $scope.href = "#/monitor?code=" + data;
+        }, function () {
+        });
 
         dashboardService.getEstimateUsers($scope.seletedProjectId, function (data) {
             if ($scope.customerIdSubscribed &&

@@ -63,11 +63,18 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("projectcode")]
-        [BasicAuthorize]
+        [Route("projectDeCode")]
         public string DecryptProjectCode(string projectCode)
         {
             return TokenGenerator.DecodeToken(projectCode);
         }
+
+        [HttpGet]
+        [Route("projectEnCode")]
+        public string EncryptProjectCode(string projectId)
+        {
+            return TokenGenerator.EncodeToken(projectId);
+        }
+
     }
 }
