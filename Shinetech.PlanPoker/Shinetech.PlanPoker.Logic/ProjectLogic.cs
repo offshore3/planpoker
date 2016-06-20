@@ -48,6 +48,11 @@ namespace Shinetech.PlanPoker.Logic
         {
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
+                var invites = _inviteRepository.Query().Where(x => x.Project.Id == id);
+                foreach (var invite in invites)
+                {
+                    _inviteRepository.Delete(invite.Id);
+                }
                 _projectRepository.Delete(id);
 
                 unitOfwork.Commit();
