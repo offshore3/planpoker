@@ -92,7 +92,16 @@ namespace Shinetech.PlanPoker.Logic
 
         public bool CheckToken(string email, string password)
         {
-            return _userRepository.Query().Any(x => x.Email == email && x.Password == password);
+            var isLoginUser = false;
+            try
+            {
+                isLoginUser = _userRepository.Query().Any(x => x.Email == email && x.Password == password);
+            }
+            catch (Exception ex)
+            {
+                isLoginUser = false;
+            }
+            return isLoginUser;
         }
 
         public UserLogicModel GetUserByEmail(string email)
