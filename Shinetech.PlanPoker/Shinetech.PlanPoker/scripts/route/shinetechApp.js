@@ -2,7 +2,7 @@
     Token = "Token",
     userImagePath = "",
     appModule = angular.module("shinetech-app", ["ngRoute", "ngCookies"]),
-    hub = $.connection.shinetechPlanPokerHub;
+    hub = $.connection.ShinetechPlanPokerHub;
 
 angular.module("shinetech-app").run([
     "$rootScope", "$location", "$routeParams", "$cookieStore", function($rootScope, $location, $routeParams, $cookieStore) {
@@ -36,5 +36,24 @@ angular.module("shinetech-app").run([
             $location.path("retrievepassword");
         }
 
+        
+
+        $.connection.hub.url = webAPI+"signalr";
+        $.connection.hub.start().done(function () {
+            console.log("connected");
+            //$("div[data-autorefresh='true']").each(function (i, e) {
+            //    var $this = $(this);
+            //    var projectId = $this.attr('project-id');
+            //    hub.server.join(projectId);
+            //});
+
+        })
+        .fail(function () {
+
+        });
+
+        hub.client.refreshEstimateResult = function (message) {
+            //logic
+        };
     }
 ]);

@@ -7,7 +7,7 @@
         text: "√",
         data: ""
     };
-
+    hub.server.join("123");
     $scope.pokers = {
         poker: [
             { data: 1, myStyle: { "left": "20%" } },
