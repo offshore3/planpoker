@@ -31,6 +31,10 @@
 .input-box{
 	margin-top:50px;
 }
+.operation {
+    margin-top: 16px;
+}
+
 .forgot-password{
 	float:right; 
 	font-size: 80%; 
