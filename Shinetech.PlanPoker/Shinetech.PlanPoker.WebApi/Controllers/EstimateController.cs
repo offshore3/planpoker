@@ -59,7 +59,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [HttpGet]
         public IHttpActionResult Get(string projectId)
         {
-            var estimatesViewModel = GetEstimatesViewModel(HubHelper.GetProjectId(projectId));
+            var estimatesViewModel = GetEstimatesViewModel(ProjectHelper.GetProjectId(projectId));
 
             return Ok(estimatesViewModel);
         }
@@ -73,19 +73,18 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             var estimates = _cacheManager.Get<Estimates>(projectId);
             if (estimates != null) {
                 var sum = 0;
-                var nanNum = 0;
+                var notNum = 0;
 
                 foreach (var estimate in estimates.EstimateList)
                 {
                     if (!isNumberic(estimate.SelectedPoker))
                     {
-                        nanNum--;
+                        notNum--;
                         continue;
                     }
                     sum += int.Parse(estimate.SelectedPoker);
                 }
-                var hehe = sum / (estimates.EstimateList.Count + nanNum);
-                estimates.AveragePoint = sum / (estimates.EstimateList.Count + nanNum);
+                estimates.AveragePoint = (int)Math.Ceiling((decimal)sum / (estimates.EstimateList.Count + notNum));
                 estimates.IsShow = true;
 
                 var subscribed = Hub.Clients.Group(projectId);

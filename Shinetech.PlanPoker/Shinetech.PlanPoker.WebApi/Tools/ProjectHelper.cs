@@ -1,8 +1,8 @@
 ﻿using Shinetech.PlanPoker.Logic.Tools;
 
-namespace Shinetech.PlanPoker.WebApi.Hubs
+namespace Shinetech.PlanPoker.WebApi.Tools
 {
-    public class HubHelper
+    public class ProjectHelper
     {
         public static string GetProjectId(string code)
         {

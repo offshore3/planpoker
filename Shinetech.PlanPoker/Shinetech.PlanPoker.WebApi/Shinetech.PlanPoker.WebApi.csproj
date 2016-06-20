@@ -255,7 +255,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\HubHelper.cs" />
+    <Compile Include="Tools\ProjectHelper.cs" />
     <Compile Include="Hubs\ShinetechPlanPokerHub.cs" />
     <Compile Include="Installer\ApiControllersInstaller.cs" />
     <Compile Include="Installer\CacheInstaller.cs" />
