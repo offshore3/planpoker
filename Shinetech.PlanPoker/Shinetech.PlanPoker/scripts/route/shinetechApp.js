@@ -36,7 +36,8 @@ angular.module("shinetech-app").run([
             $location.path("retrievepassword");
         }
 
-        
+        $rootScope.estimates = [];
+
 
         $.connection.hub.url = webAPI+"signalr";
         $.connection.hub.start().done(function () {
@@ -55,5 +56,11 @@ angular.module("shinetech-app").run([
         hub.client.refreshEstimateResult = function (message) {
             //logic
         };
+
+        hub.client.addItem = function (item) {
+            $rootScope.estimates.push(item);
+            // this is outside of angularjs, so need to apply
+            $rootScope.$apply();
+        }
     }
 ]);

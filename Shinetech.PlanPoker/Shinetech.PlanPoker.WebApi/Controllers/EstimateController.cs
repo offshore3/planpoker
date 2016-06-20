@@ -105,6 +105,10 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         private EstimatesViewModel GetEstimatesViewModel(string projectId)
         {
             var estimatesViewModel = new EstimatesViewModel();
+            if (!_cacheManager.KeyExist(projectId))
+            {
+                return null;
+            } 
             var estimates = _cacheManager.Get<Estimates>(projectId);
             estimatesViewModel.IsShow = estimates.IsShow;
 

@@ -1,13 +1,12 @@
-﻿appModule.controller('dashboardController', ['$scope', '$cookieStore', 'dashboardService', 'projectService', function ($scope,$cookieStore, dashboardService, projectService) {
-     
-    $scope.estimates = [];
+﻿appModule.controller('dashboardController', ['$rootScope', '$scope', '$cookieStore', 'dashboardService', 'projectService', function ($rootScope, $scope, $cookieStore, dashboardService, projectService) {
+    
     $scope.customerIdSubscribed;
 
     $scope.selectedPoker = {
         text: "√",
         data: ""
     };
-    hub.server.join("123");
+    //hub.server.join("123");
     $scope.pokers = {
         poker: [
             { data: 1, myStyle: { "left": "20%" } },
@@ -76,8 +75,8 @@
         if ($scope.seletedProjectId == undefined) return;
 
         dashboardService.getEstimateUsers($scope.seletedProjectId, function (data) {
-            $scope.estimates = data.EstimateViewModel;
-            $scope.isShowResult = data.IsShow;
+            $rootScope.estimates = data.EstimateViewModel;
+            $rootScope.isShowResult = data.IsShow;
             if ($scope.customerIdSubscribed &&
                     $scope.customerIdSubscribed.length > 0 &&
                     $scope.customerIdSubscribed !== $scope.seletedProjectId) {
@@ -85,12 +84,12 @@
                 hub.server.unsubscribe($scope.customerIdSubscribed);
             }
             // subscribe to start to get notifications for new customer
-            $.connection.hub.start().done(function () {
+            //$.connection.hub.start().done(function () {
                 hub.server.subscribe($scope.seletedProjectId);
                 $scope.customerIdSubscribed = $scope.seletedProjectId;
-            });
+            //});
         }, function () {
-            $scope.estimates = [];
+            $rootScope.estimates = [];
         });        
     };
 
@@ -101,11 +100,7 @@
     }
 
     // signalr client functions
-    hub.client.addItem = function (item) {
-        $scope.estimates.push(item);
-        // this is outside of angularjs, so need to apply
-        $scope.$apply(); 
-    }
+    
     
 }]);
 
