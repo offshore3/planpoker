@@ -41,7 +41,7 @@ angular.module("shinetech-app").run([
 
         $.connection.hub.url = webAPI+"signalr";
         $.connection.hub.start().done(function () {
-            console.log("connected");
+            //console.log("connected");
             //$("div[data-autorefresh='true']").each(function (i, e) {
             //    var $this = $(this);
             //    var projectId = $this.attr('project-id');
@@ -58,7 +58,7 @@ angular.module("shinetech-app").run([
         };
 
         hub.client.addItem = function (item) {
-            
+
             var existItem = E($rootScope.estimates).FirstOrDefault(undefined, function (t) {
                 return t.UserId === item.UserId;
             });
@@ -68,6 +68,19 @@ angular.module("shinetech-app").run([
                 $rootScope.estimates.push(item);
             }
             $rootScope.$apply();
-        }
+        };
+
+        hub.client.showEstimateResult = function (data) {
+            console.log(data);
+            $rootScope.isShowResult = data.IsShow;
+            $rootScope.averagePoint = data.AveragePoint;
+            $rootScope.$apply();
+        };
+        
+        hub.client.clearEstimate = function (data) {
+            $rootScope.estimates = data;
+            $rootScope.isShowResult = false;
+            $rootScope.$apply();
+        };
     }
 ]);

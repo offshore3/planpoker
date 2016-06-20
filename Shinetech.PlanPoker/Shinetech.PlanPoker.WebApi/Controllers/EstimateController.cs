@@ -6,6 +6,7 @@ using Shinetech.PlanPoker.WebApi.Controllers;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 using Shinetech.PlanPoker.WebApi.Hubs;
 using Shinetech.PlanPoker.WebApi.Tools;
+using System;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
 {
@@ -47,10 +48,10 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [HttpDelete]
         public void Delete(string projectId)
         {
-            if (_cacheManager.KeyExist(projectId))
-            {
-                _cacheManager.Remove(projectId);
-            }
+            if (_cacheManager.KeyExist(projectId)) _cacheManager.Remove(projectId);
+
+            var subscribed = Hub.Clients.Group(projectId);
+            subscribed.clearEstimate(null);
         }
 
 
@@ -70,7 +71,26 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             if (!_cacheManager.KeyExist(projectId)) return;
 
             var estimates = _cacheManager.Get<Estimates>(projectId);
-            if (estimates != null) estimates.IsShow = true;
+            if (estimates != null) {
+                var sum = 0;
+                var nanNum = 0;
+
+                foreach (var estimate in estimates.EstimateList)
+                {
+                    if (!isNumberic(estimate.SelectedPoker))
+                    {
+                        nanNum--;
+                        continue;
+                    }
+                    sum += int.Parse(estimate.SelectedPoker);
+                }
+                var hehe = sum / (estimates.EstimateList.Count + nanNum);
+                estimates.AveragePoint = sum / (estimates.EstimateList.Count + nanNum);
+                estimates.IsShow = true;
+
+                var subscribed = Hub.Clients.Group(projectId);
+                subscribed.showEstimateResult(estimates);
+            }            
         }
 
         [Route("estimateIsCleared")]
@@ -110,7 +130,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             } 
             var estimates = _cacheManager.Get<Estimates>(projectId);
             estimatesViewModel.IsShow = estimates.IsShow;
-
+            estimatesViewModel.AveragePoint = estimates.AveragePoint;
             if (estimates.EstimateList.Count <= 0) return estimatesViewModel;
 
             foreach (var item in estimates.EstimateList)
@@ -140,6 +160,18 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                 UserId = user.Id.ToString()
             };
             return estimateViewModel;
+        }
+
+        private bool isNumberic(string message)
+        {
+            var rex =new System.Text.RegularExpressions.Regex(@"^\d+$");
+            if (rex.IsMatch(message))
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 }

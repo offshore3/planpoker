@@ -42,8 +42,8 @@
     };
 
     this.showEstimate = function (projectId,successCallback, errorCallback) {
-        httpProxy.get("api/estimateShowCard?projectId=" + projectId).then(function () {
-            successCallback();
+        httpProxy.get("api/estimateShowCard?projectId=" + projectId).then(function (data) {
+            successCallback(data);
         }, function (error) {
             errorCallback();
         });
@@ -51,9 +51,17 @@
 
     this.getMonitorUrl = function (projectId, successCallback, errorCallback) {
         httpProxy.get("api/monitor?projectId=" + projectId).then(function () {
-            successCallback();
         }, function (error) {
             errorCallback();
+        });
+    }
+
+    this.removeEstimate = function (projectId, successCallback, errorCallback) {
+
+        httpProxy.Delete("api/estimateDelete?projectId=" + projectId).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
         });
     }
 

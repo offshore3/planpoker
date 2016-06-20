@@ -8,11 +8,13 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
         {
             EstimateList = new List<Estimate>();
             IsShow = false;
+            AveragePoint = 0;
         }
 
         public List<Estimate> EstimateList { get; set; }
 
         public bool IsShow { get; set; }
+        public int AveragePoint { get; set; }
 
     }
 }

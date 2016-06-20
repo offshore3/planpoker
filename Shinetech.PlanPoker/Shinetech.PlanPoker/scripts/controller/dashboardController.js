@@ -53,8 +53,6 @@
     $scope.cardSelect = function (poker) {
 
         if ($scope.seletedProjectId == undefined) return;
-        console.log(poker);
-        console.log($scope.seletedProjectId);
         $scope.isFloat = poker.data;
 
         var command = {
@@ -72,6 +70,8 @@
     };
 
     $scope.changeProject = function () {
+        $rootScope.isShowResult = false;
+        $rootScope.averagePoint = "";
         if ($scope.seletedProjectId == undefined || $scope.seletedProjectId == null || $scope.seletedProjectId == "") {
             $rootScope.estimates = [];
             return;
@@ -98,16 +98,22 @@
         }, function () {
             $rootScope.estimates = [];
         });
+
     };
 
     $scope.showEstimate = function () {
-        dashboardService.showEstimate($scope.seletedProjectId, function () {
-            $scope.isShowResult = true;
+        dashboardService.showEstimate($scope.seletedProjectId, function (data) {
+
         }, function () { });
     }
 
-    // signalr client functions
+    $scope.clearEstimate = function () {
+        dashboardService.removeEstimate($scope.seletedProjectId, function () {
 
+        }, function () {
+
+        });
+    }
 
 }]);
 

@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <a target="_blank" href="javascript:void(0)" ng-href={{href}}>Monitor</a>
-                    <button type="button" class="btn btn-primary btn-info" ng-disabled="!isShowResult" ng-click="saveUserInfo()"> Next </button>
+                    <button type="button" class="btn btn-primary btn-info" ng-disabled="!isShowResult" ng-click="clearEstimate()"> Clean </button>
                     <button type="button" class="btn btn-primary btn-info" ng-disabled="isShowResult" ng-click="showEstimate()"> Show </button>
                 </div>
             </div>
@@ -39,6 +39,13 @@
                                 <div class="label label-inverse label-name pull-right">{{estimate.UserName}}</div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="all-players-cards-selected row" ng-show="isShowResult">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Plan average: {{averagePoint}} points</h3>
                     </div>
                 </div>
             </div>
