@@ -18,7 +18,6 @@ angular.module("shinetech-app").run([
         function locationChangeStart() {
             if ($location.path() === "/dashboard") {
                 if ($cookieStore.get("LoginUserId") === undefined || $cookieStore.get("LoginUserId") === null) {
-                    console.log(11);
                     $rootScope.gotoLogin();
                 }
             }
@@ -71,7 +70,6 @@ angular.module("shinetech-app").run([
         };
 
         hub.client.showEstimateResult = function (data) {
-            console.log(data);
             $rootScope.isShowResult = data.IsShow;
             $rootScope.averagePoint = data.AveragePoint;
             $rootScope.$apply();
