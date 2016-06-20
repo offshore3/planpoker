@@ -6,25 +6,25 @@
         text: "√",
         data: ""
     };
-    //hub.server.join("123");
+    
     $scope.pokers = {
         poker: [
-            { data: 1, myStyle: { "left": "20%" } },
-            { data: 2, myStyle: { "left": "23%" } },
-            { data: 3, myStyle: { "left": "26%" } },
-            { data: 5, myStyle: { "left": "29%" } },
-            { data: 8, myStyle: { "left": "32%" } },
-            { data: 13, myStyle: { "left": "35%" } },
-            { data: 20, myStyle: { "left": "38%" } },
-            { data: 40, myStyle: { "left": "41%" } },
-            { data: 100, myStyle: { "left": "44%" } },
-            { data: 's', myStyle: { "left": "47%" } },
-            { data: 'm', myStyle: { "left": "50%" } },
-            { data: 'l', myStyle: { "left": "53%" } },
-            { data: 'xs', myStyle: { "left": "56%" } },
-            { data: 'coffee', myStyle: { "left": "59%" } },
-            { data: 'yes', myStyle: { "left": "62%" } },
-            { data: 'no', myStyle: { "left": "65%" } }
+            { data: 1, myStyle: { "left": "23%" } },
+            { data: 2, myStyle: { "left": "26%" } },
+            { data: 3, myStyle: { "left": "29%" } },
+            { data: 5, myStyle: { "left": "32%" } },
+            { data: 8, myStyle: { "left": "35%" } },
+            { data: 13, myStyle: { "left": "38%" } },
+            { data: 20, myStyle: { "left": "41%" } },
+            { data: 40, myStyle: { "left": "44%" } },
+            { data: 100, myStyle: { "left": "47%" } },
+            { data: 's', myStyle: { "left": "50%" } },
+            { data: 'm', myStyle: { "left": "53%" } },
+            { data: 'l', myStyle: { "left": "56%" } },
+            { data: 'xs', myStyle: { "left": "59%" } },
+            { data: 'coffee', myStyle: { "left": "62%" } },
+            { data: 'yes', myStyle: { "left": "65%" } },
+            { data: 'no', myStyle: { "left": "68%" } }
         ]
     };
 
