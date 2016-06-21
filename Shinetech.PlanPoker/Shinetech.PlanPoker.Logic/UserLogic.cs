@@ -24,9 +24,15 @@ namespace Shinetech.PlanPoker.Logic
         {
             var userModel = model.ToModel();
 
-            if (_userRepository.Query().Any(x => x.Email == model.Email)) return;
+            if (_userRepository.Query().Any(x => x.Email == model.Email))
+            {
+                throw new PlanPokerException("The email is already exist.");
+            }
 
-            if (model.Password != model.ComfirmPassword) return;
+            if (model.Password != model.ComfirmPassword)
+            {
+                throw new PlanPokerException("Confirm is not match with password.");
+            }
 
             userModel.Password = TokenGenerator.EncodeToken(model.Password);
             userModel.ExpiredTime = DateTime.Now;
