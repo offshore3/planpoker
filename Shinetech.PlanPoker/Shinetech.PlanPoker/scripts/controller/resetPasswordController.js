@@ -8,9 +8,6 @@
             retrievePasswordService.decryptResetPasswordCode($scope.resetPasswordToken, function (data) {
                 var resultArray = data.split('&');
                 resetPasswordService.getUserByEmail(resultArray[0], function (data) {
-
-                    console.log($scope.currentTime + "%%%" + data.ExpiredTime);
-                     
                     $scope.user = data;
                 }, function () {
 

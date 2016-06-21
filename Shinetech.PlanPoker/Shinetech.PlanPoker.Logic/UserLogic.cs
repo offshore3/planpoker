@@ -126,21 +126,27 @@ namespace Shinetech.PlanPoker.Logic
 
         public UserLogicModel GetUserByEmail(string email)
         {
-            //var deCodeEmail = TokenGenerator.DecodeToken(email);
-            return _userRepository.Query().FirstOrDefault(x => x.Email == email).ToLogicModel();
+            var user= _userRepository.Query().FirstOrDefault(x => x.Email == email).ToLogicModel();
+
+            if (DateTime.Now> user.ExpiredTime)
+            {
+                throw new PlanPokerException("The email is already exist.");
+            }
+            return user;
         }
-        public bool SendEmail(SendEmailLogicModel model)
+        public bool SendForgetPassowrdEmail(SendEmailLogicModel model)
         {
             if (!_userRepository.Query().Any(x => x.Email == model.MailLogicModel.EmailTo)) return false;
 
-
-            var userModel = _userRepository.Query().FirstOrDefault(x => x.Email == model.MailLogicModel.EmailTo).ToLogicModel();
+            var userModel = _userRepository.Query().FirstOrDefault(x => x.Email == model.MailLogicModel.EmailTo);
+            
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
                 userModel.ResetPasswordToken = TokenGenerator.EncodeToken(model.MailLogicModel.EmailTo + "&" + DateTime.UtcNow.ToString());
                 userModel.ExpiredTime = DateTime.Now.AddHours(1);
+                _userRepository.Save(userModel);
                 unitOfwork.Commit();
-            }
+            }            
 
             var titletxt = model.MailContentLogicModel.MailTitle;
             var bodytxt = model.MailContentLogicModel.Content;

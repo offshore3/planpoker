@@ -37,7 +37,9 @@
                                                     <div class="small-card-id">
                                                         <span>{{isShowResult?estimate.SelectedPoker:selectedPoker.text}}</span>
                                                     </div>
-                                                    <div class="text-center player-vote"><span>{{isShowResult?estimate.SelectedPoker:selectedPoker.text}}</span></div>
+                                                    <div class="text-center player-vote"><span ng-show="isShowResult">
+                                                        {{estimate.SelectedPoker}}</span>
+                                                    <img ng-show="!isShowResult" class="user-image-poker" ng-src="{{estimate.UserImage?webAPI+estimate.UserImage:'/images/user.png'}}" /></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -48,13 +50,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center" ng-show="isShowResult">
+                <div ng-show="isShowResult">
                     <h3>Plan average: {{averagePoint}} points</h3>
                 </div>
             </div>
             <div class="row">
                 <div ng-repeat="poker in pokers.poker" ng-click="cardSelect(poker)">
-                    <div class="card-rig card-in-hand card-flipped" ng-style="{{poker.myStyle}}"
+                    <div class="card-rig card-in-hand card-flipped card-poker" ng-style="{{poker.myStyle}}"
                          ng-class="isFloat=='{{poker.data}}'?'up-float':''">
                         <div class="card-wrapper perspective-wrapper">
                             <div class="animation-wrapper">
@@ -136,7 +138,7 @@
                     <div class="panel-title"> My project </div>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
+                    <div class="col-sm-12 panel-body-project">
                         <div class="col-sm-6">
                             <input class="form-control" ng-model="queryText" placeholder="Search..." />
                         </div>

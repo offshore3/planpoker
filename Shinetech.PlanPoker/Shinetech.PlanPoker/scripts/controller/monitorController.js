@@ -1,7 +1,7 @@
 ﻿appModule.controller('monitorController', ['$rootScope', '$scope', '$timeout', 'dashboardService', function ($rootScope, $scope, $timeout, dashboardService) {
     $scope.customerIdSubscribed;
     $scope.projectId = getQueryVariable('code');
-
+    $scope.webAPI = webAPI;
     
     $scope.initMonitor = function () {
         dashboardService.getEstimateUsers($scope.projectId, function (data) {

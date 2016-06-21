@@ -7,12 +7,17 @@
                         <div class="row">
                             <div class="col-sm-2 col-xs-4" ng-repeat="estimate in estimates">
                                 <div class="animation-wrapper">
-                                    <div class="card-container rotate face-up card-blue">
+                                    <div class="card-container rotate face-up card-blue">                                        
                                         <div class="card card-face">
                                             <div class="small-card-id">
                                                 <span>{{isShowResult?estimate.SelectedPoker:selectedPoker.text}}</span>
                                             </div>
-                                            <div class="text-center player-vote"><span>{{isShowResult?estimate.SelectedPoker:selectedPoker.text}}</span></div>
+                                            <div class="text-center player-vote">
+                                                <span ng-show="isShowResult">
+                                                    {{estimate.SelectedPoker}}
+                                                </span>
+                                                <img ng-show="!isShowResult" class="user-image-poker" ng-src="{{estimate.UserImage?webAPI+estimate.UserImage:'/images/user.png'}}" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -22,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="all-players-cards-selected row" ng-show="isShowResult">
+            <div class="all-players-cards-selected row text-left" ng-show="isShowResult">
                 <div class="row">
                     <div class="col-md-6">
                         <h3>Plan average: {{averagePoint}} points</h3>

@@ -138,7 +138,21 @@
 .user-image {
     max-width: 200px;
 }
+.user-image-poker {
+    max-width:96px;
+    max-height:90px;
+}
 
 .success {
     color:green;
+}
+
+.dropdown-setting a:hover,.dropdown-setting li>a,.dropdown-setting>li a:hover,.dropdown-setting ul {
+    background-color: #333;
+    color: #fff;
+}
+
+.panel-body-project {
+    padding-left:0px; 
+    padding-right:0px;
 }

@@ -63,14 +63,6 @@
         });
     };
 
-    //this.inviteUser = function (inviteParticipate, successCallback, errorCallback) {
-    //    httpProxy.post("api/invite-participate", inviteParticipate).then(function (data) {
-    //        successCallback(data);
-    //    }, function (error) {
-    //        errorCallback(error);
-    //    });
-    //}
-
     this.createInvite = function (invite, successCallback, errorCallback) {
         httpProxy.post("api/participate", invite).then(function (data) {
             successCallback(data);
@@ -93,12 +85,10 @@
             mailViewModel: emailtemplate,
             mailContentViewModel: mailtemplatecontent
         };
-        return $http({
-            method: "POST",
-            url: webAPI + "api/inviteprojectemail",
-            data: sendEmailViewModel
-        }).then(function (response) {
-            return $q.when(response);
+        httpProxy.post("api/inviteprojectemail", sendEmailViewModel).then(function (data) {
+            successCallback(data);
+        }, function (error) {
+            errorCallback(error);
         });
     };
 }]);

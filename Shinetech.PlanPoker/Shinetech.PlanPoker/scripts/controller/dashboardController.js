@@ -1,7 +1,7 @@
 ﻿appModule.controller('dashboardController', ['$rootScope', '$scope', '$cookieStore', 'dashboardService', 'projectService', function ($rootScope, $scope, $cookieStore, dashboardService, projectService) {
 
     $scope.customerIdSubscribed;
-
+    $scope.webAPI = webAPI;
     $scope.selectedPoker = {
         text: "√",
         data: ""
@@ -22,7 +22,7 @@
             { data: 'm', myStyle: { "left": "57.5%" } },
             { data: 'l', myStyle: { "left": "61.5%" } },
             { data: 'xs', myStyle: { "left": "65.5%" } },
-            { data: 'coffee', myStyle: { "left": "69.5%" } },
+            { data: 'rest', myStyle: { "left": "69.5%" } },
             { data: 'yes', myStyle: { "left": "73.5%" } },
             { data: 'no', myStyle: { "left": "77.5%" } }
         ]
@@ -97,6 +97,7 @@
                 $rootScope.estimates = [];
                 return;
             }
+
             $rootScope.estimates = data.EstimateViewModel;
             $rootScope.isShowResult = data.IsShow;
             $rootScope.averagePoint = data.AveragePoint;

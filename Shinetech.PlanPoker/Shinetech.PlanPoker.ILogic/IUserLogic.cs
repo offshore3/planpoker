@@ -15,7 +15,7 @@ namespace Shinetech.PlanPoker.ILogic
         bool CheckEmailExist(string email);
         bool CheckToken(string email, string password);
         UserLogicModel GetUserByEmail(string email);
-        bool SendEmail(SendEmailLogicModel model);
+        bool SendForgetPassowrdEmail(SendEmailLogicModel model);
 
     }
 }
