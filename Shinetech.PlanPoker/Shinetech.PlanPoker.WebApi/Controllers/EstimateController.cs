@@ -24,7 +24,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [Route("estimate")]
         [HttpPost]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public IHttpActionResult Insert(Estimate estimate)
         {
             if (_cacheManager.KeyExist(estimate.ProjectId))

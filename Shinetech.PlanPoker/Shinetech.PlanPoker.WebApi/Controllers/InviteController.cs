@@ -21,7 +21,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpGet]
         [Route("participates")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public List<ParticipatesViewModel> GetParticipatesByProjectId(int projectId)
         {
             return _inviteLogic.GetParticipatesByProjectId(projectId).Select(x => x.ToViewModel()).ToList();
@@ -29,7 +29,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpDelete]
         [Route("participates")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public void DeleteParticipates(int participateId)
         {
             _inviteLogic.Delete(participateId);
@@ -37,7 +37,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpPost]
         [Route("participate")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public void CreateInvite(InviteParticipateViewModel inviteParticipateViewModel)
         {
             _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
@@ -52,7 +52,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpGet]
         [Route("get-invite-by-projectid-email")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public InviteViewModel Get(int projectId,string email)
         {
             return _inviteLogic.Get(projectId, email).ToViewModel();
@@ -60,7 +60,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         //[HttpPost]
         //[Route("invite-participate")]
-        //[BasicAuthorize]
+        //[PlanPokerAuthorize]
         //public bool InviteParticipates(InviteParticipateViewModel inviteParticipateViewModel)
         //{
         //    var isSendEmailSuccess = true;

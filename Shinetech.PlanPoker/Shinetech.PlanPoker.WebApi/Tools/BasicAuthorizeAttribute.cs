@@ -7,7 +7,7 @@ using Shinetech.PlanPoker.WebApi.Installer;
 
 namespace Shinetech.PlanPoker.WebApi.Tools
 {
-    public class BasicAuthorizeAttribute : AuthorizeAttribute
+    public class PlanPokerAuthorizeAttribute : AuthorizeAttribute
     {
         private IUserLogic _userLogic;
 

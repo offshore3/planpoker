@@ -8,7 +8,7 @@
         });
     }
     this.decryptProjectCode = function (projectCode, successCallback, errorCallback) {
-        httpProxy.get("api/projectDeCode?projectCode=" + projectCode).then(function (data) {
+        httpProxy.get("api/projectdecrypt?projectCode=" + projectCode).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);
@@ -17,7 +17,7 @@
     };
 
     this.encryptProjectCode = function (projectId, successCallback, errorCallback) {
-        httpProxy.get("api/projectEnCode?projectId=" + projectId).then(function (data) {
+        httpProxy.get("api/projectencrypt?projectId=" + projectId).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);

@@ -19,7 +19,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpGet]
         [Route("projects")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public ProjectsViewModel GetProjects(int pageNumber, int pageCount, string queryText = "")
         {
             var result = new ProjectsViewModel
@@ -40,7 +40,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpDelete]
         [Route("project")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public void DeleteProject(int projectId)
         {
             _projectLogic.Delete(projectId);
@@ -48,7 +48,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpPost]
         [Route("project")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public void CreateProject(ProjectViewModel project)
         {
             _projectLogic.Create(LoginUser.ToLogicModel(), project.ToLogicModel());
@@ -56,21 +56,21 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpPut]
         [Route("project")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public void EditProject(ProjectViewModel project)
         {
             _projectLogic.Edit(project.ToLogicModel());
         }
 
         [HttpGet]
-        [Route("projectDeCode")]
+        [Route("projectdecrypt")]
         public string DecryptProjectCode(string projectCode)
         {
             return TokenGenerator.DecodeToken(projectCode);
         }
 
         [HttpGet]
-        [Route("projectEnCode")]
+        [Route("projectencrypt")]
         public string EncryptProjectCode(string projectId)
         {
             return TokenGenerator.EncodeToken(projectId);

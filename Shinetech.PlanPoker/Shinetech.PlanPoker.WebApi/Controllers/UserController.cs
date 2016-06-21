@@ -53,7 +53,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpGet]
         [Route("user")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public UserViewModel GetUserViewModel()
         {
             return LoginUser;
@@ -61,7 +61,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpPut]
         [Route("user")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public void EditUser(UserViewModel userViewModel)
         {
             _userLogic.Edit(userViewModel.ToLogicModel());
@@ -83,7 +83,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
         [HttpPut]
         [Route("changepassword")]
-        [BasicAuthorize]
+        [PlanPokerAuthorize]
         public string EditUserPassword(UserViewModel userViewModel)
         {
             _userLogic.EditPassword(userViewModel.ToLogicModel());
