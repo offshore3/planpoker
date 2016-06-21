@@ -1,13 +1,24 @@
-﻿appModule.controller('resetPasswordController', ['$scope', 'resetPasswordService', '$location', function ($scope, resetPasswordService, $location) {
+﻿appModule.controller('resetPasswordController', ['$scope', 'resetPasswordService', 'retrievePasswordService','$location', function ($scope, resetPasswordService,retrievePasswordService, $location) {
     $scope.user = {};
-    $scope.resetPasswordEmail = getQueryVariable('code');
-    
-    $scope.initialize= function() {
-        resetPasswordService.getUserByEmail($scope.resetPasswordEmail, function(data) {
-            $scope.user = data;
-        }, function() {
 
-        });
+    $scope.initialize = function () {
+        $scope.currentTime = new Date();
+        $scope.resetPasswordToken = getQueryVariable('code');
+        if ($scope.resetPasswordToken) {
+            retrievePasswordService.decryptResetPasswordCode($scope.resetPasswordToken, function (data) {
+                var resultArray = data.split('&');
+                resetPasswordService.getUserByEmail(resultArray[0], function (data) {
+
+                    console.log($scope.currentTime + "%%%" + data.ExpiredTime);
+                     
+                    $scope.user = data;
+                }, function () {
+
+                });
+            }, function () {
+
+            });
+        }
     }
 
     $scope.resetPassword= function() {

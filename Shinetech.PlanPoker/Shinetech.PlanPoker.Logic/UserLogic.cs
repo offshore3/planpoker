@@ -58,14 +58,14 @@ namespace Shinetech.PlanPoker.Logic
         public void EditPassword(UserLogicModel model)
         {
             var userModel = _userRepository.GetForUpdate(model.Id);
-            if (model.Password != model.ComfirmPassword)
+            if (model.ComfirmPassword != null && model.Password != model.ComfirmPassword)
             {
                 throw new PlanPokerException("Confirm is not match with password.");
             }
 
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
-                userModel.Password = model.Password;
+                userModel.Password = TokenGenerator.EncodeToken(model.Password);
                 userModel.ExpiredTime = DateTime.Now;
                 unitOfwork.Commit();
             }
@@ -78,12 +78,15 @@ namespace Shinetech.PlanPoker.Logic
 
         public UserLogicModel Get(int id)
         {
-            return _userRepository.Get(id)?.ToLogicModel();
+            var user = _userRepository.Get(id);
+            if (user == null) return null;
+            user.Password = TokenGenerator.DecodeToken(user.Password);
+            return user.ToLogicModel();
         }
 
         public string Login(string email, string password)
         {
-            var user = _userRepository.Query().FirstOrDefault(x => x.Email == email && x.Password== TokenGenerator.EncodeToken(password));
+            var user = _userRepository.Query().FirstOrDefault(x => x.Email == email && x.Password == TokenGenerator.EncodeToken(password));
             var isLoginSuccess = user != null;
 
             return isLoginSuccess
@@ -123,12 +126,21 @@ namespace Shinetech.PlanPoker.Logic
 
         public UserLogicModel GetUserByEmail(string email)
         {
-            var deCodeEmail = TokenGenerator.DecodeToken(email);
-            return _userRepository.Query().FirstOrDefault(x => x.Email == deCodeEmail).ToLogicModel();
+            //var deCodeEmail = TokenGenerator.DecodeToken(email);
+            return _userRepository.Query().FirstOrDefault(x => x.Email == email).ToLogicModel();
         }
         public bool SendEmail(SendEmailLogicModel model)
         {
             if (!_userRepository.Query().Any(x => x.Email == model.MailLogicModel.EmailTo)) return false;
+
+
+            var userModel = _userRepository.Query().FirstOrDefault(x => x.Email == model.MailLogicModel.EmailTo).ToLogicModel();
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                userModel.ResetPasswordToken = TokenGenerator.EncodeToken(model.MailLogicModel.EmailTo + "&" + DateTime.UtcNow.ToString());
+                userModel.ExpiredTime = DateTime.Now.AddHours(1);
+                unitOfwork.Commit();
+            }
 
             var titletxt = model.MailContentLogicModel.MailTitle;
             var bodytxt = model.MailContentLogicModel.Content;
@@ -136,7 +148,7 @@ namespace Shinetech.PlanPoker.Logic
             bodytxt = bodytxt.Replace("{webname}", model.MailLogicModel.WebName);
             bodytxt = bodytxt.Replace("{weburl}", model.MailLogicModel.WebUrl);
             bodytxt = bodytxt.Replace("{webtel}", model.MailLogicModel.WebTel);
-            bodytxt = bodytxt.Replace("{linkurl}", model.MailLogicModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(model.MailLogicModel.EmailCode));
+            bodytxt = bodytxt.Replace("{linkurl}", model.MailLogicModel.AbsUrl + "?code=" + userModel.ResetPasswordToken);
 
             try
             {

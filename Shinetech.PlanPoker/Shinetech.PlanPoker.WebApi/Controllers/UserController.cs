@@ -105,5 +105,12 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         {
             return _userLogic.SendEmail(sendEmailViewModel.ToLogicModel());
         }
+
+        [HttpGet]
+        [Route("resetpassworddecrypt")]
+        public string DecryptProjectCode(string resetPasswordToken)
+        {
+            return TokenGenerator.DecodeToken(resetPasswordToken);
+        }
     }
 }

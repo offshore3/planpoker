@@ -1,5 +1,5 @@
 ﻿appModule.controller('projectController', [
-    '$scope','$location', 'projectService', 'loginService', 'retrievePasswordService', '$cookieStore', 'emailtemplate', 'mailtemplatecontent', function ($scope,$location, projectService, loginService, retrievePasswordService,$cookieStore, emailtemplate, mailtemplatecontent) {
+    '$scope','$location', 'projectService', 'loginService', '$cookieStore', 'emailtemplate', 'mailtemplatecontent', function ($scope,$location, projectService, loginService,$cookieStore, emailtemplate, mailtemplatecontent) {
         $scope.projects = {};
         $scope.LoginUserId = $cookieStore.get("LoginUserId");
         $scope.emailtemplate = emailtemplate;
@@ -114,7 +114,7 @@
             $scope.emailtemplate.absUrl = $location.absUrl();
             $scope.emailtemplate.emailto = $scope.InviteEmail;
             $scope.emailtemplate.emailcode = $scope.currentProjectId;
-            retrievePasswordService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function (response) {
+            projectService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function (response) {
                 $scope.isSendEmail = true;
             }, function () {
 
