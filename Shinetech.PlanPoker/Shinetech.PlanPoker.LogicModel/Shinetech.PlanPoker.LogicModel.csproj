@@ -42,8 +42,11 @@
   <ItemGroup>
     <Compile Include="ConvertModel.cs" />
     <Compile Include="InviteLogicModel.cs" />
+    <Compile Include="MailContentLogicModel.cs" />
+    <Compile Include="MailLogicModel.cs" />
     <Compile Include="ParticipatesLogicModel.cs" />
     <Compile Include="ProjectLogicModel.cs" />
+    <Compile Include="SendEmailLogicModel.cs" />
     <Compile Include="UserLogicModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

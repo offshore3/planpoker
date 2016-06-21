@@ -95,7 +95,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [Route("sendemail")]
         public bool SendEmail(SendEmailViewModel sendEmailViewModel)
         {
-            return SendEmailHelper.SendEmail(sendEmailViewModel);
+            return _userLogic.SendEmail(sendEmailViewModel.ToLogicModel());
         }
     }
 }

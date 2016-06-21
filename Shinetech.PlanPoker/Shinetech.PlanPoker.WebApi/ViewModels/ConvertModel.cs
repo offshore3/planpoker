@@ -83,5 +83,15 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 User=invite.User.ToViewModel()
             };
         }
+
+        public static SendEmailLogicModel ToLogicModel(this SendEmailViewModel email)
+        {
+            return email == null ? null : new SendEmailLogicModel
+            {
+                //MailLogicModel=email.MailViewModel?
+                
+                //Projects = user.Projects?.Select(x => x.ToLogicModel())
+            };
+        }
     }
 }

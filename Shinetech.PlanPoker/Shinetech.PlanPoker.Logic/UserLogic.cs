@@ -44,7 +44,7 @@ namespace Shinetech.PlanPoker.Logic
             {
                 userModel.Name = model.Name;
                 userModel.ImagePath = model.ImagePath;
-
+                userModel.ExpiredTime = DateTime.Now;
                 unitOfwork.Commit();
             }
         }
@@ -57,7 +57,7 @@ namespace Shinetech.PlanPoker.Logic
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
                 userModel.Password = model.Password;
-
+                userModel.ExpiredTime = DateTime.Now;
                 unitOfwork.Commit();
             }
         }
@@ -116,6 +116,36 @@ namespace Shinetech.PlanPoker.Logic
         {
             var deCodeEmail = TokenGenerator.DecodeToken(email);
             return _userRepository.Query().FirstOrDefault(x => x.Email == deCodeEmail).ToLogicModel();
+        }
+        public bool SendEmail(SendEmailLogicModel model)
+        {
+            if (!_userRepository.Query().Any(x => x.Email == model.MailLogicModel.EmailTo)) return false;
+
+            var titletxt = model.MailContentLogicModel.MailTitle;
+            var bodytxt = model.MailContentLogicModel.Content;
+
+            bodytxt = bodytxt.Replace("{webname}", model.MailLogicModel.WebName);
+            bodytxt = bodytxt.Replace("{weburl}", model.MailLogicModel.WebUrl);
+            bodytxt = bodytxt.Replace("{webtel}", model.MailLogicModel.WebTel);
+            bodytxt = bodytxt.Replace("{linkurl}", model.MailLogicModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(model.MailLogicModel.EmailCode));
+
+            try
+            {
+                SendEmailLogicModel.SendMail(model.MailLogicModel.EmailSmtp,
+                    model.MailLogicModel.EmailSsl,
+                    model.MailLogicModel.EmailUserName,
+                    TokenGenerator.DecodeToken(model.MailLogicModel.EmailPassWord),
+                    model.MailLogicModel.EmailNickName,
+                    model.MailLogicModel.EmailFrom,
+                    model.MailLogicModel.EmailTo,
+                    titletxt, bodytxt);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

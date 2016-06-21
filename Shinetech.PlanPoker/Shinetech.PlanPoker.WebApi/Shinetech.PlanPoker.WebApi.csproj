@@ -271,10 +271,7 @@
     <Compile Include="Tools\FileTypeFilter.cs" />
     <Compile Include="Tools\FileUpload.cs" />
     <Compile Include="Tools\IFileUpload.cs" />
-    <Compile Include="Tools\ISendEmailHelper.cs" />
-    <Compile Include="Tools\SendEmailHelper.cs" />
     <Compile Include="ViewModels\ConvertModel.cs" />
-    <Compile Include="Tools\DESEncrypt.cs" />
     <Compile Include="ViewModels\Estimate.cs" />
     <Compile Include="ViewModels\Estimates.cs" />
     <Compile Include="ViewModels\EstimatesViewModel.cs" />

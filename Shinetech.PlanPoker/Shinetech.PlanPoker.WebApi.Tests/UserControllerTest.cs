@@ -12,12 +12,12 @@ namespace Shinetech.PlanPoker.WebApi.Tests
     {
         private Mock<IUserLogic> _iuserLogicMock;
         private UserController _userController;
-       private Mock<ISendEmailHelper> _sendEmailHelper;
+        //private Mock<ISendEmailHelper> _sendEmailHelper;
 
         [SetUp]
         public void SetUp() {
             _iuserLogicMock = new Mock<IUserLogic>();
-            _sendEmailHelper=new Mock<ISendEmailHelper>();
+            //_sendEmailHelper=new Mock<ISendEmailHelper>();
             _userController = new UserController(_iuserLogicMock.Object);
         }
 
@@ -193,35 +193,35 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             _iuserLogicMock.Verify(x => x.EditPassword(userLogicModel), Times.AtMostOnce);
         }
 
-        [Test]
-        public void SendEmail_should_change_user_password()
-        {
-            //Arrange
-            var sendEmailViewModel = new SendEmailViewModel
-            {
-                MailViewModel=new MailViewModel()
-                {
-                    WebName = "123",
-                    WebUrl="123",
-                    WebTel="123",
-                    AbsUrl="123",
-                    EmailTo="123",
-                    EmailCode="123"
-                },
-                MailContentViewModel = new MailContentViewModel()
-                {
-                    Content = "",
-                    MailTitle = "",
-                    Title = ""
-                }
-            };
+        //[Test]
+        //public void SendEmail_should_change_user_password()
+        //{
+        //    //Arrange
+        //    var sendEmailViewModel = new SendEmailViewModel
+        //    {
+        //        MailViewModel=new MailViewModel()
+        //        {
+        //            WebName = "123",
+        //            WebUrl="123",
+        //            WebTel="123",
+        //            AbsUrl="123",
+        //            EmailTo="123",
+        //            EmailCode="123"
+        //        },
+        //        MailContentViewModel = new MailContentViewModel()
+        //        {
+        //            Content = "",
+        //            MailTitle = "",
+        //            Title = ""
+        //        }
+        //    };
 
-            //Act
-            _userController.SendEmail(sendEmailViewModel);
+        //    //Act
+        //    _userController.SendEmail(sendEmailViewModel);
 
-            //Assert
-            _sendEmailHelper.Verify(x => x.SendEmail(It.IsAny<SendEmailViewModel>()), Times.AtMostOnce);
-        }
+        //    //Assert
+        //    _sendEmailHelper.Verify(x => x.SendEmail(It.IsAny<SendEmailViewModel>()), Times.AtMostOnce);
+        //}
 
 
         [Test]
