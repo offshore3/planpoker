@@ -4,6 +4,9 @@
     $scope.getUserInfo = function () {
         loginService.getUser(function (data) {
             $scope.user = data;
+            if ($scope.user.ImagePath != null) {
+                $scope.user.ImagePath = webAPI + $scope.user.ImagePath;
+            }
         }, function () {
         });
     }
@@ -22,7 +25,13 @@
     };
 
     $scope.updateUser = function () {
+        if ($scope.user.ImagePath != null) {
+            $scope.user.ImagePath = $scope.user.ImagePath.substring($scope.user.ImagePath.lastIndexOf("Image"));
+        }
         profileService.editUser($scope.user, function (data) {
+            if ($scope.user.ImagePath != null) {
+                $scope.user.ImagePath = webAPI + $scope.user.ImagePath;
+            }
             $("#profileModal").modal("hide");
         }, function () {
             $scope.message = "update fail";
