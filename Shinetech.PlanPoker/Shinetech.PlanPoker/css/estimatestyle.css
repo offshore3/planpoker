@@ -204,11 +204,11 @@
 }
 .card-in-hand:hover .card-container,
 .card-in-hand.selected .card-container {
-  -webkit-transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  -o-transform: scale(1.5);
-  transform: scale(1.2);
+  -webkit-transform: scale(2);
+  -moz-transform: scale(2);
+  -ms-transform: scale(2);
+  -o-transform: scale(2);
+  transform: scale(1.5);
 }
 .card-in-hand .card-container {
   -webkit-transition: -webkit-transform 0.3s ease;
