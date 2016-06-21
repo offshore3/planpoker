@@ -4,10 +4,6 @@
   }
 }
 
-.all-players-cards-selected {
-  padding-top: 20px;
-  padding-left: 20px;
-}
 .card-rig {
   width: 100px;
   text-align: center;
@@ -126,7 +122,7 @@
   background-color: #16ae3d;
 }
 .card-blue .card-face {
-  background-color: #0466d2;
+  background-color: #428bca;
   border: 2px solid #0b64a2;
 }
 
@@ -135,7 +131,7 @@
   border: 2px solid  #149c37;
 }
 .card-blue .card-face .hover {
-  background-color: #0470e6;
+  background-color: #428bca;
 }
 .card-orange .card-face {
   background-color: #f97302;
@@ -261,5 +257,5 @@
 }
 
 .all-players-cards-content {
-    min-height:680px;
+    min-height:0px;
 }
