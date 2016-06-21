@@ -14,6 +14,8 @@ namespace Shinetech.PlanPoker.LogicModel
                 Password = user.Password,
                 Email = user.Email,
                 ImagePath = user.ImagePath,
+                ResetPasswordToken=user.ResetPasswordToken,
+                ExpiredTime=user.ExpiredTime,
                 Projects = user.Projects?.Select(x => x.ToLogicModel())
             };
         }
@@ -26,6 +28,9 @@ namespace Shinetech.PlanPoker.LogicModel
                 Name = user.Name,
                 Password = user.Password,
                 Email = user.Email,
+                ImagePath = user.ImagePath,
+                ResetPasswordToken = user.ResetPasswordToken,
+                ExpiredTime = user.ExpiredTime,
                 Projects = user.Projects?.Select(x => x.ToModel())
             };
         }

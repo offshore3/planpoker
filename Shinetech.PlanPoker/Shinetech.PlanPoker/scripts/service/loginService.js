@@ -23,29 +23,4 @@
         });
     }
 
-    this.testAuthorize = function (successCallback, errorCallback) {
-        httpProxy.get("api/test-authorize").then(function (data) {
-            successCallback(data);
-        }, function (error) {
-            errorCallback(error);
-        });
-    }
-    this.testGetUser = function (successCallback, errorCallback) {
-        httpProxy.get("api/user").then(function (data) {
-            successCallback(data);
-        }, function (error) {
-            errorCallback(error);
-        });
-    }
-
-    this.testUpdateUser = function (command, successCallback, errorCallback) {
-        httpProxy.put("api/user",command
-        ).then(function (data) {
-            successCallback(data);
-        }, function (error) {
-            errorCallback(error);
-        });
-    }
-
-    
 }])

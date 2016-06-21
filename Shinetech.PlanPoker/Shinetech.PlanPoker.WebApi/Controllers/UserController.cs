@@ -68,14 +68,14 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("get-user-by-email")]
+        [Route("getuserbyemail")]
         public UserViewModel GetUserByEmail(string email)
         {
            return _userLogic.GetUserByEmail(email).ToViewModel();
         }
 
         [HttpPut]
-        [Route("reset-user-passowrd")]
+        [Route("resetpassowrd")]
         public void ResetPassword(UserViewModel userViewModel)
         {
             _userLogic.EditPassword(userViewModel.ToLogicModel());

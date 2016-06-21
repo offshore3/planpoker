@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Shinetech.PlanPoker.Data.Models
 {
@@ -8,6 +9,8 @@ namespace Shinetech.PlanPoker.Data.Models
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }
         public virtual string ImagePath { get; set; }
+        public virtual string ResetPasswordToken { get; set; }
+        public virtual DateTime ExpiredTime { get; set; }
         public virtual IEnumerable<ProjectModel> Projects { get; set; }
     }
 

@@ -12,8 +12,11 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 Id = user.Id,
                 Name = user.Name,
                 Password = user.Password,
+                ComfirmPassword=user.ComfirmPassword,
                 Email = user.Email,
                 ImagePath = user.ImagePath,
+                ResetPasswordToken=user.ResetPasswordToken,
+                ExpiredTime=user.ExpiredTime,
                 Projects = user.Projects?.Select(x => x.ToLogicModel())
             };
         }
@@ -25,8 +28,11 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 Id = user.Id,
                 Name = user.Name,
                 Password = user.Password,
+                ComfirmPassword=user.ComfirmPassword,
                 Email = user.Email,
                 ImagePath = user.ImagePath,
+                ResetPasswordToken=user.ResetPasswordToken,
+                ExpiredTime=user.ExpiredTime,
                 Projects = user.Projects?.Select(x => x.ToViewModel())
             };
         }

@@ -24,6 +24,12 @@ namespace Shinetech.PlanPoker.Logic
         {
             var userModel = model.ToModel();
 
+            if (_userRepository.Query().Any(x => x.Email == model.Email)) return;
+
+            if (model.Password != model.ComfirmPassword) return;
+
+            userModel.Password = TokenGenerator.EncodeToken(model.Password);
+            userModel.ExpiredTime = DateTime.Now;
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
                 _userRepository.Save(userModel);
@@ -46,6 +52,8 @@ namespace Shinetech.PlanPoker.Logic
         public void EditPassword(UserLogicModel model)
         {
             var userModel = _userRepository.GetForUpdate(model.Id);
+            if (model.Password != model.ComfirmPassword) return;
+
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
                 userModel.Password = model.Password;
@@ -66,11 +74,11 @@ namespace Shinetech.PlanPoker.Logic
 
         public string Login(string email, string password)
         {
-            var user = _userRepository.Query().FirstOrDefault(x => x.Email == email && password == x.Password);
+            var user = _userRepository.Query().FirstOrDefault(x => x.Email == email && x.Password== TokenGenerator.EncodeToken(password));
             var isLoginSuccess = user != null;
 
             return isLoginSuccess
-                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + "&" +
+                ? TokenGenerator.Generate(email, TokenGenerator.DecodeToken(password), DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + "&" +
                   user.Id
                 : string.Empty;
         }
@@ -95,7 +103,7 @@ namespace Shinetech.PlanPoker.Logic
             bool isLoginUser = false;
             try
             {
-                isLoginUser = _userRepository.Query().Any(x => x.Email == email && x.Password == password);
+                isLoginUser = _userRepository.Query().Any(x => x.Email == email && x.Password == TokenGenerator.EncodeToken(password));
             }
             catch (Exception)
             {
