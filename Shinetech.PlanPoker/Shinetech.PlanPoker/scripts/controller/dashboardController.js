@@ -50,6 +50,10 @@
         });
     };
 
+    $scope.$on('dashboardReloadProject', function () {
+        $scope.loadProjects();
+    });
+
     $scope.cardSelect = function (poker) {
 
         if ($scope.seletedProjectId == undefined || $scope.seletedProjectId == null || $scope.seletedProjectId == "" || $rootScope.isShowResult) return;

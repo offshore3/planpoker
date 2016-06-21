@@ -18,6 +18,7 @@
             projectService.queryProjects(command, function(data) {
                 $scope.projects = data.ProjectViewModels;
                 $scope.pages = range(1, data.Pages);
+                $scope.$emit('dashboardParentReloadProject');
             }, function() {
             });
 
