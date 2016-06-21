@@ -127,6 +127,7 @@
     <Content Include="scripts\angular\angular.min.js" />
     <Content Include="scripts\bootstrap\bootstrap.min.js" />
     <Content Include="scripts\controller\changePasswordController.js" />
+    <Content Include="scripts\controller\dashboardParentController.js" />
     <Content Include="scripts\controller\monitorController.js" />
     <Content Include="scripts\controller\projectController.js" />
     <Content Include="scripts\controller\profileController.js" />

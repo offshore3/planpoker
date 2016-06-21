@@ -78,7 +78,7 @@ namespace Shinetech.PlanPoker.Logic
             var isLoginSuccess = user != null;
 
             return isLoginSuccess
-                ? TokenGenerator.Generate(email, TokenGenerator.DecodeToken(password), DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + "&" +
+                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + "&" +
                   user.Id
                 : string.Empty;
         }

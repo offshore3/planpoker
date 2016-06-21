@@ -51,28 +51,11 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("get-invite-by-projectid-email")]
+        [Route("participate")]
         [PlanPokerAuthorize]
         public InviteViewModel Get(int projectId,string email)
         {
             return _inviteLogic.Get(projectId, email).ToViewModel();
         }
-
-        //[HttpPost]
-        //[Route("invite-participate")]
-        //[PlanPokerAuthorize]
-        //public bool InviteParticipates(InviteParticipateViewModel inviteParticipateViewModel)
-        //{
-        //    var isSendEmailSuccess = true;
-        //    if (!_inviteLogic.CheckInviteExist(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email))
-        //    {
-        //        _inviteLogic.Create(inviteParticipateViewModel.ProjectId, inviteParticipateViewModel.Email);
-        //    }
-        //    if (!_userLogic.CheckEmailExist(inviteParticipateViewModel.Email))
-        //    {
-        //        //TODO add send email.
-        //    }
-        //    return isSendEmailSuccess;
-        //}
     }
 }

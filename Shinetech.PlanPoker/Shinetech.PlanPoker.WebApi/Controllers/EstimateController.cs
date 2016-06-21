@@ -44,7 +44,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
 
 
 
-        [Route("estimateDelete")]
+        [Route("estimate")]
         [HttpDelete]
         public void Delete(string projectId)
         {
@@ -64,7 +64,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             return Ok(estimatesViewModel);
         }
 
-        [Route("estimateShowCard")]
+        [Route("showestimate")]
         [HttpGet]
         public void ShowCard(string projectId)
         {
@@ -91,13 +91,6 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                 var subscribed = Hub.Clients.Group(projectId);
                 subscribed.showEstimateResult(estimates);
             }            
-        }
-
-        [Route("estimateIsCleared")]
-        [HttpGet]
-        public bool IsCleared(string projectId)
-        {
-            return !_cacheManager.KeyExist(projectId);
         }
 
         private void UpdateEsitmate(Estimate estimate)

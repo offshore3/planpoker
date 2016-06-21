@@ -42,7 +42,7 @@
     };
 
     this.showEstimate = function (projectId,successCallback, errorCallback) {
-        httpProxy.get("api/estimateShowCard?projectId=" + projectId).then(function (data) {
+        httpProxy.get("api/showestimate?projectId=" + projectId).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback();
@@ -58,7 +58,7 @@
 
     this.removeEstimate = function (projectId, successCallback, errorCallback) {
 
-        httpProxy.Delete("api/estimateDelete?projectId=" + projectId).then(function (data) {
+        httpProxy.Delete("api/estimate?projectId=" + projectId).then(function (data) {
             successCallback(data);
         }, function (error) {
             errorCallback(error);
