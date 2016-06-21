@@ -76,5 +76,13 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             return TokenGenerator.EncodeToken(projectId);
         }
 
+        [HttpPost]
+        [Route("inviteprojectemail")]
+        [PlanPokerAuthorize]
+        public bool SendEmail(SendEmailViewModel sendEmailViewModel)
+        {
+            return _projectLogic.SendEmail(sendEmailViewModel.ToLogicModel());
+        }
+
     }
 }

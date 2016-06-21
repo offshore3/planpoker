@@ -7,7 +7,6 @@
             console.log(data);
             if (data != null && data.Password === $scope.user.oldpassword) {
                 data.Password = $scope.user.password;
-                data.ComfirmPassword = $scope.user.oldpassword;
                 changePasswordService.editUser(data, function () {
                     $("#changePasswordModal").modal("hide");
                 });

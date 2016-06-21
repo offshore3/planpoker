@@ -88,24 +88,41 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
         {
             return email == null ? null : new SendEmailLogicModel
             {
-                MailLogicModel=email.MailViewModel.ToLogicModel(),
-                
+                MailLogicModel = email.MailViewModel.ToLogicModel(),
+                MailContentLogicModel = email.MailContentViewModel.ToLogicModel()
             };
         }
 
-        public static MailLogicModel ToLogicModel(this MailViewModel email)
+        public static MailLogicModel ToLogicModel(this MailViewModel model)
         {
-            return email == null ? null : new MailLogicModel
+
+            return model == null ? null : new MailLogicModel
             {
-                WebName = email.WebName
+                WebName = model.WebName,
+                WebUrl = model.WebUrl,
+                WebCompany = model.WebCompany,
+                WebAddress = model.WebAddress,
+                WebTel = model.WebTel,
+                EmailSmtp = model.EmailSmtp,
+                EmailSsl = model.EmailSsl,
+                EmailPort = model.EmailPort,
+                EmailFrom = model.EmailFrom,
+                EmailTo = model.EmailTo,
+                EmailCode = model.EmailCode,
+                EmailUserName = model.EmailUserName,
+                EmailPassWord = model.EmailPassWord,
+                EmailNickName = model.EmailNickName,
+                AbsUrl = model.AbsUrl
             };
         }
 
-        public static MailContentLogicModel ToLogicModel(this MailContentViewModel email)
+        public static MailContentLogicModel ToLogicModel(this MailContentViewModel model)
         {
-            return email == null ? null : new MailContentLogicModel
+            return model == null ? null : new MailContentLogicModel
             {
-                Title=email.Title
+                Title= model.Title,
+                MailTitle=model.MailTitle,
+                Content=model.Content
             };
         }
         

@@ -8,6 +8,7 @@
         $scope.emailtemplate.absUrl = $location.absUrl().replace('retrievepassword', 'resetpassword');
         $scope.emailtemplate.EmailCode = $scope.emailtemplate.emailto;
         registerService.checkEmailExist($scope.emailtemplate.emailto).then(function (response) {
+            console.log(response.data);
             if (response.data) {
                 retrievePasswordService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function (response) {
                     $scope.isExistEmail = true;

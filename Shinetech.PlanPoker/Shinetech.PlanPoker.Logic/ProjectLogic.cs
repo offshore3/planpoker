@@ -5,6 +5,7 @@ using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
 using Shinetech.PlanPoker.LogicModel;
 using Shinetech.PlanPoker.Repository.UnitOfWork;
+using Shinetech.PlanPoker.Logic.Tools;
 
 namespace Shinetech.PlanPoker.Logic
 {
@@ -99,6 +100,35 @@ namespace Shinetech.PlanPoker.Logic
             var projectCounts = _projectRepository.Query()
                 .Count(x => (x.Owner.Id == userId || participateProjectIds.Contains(x.Id)) && (!isQueryByText || x.Name.Contains(queryText)));
             return (int)Math.Ceiling((decimal)projectCounts / pageCount);
+        }
+
+        public bool SendEmail(SendEmailLogicModel model)
+        {
+            var titletxt = model.MailContentLogicModel.MailTitle;
+            var bodytxt = model.MailContentLogicModel.Content;
+
+            bodytxt = bodytxt.Replace("{webname}", model.MailLogicModel.WebName);
+            bodytxt = bodytxt.Replace("{weburl}", model.MailLogicModel.WebUrl);
+            bodytxt = bodytxt.Replace("{webtel}", model.MailLogicModel.WebTel);
+            bodytxt = bodytxt.Replace("{linkurl}", model.MailLogicModel.AbsUrl + "?code=" + TokenGenerator.EncodeToken(model.MailLogicModel.EmailCode));
+
+            try
+            {
+                SendEmailLogicModel.SendMail(model.MailLogicModel.EmailSmtp,
+                    model.MailLogicModel.EmailSsl,
+                    model.MailLogicModel.EmailUserName,
+                    TokenGenerator.DecodeToken(model.MailLogicModel.EmailPassWord),
+                    model.MailLogicModel.EmailNickName,
+                    model.MailLogicModel.EmailFrom,
+                    model.MailLogicModel.EmailTo,
+                    titletxt, bodytxt);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
