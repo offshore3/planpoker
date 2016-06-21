@@ -19,6 +19,7 @@ namespace Shinetech.PlanPoker.WebApi
               new WindsorCompositionRoot(WindsorBootstrapper.Container));
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }

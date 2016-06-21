@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
+using Shinetech.PlanPoker.Logic.Tools;
 using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 
@@ -22,7 +23,14 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         public void Create(UserViewModel userViewModel)
         {
             var userLogicModel = userViewModel.ToLogicModel();
-            _userLogic.Create(userLogicModel);
+            try
+            {
+                _userLogic.Create(userLogicModel);
+            }
+            catch (PlanPokerException exception)
+            {
+                LogHelper.WriteLog(exception.GetType(), exception.Key);
+            }
         }
 
         [HttpGet]

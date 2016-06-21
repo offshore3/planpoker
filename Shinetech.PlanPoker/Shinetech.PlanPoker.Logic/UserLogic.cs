@@ -58,7 +58,10 @@ namespace Shinetech.PlanPoker.Logic
         public void EditPassword(UserLogicModel model)
         {
             var userModel = _userRepository.GetForUpdate(model.Id);
-            if (model.Password != model.ComfirmPassword) return;
+            if (model.Password != model.ComfirmPassword)
+            {
+                throw new PlanPokerException("Confirm is not match with password.");
+            }
 
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {

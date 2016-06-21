@@ -14,7 +14,7 @@ function getQueryVariable(name) {
         var pair = vars[i].split("=");
         if (pair[0] === name) { return pair[1]; }
     }
-    return (false);
+    return null;
 }
 
 E = function (array) {

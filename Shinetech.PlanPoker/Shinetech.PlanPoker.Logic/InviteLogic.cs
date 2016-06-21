@@ -94,7 +94,10 @@ namespace Shinetech.PlanPoker.Logic
             int.TryParse(TokenGenerator.DecodeToken(enCodeProjectId), out projectId);
             var invite =
                 _inviteRepository.Query().FirstOrDefault(x => x.Project.Id == projectId && x.InviteEmail == email);
-            if (invite == null) return;
+            if (invite == null)
+            {
+                throw new PlanPokerException("This invitation is not exist.");
+            }
 
             var user = _userRepository.Query().FirstOrDefault(x => x.Email == email);
             
