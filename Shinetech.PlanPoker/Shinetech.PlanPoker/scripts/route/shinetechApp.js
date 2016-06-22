@@ -11,8 +11,8 @@ angular.module("shinetech-app").run([
         $rootScope.$on('$locationChangeStart', locationChangeStart);
         function routeChangeSuccess() {
             $rootScope.isSettingsShow = true;
-            if ($location.path() === "/login" || $location.path() === "/register" || $location.path() === "/retrievepassword" || $location.path() === "/resetpassword"||$location.path().indexOf("/monitor")>0) {
-                $rootScope. = false;
+            if ($location.path() === "/login" || $location.path() === "/register" || $location.path() === "/retrievepassword" || $location.path() === "/resetpassword"||$location.path().indexOf("monitor")>0) {
+                $rootScope.isSettingsShow = false;
             } 
         }
 
