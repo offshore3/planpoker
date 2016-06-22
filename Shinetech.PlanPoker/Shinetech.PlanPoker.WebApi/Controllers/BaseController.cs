@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
+using Shinetech.PlanPoker.Logic.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers
@@ -21,7 +22,9 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             get
             {
                 if (LoginUserId == 0) return null;
-                return _userLogic.Get(LoginUserId).ToViewModel();
+                var userlogicModel = _userLogic.Get(LoginUserId);
+                userlogicModel.Password = TokenGenerator.DecodeToken(userlogicModel.Password);
+                return userlogicModel.ToViewModel();
             }
         }
 

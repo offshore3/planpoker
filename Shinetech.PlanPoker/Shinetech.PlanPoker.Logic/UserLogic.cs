@@ -80,7 +80,6 @@ namespace Shinetech.PlanPoker.Logic
         {
             var user = _userRepository.Get(id);
             if (user == null) return null;
-            user.Password = TokenGenerator.DecodeToken(user.Password);
             return user.ToLogicModel();
         }
 
@@ -126,12 +125,8 @@ namespace Shinetech.PlanPoker.Logic
 
         public UserLogicModel GetUserByEmail(string email)
         {
-            var user= _userRepository.Query().FirstOrDefault(x => x.Email == email).ToLogicModel();
-
-            if (DateTime.Now> user.ExpiredTime)
-            {
-                throw new PlanPokerException("The email is already exist.");
-            }
+            var user= _userRepository.Query().FirstOrDefault(x => x.Email == email&& x.ExpiredTime>DateTime.Now )?.ToLogicModel();
+            
             return user;
         }
         public bool SendForgetPassowrdEmail(SendEmailLogicModel model)
