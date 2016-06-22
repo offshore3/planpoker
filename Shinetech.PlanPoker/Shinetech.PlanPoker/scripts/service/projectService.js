@@ -80,7 +80,7 @@
         });
     };
 
-    this.sendEmail = function (emailtemplate, mailtemplatecontent) {
+    this.sendEmail = function (emailtemplate, mailtemplatecontent, successCallback, errorCallback) {
         var sendEmailViewModel = {
             mailViewModel: emailtemplate,
             mailContentViewModel: mailtemplatecontent

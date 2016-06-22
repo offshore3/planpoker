@@ -6,7 +6,9 @@
         $scope.mailtemplatecontent = mailtemplatecontent.invitemail;
 
         $scope.currentPage = 1;
-        $scope.loadProjects = function(isSearch) {
+        $scope.isProjectSearchBusy = false;
+        $scope.loadProjects = function (isSearch) {
+            $scope.isProjectSearchBusy = true;
             if (isSearch) {
                 $scope.currentPage = 1;
             }
@@ -19,7 +21,9 @@
                 $scope.projects = data.ProjectViewModels;
                 $scope.pages = range(1, data.Pages);
                 $scope.$emit('dashboardParentReloadProject');
-            }, function() {
+                $scope.isProjectSearchBusy = false;
+            }, function () {
+                $scope.isProjectSearchBusy = false;
             });
 
         }
@@ -63,15 +67,21 @@
             $("#deleteParticipatesModal").modal("show");
         };
 
+        $scope.isParticipateDeleteBusy = false;
         $scope.participateDelete = function () {
+            $scope.isParticipateDeleteBusy = true;
             projectService.deleteParticipate($scope.deleteParticipate.Id, function () {
                 $scope.loadParticipates($scope.deleteParticipate.ProjectId);
                 $("#deleteParticipatesModal").modal("hide");
+                $scope.isParticipateDeleteBusy = false;
             }, function () {
+                $scope.isParticipateDeleteBusy = false;
             });
         }
 
-        $scope.inviteUser = function() {
+        $scope.isParticipateInviteBusy = false;
+        $scope.inviteUser = function () {
+            $scope.isParticipateInviteBusy = true;
             var command = {
                 ProjectId: $scope.currentProjectId,
                 Email: $scope.InviteEmail
@@ -81,7 +91,9 @@
                 if (data.Email.toLowerCase() == $scope.InviteEmail.toLowerCase())
                 {
                     $scope.isInviteSelf = true;
+                    $scope.isParticipateInviteBusy = false;
                     return;
+
                 }
             });
 
@@ -98,8 +110,9 @@
                 } else if (data != null && !data.IsRegister) {
                     $scope.sendEmail();
                 }
-
+                $scope.isParticipateInviteBusy = false;
             }, function () {
+                $scope.isParticipateInviteBusy = false;
             });
             //end  add by Jimbo 2016-06-16 09:48:33
         }
@@ -114,7 +127,7 @@
             $scope.emailtemplate.absUrl = $location.absUrl();
             $scope.emailtemplate.emailto = $scope.InviteEmail;
             $scope.emailtemplate.emailcode = $scope.currentProjectId;
-            projectService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent).then(function (response) {
+            projectService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent,function (response) {
                 $scope.isSendEmail = true;
             }, function () {
 
@@ -141,27 +154,36 @@
             $("#deleteProject").modal("show");
         };
 
-        $scope.projectDelete = function() {
+        $scope.isProjectDeleteBusy = false;
+        $scope.projectDelete = function () {
+            $scope.isProjectDeleteBusy = true;
             projectService.deleteProject($scope.deleteProject.Id, function() {
                 $("#deleteProject").modal("hide");
                 $scope.loadProjects();
-            }, function() {
+                $scope.isProjectDeleteBusy = false;
+            }, function () {
+                $scope.isProjectDeleteBusy = false;
             });
         }
 
+        $scope.isProjectSaveBusy = false;
         $scope.saveProject = function () {
+            $scope.isProjectSaveBusy = true;
             var project = angular.copy($scope.newProject);
             if (project.Id) {
                 projectService.editProject(project, function () {
                     $scope.loadProjects();
                     $("#projectCreateAndEdit").modal("hide");
+                    $scope.isProjectSaveBusy = false;
                 }, function (error) {
                 });
             } else {
                 projectService.createProject(project, function () {
                     $scope.loadProjects();
                     $("#projectCreateAndEdit").modal("hide");
+                    $scope.isProjectSaveBusy = false;
                 }, function (error) {
+                    $scope.isProjectSaveBusy = false;
                 });
             }
 

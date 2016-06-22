@@ -2,17 +2,17 @@
 
     $scope.user = {};
     $scope.message = "";
-    $scope.isBusy = false;
+    $scope.isLoginBusy = false;
 
     $scope.login = function () {
-        $scope.isBusy = true;
+        $scope.isLoginBusy = true;
         loginService.login($scope.user.email, $scope.user.password, function () {
             $location.path("/dashboard");
-            $scope.isBusy = false;
+            $scope.isLoginBusy = false;
         }, function () {
             $scope.isError = true;
             $scope.message = "The email or password is wrong!";
-            $scope.isBusy = false;
+            $scope.isLoginBusy = false;
         });
     };
 

@@ -106,19 +106,24 @@
         });
 
     };
-
+    $scope.isShowEstimateBusy = false;
     $scope.showEstimate = function () {
-        dashboardService.showEstimate($scope.seletedProjectId, function (data) {
-
-        }, function () { });
+        $scope.isShowEstimateBusy = true;
+        dashboardService.showEstimate($scope.seletedProjectId, function () {
+            $scope.isShowEstimateBusy = false;
+        }, function() {
+            $scope.isShowEstimateBusy = false;
+        });
     }
 
+    $scope.isClearEstimateBusy = false;
     $scope.clearEstimate = function () {
+        $scope.isClearEstimateBusy = true;
         $scope.isFloat = "";
         dashboardService.removeEstimate($scope.seletedProjectId, function () {
-
+            $scope.isClearEstimateBusy = false;
         }, function () {
-
+            $scope.isClearEstimateBusy = false;
         });
     }
 

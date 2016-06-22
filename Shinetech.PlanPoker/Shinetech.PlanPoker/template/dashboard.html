@@ -5,10 +5,22 @@
                 <div class="text-center">
                     <div class="operation">
                         <div class="pull-left">
-                            <button type="button" class="btn btn-primary  btn-lg" ng-disabled="!isShowResult" ng-click="clearEstimate()"> Clean </button>
+                            <button type="button" class="btn btn-primary  btn-lg" ng-disabled="!isShowResult||isClearEstimateBusy" ng-click="clearEstimate()">
+                                
+                                <span ng-show="!isClearEstimateBusy">Clean</span>
+                                <span ng-show="isClearEstimateBusy">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </span>
+                            </button>
                         </div>
                         <div class="pull-right">
-                            <button type="button" class="btn btn-primary btn-lg" ng-disabled="isShowResult" ng-click="showEstimate()"> Show </button>
+                            <button type="button" class="btn btn-primary btn-lg" ng-disabled="isShowResult||isShowEstimateBusy" ng-click="showEstimate()">
+                                
+                                <span ng-show="!isShowEstimateBusy">Show</span>
+                                <span ng-show="isShowEstimateBusy">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </span>
+                            </button>
                         </div>
                         <div>
                             <a class="btn btn-primary btn-lg" target="_blank" href="javascript:void(0)" ng-href={{href}}>View</a>
@@ -144,7 +156,11 @@
                         </div>
                         <div class="col-sm-offset-2 col-sm-4">
                             <button class="btn btn-primary" ng-click="loadProjects(true)">
-                                Search
+                                
+                                <span ng-show="!isProjectSearchBusy">Search</span>
+                                <span ng-show="isProjectSearchBusy">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </span>
                             </button>
                             <button class="btn btn-primary" ng-click="showModal()">
                                 Create
@@ -235,9 +251,9 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" ng-click="saveProject()" class="btn btn-primary"
-                                            ng-disabled="projectForm.$invalid || isBusy">
-                                        <span ng-show="!isbusy">Save</span>
-                                        <span ng-show="isBusy">
+                                            ng-disabled="projectForm.$invalid || isProjectSaveBusy">
+                                        <span ng-show="!isProjectSaveBusy">Save</span>
+                                        <span ng-show="isProjectSaveBusy">
                                             <i class="fa fa-spinner fa-spin"></i>
                                         </span>
                                     </button>
@@ -260,9 +276,9 @@
                                     Are you sure you want to delete the project?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" ng-click="projectDelete()" ng-disabled="isBusy" class="btn btn-danger">
-                                        <span ng-show="!isBusy">Delete</span>
-                                        <span ng-show="isBusy">
+                                    <button type="button" ng-click="projectDelete()" ng-disabled="isProjectDeleteBusy" class="btn btn-danger">
+                                        <span ng-show="!isProjectDeleteBusy">Delete</span>
+                                        <span ng-show="isProjectDeleteBusy">
                                             <i class="fa fa-spinner fa-spin"></i>
                                         </span>
                                     </button>
@@ -325,9 +341,9 @@
                                                     Are you sure you want to delete the participate?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" ng-click="participateDelete()" ng-disabled="isBusy" class="btn btn-danger">
-                                                        <span ng-show="!isBusy">Delete</span>
-                                                        <span ng-show="isBusy">
+                                                    <button type="button" ng-click="participateDelete()" ng-disabled="isParticipateDeleteBusy" class="btn btn-danger">
+                                                        <span ng-show="!isParticipateDeleteBusy">Delete</span>
+                                                        <span ng-show="isParticipateDeleteBusy">
                                                             <i class="fa fa-spinner fa-spin"></i>
                                                         </span>
                                                     </button>
@@ -350,7 +366,12 @@
                                             </span>
                                         </div>
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary btn-info" ng-disabled="participatesForm.$invalid" ng-click="inviteUser()"> Invite </button>
+                                            <button type="button" class="btn btn-primary btn-info" ng-disabled="participatesForm.$invalid||isParticipateInviteBusy" ng-click="inviteUser()">
+                                                <span ng-show="!isParticipateInviteBusy">Invite</span>
+                                                <span ng-show="isParticipateInviteBusy">
+                                                    <i class="fa fa-spinner fa-spin"></i>
+                                                </span>
+                                            </button>
                                             <span class="error" ng-show="isInviteSelf">
                                                 <span>You cann't invite yourself.</span>
                                             </span>
