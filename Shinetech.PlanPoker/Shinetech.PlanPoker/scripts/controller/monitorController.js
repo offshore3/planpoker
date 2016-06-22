@@ -1,17 +1,18 @@
-﻿appModule.controller('monitorController', ['$rootScope', '$scope', '$timeout', 'dashboardService', function ($rootScope, $scope, $timeout, dashboardService) {
+﻿appModule.controller('monitorController', ['$rootScope', '$scope', '$timeout','$routeParams', 'dashboardService', function ($rootScope, $scope, $timeout,$routeParams, dashboardService) {
     $scope.customerIdSubscribed;
-    $scope.projectId = getQueryVariable('code');
     $scope.webAPI = webAPI;
     
     $scope.initMonitor = function () {
-        dashboardService.getEstimateUsers($scope.projectId, function (data) {
+        $scope.projectCode = $routeParams.projectCode;
+        var projectId = $scope.projectCode.split('-')[0];
+        dashboardService.getEstimateUsers(projectId, function (data) {
             if ($scope.customerIdSubscribed &&
                     $scope.customerIdSubscribed.length > 0 &&
-                    $scope.customerIdSubscribed !== $scope.projectId) {
+                    $scope.customerIdSubscribed !== projectId) {
                 hub.server.unsubscribe($scope.customerIdSubscribed);
             }
-            hub.server.subscribe($scope.projectId);
-            $scope.customerIdSubscribed = $scope.projectId;
+            hub.server.subscribe(projectId);
+            $scope.customerIdSubscribed = projectId;
             if (data == null) {
                 $rootScope.estimates = [];
                 return;

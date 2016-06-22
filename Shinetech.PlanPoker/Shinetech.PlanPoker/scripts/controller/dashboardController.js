@@ -80,10 +80,8 @@
             $rootScope.estimates = [];
             return;
         }
-        dashboardService.encryptProjectCode($scope.seletedProjectId, function (data) {
-            $scope.href = "#/monitor?code=" + data;
-        }, function () {
-        });
+
+        $scope.href = "#/monitor/" + $scope.seletedProjectId + "-" + $cookieStore.get('LoginUserId');
 
         dashboardService.getEstimateUsers($scope.seletedProjectId, function (data) {
             if ($scope.customerIdSubscribed &&

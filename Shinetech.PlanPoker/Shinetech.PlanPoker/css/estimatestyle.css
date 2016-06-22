@@ -312,8 +312,8 @@
     }
     
     .user-image-poker {
-        max-width:30px;
-        max-height:80px;
+        width:54px;
+        height:48px;
     }
     .card-face .player-vote {
         font-size:20px;

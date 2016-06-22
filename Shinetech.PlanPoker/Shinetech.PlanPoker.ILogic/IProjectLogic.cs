@@ -12,6 +12,6 @@ namespace Shinetech.PlanPoker.ILogic
         IEnumerable<ProjectLogicModel> GetAll();
         IEnumerable<ProjectLogicModel> GetProjectByUser(int userId, int pageNumber, int pageCount, string queryText);
         int GetPages(int userId, int pageNumber, int pageCount, string queryText);
-        bool SendEmail(SendEmailLogicModel model);
+        bool SendInviteProjectEmail(SendEmailLogicModel model);
     }
 }

@@ -102,7 +102,7 @@ namespace Shinetech.PlanPoker.Logic
             return (int)Math.Ceiling((decimal)projectCounts / pageCount);
         }
 
-        public bool SendEmail(SendEmailLogicModel model)
+        public bool SendInviteProjectEmail(SendEmailLogicModel model)
         {
             var titletxt = model.MailContentLogicModel.MailTitle;
             var bodytxt = model.MailContentLogicModel.Content;

@@ -26,7 +26,7 @@
             controller:"dashboardController"
         })
 
-        .when("/monitor", {
+        .when("/monitor/:projectCode/", {
             templateUrl: "template/monitor.html",
             controller: "monitorController"
         })
