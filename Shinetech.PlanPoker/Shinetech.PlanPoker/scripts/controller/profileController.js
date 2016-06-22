@@ -1,5 +1,6 @@
 ﻿appModule.controller('profileController', ['$scope', 'profileService', 'loginService', 'fileServices', function ($scope, profileService, loginService, fileServices) {
     $scope.user = {};
+    $scope.isSaveProfileBusy = false;
 
     $scope.getUserInfo = function () {
         loginService.getUser(function (data) {
@@ -16,11 +17,13 @@
     };
 
     $scope.saveUserInfo = function () {
-        $scope.isBusy = true;
+        $scope.isSaveProfileBusy = true;
         if (userImagePath) {
             $scope.uploadPicture($scope.updateUser);
+            $scope.isSaveProfileBusy = false;
         } else {
             $scope.updateUser();
+            $scope.isSaveProfileBusy = false;
         }
     };
 

@@ -40,7 +40,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-3 col-md-9">
-                            <button type="button" class="btn btn-primary btn-info" ng-disabled="signUpForm.$invalid" ng-click="registerUser()"> Register </button>
+                            <button type="button" class="btn btn-primary btn-info" ng-disabled="signUpForm.$invalid" ng-click="registerUser()">
+                                <span ng-show="!isRegisterBusy">Register</span>
+                                <span ng-show="isRegisterBusy">
+                                    <i class="fa fa-spinner fa-spin"></i>
+                                </span>
+                            </button>
                             <span class="error" ng-show="isExist">
                                 <span>The email has been registered.</span>
                             </span>
