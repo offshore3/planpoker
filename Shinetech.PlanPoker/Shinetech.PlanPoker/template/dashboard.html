@@ -43,7 +43,7 @@
                             <div class="card-in-hand-in-hand card-flipped">
                                 <div>
                                     <div class="col-sm-2 col-xs-4" ng-repeat="estimate in estimates">
-                                        <div class="animation-wrapper">
+                                        <div class="animation-wrapper animation-wrapper-poker">
                                             <div class="card-container rotate face-up card-blue">
                                                 <div class="card card-face">
                                                     <div class="small-card-id">
@@ -55,7 +55,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="label label-inverse label-name pull-right">{{estimate.UserName}}</div>
+                                        <div class="label label-inverse label-name pull-left">{{estimate.UserName}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -68,10 +68,10 @@
             </div>
             <div class="row">
                 <div ng-repeat="poker in pokers.poker" ng-click="cardSelect(poker)">
-                    <div class="card-rig card-in-hand card-flipped card-poker" ng-style="{{poker.myStyle}}"
-                         ng-class="isFloat=='{{poker.data}}'?'up-float':''">
+                    <div class="card-rig card-in-hand card-flipped card-poker" ng-style="{{poker.myStyle}}"pokerclass
+                         ng-class="isFloat=='{{poker.data}}'?'up-float {{poker.pokerclass}}':'{{poker.pokerclass}}'">
                         <div class="card-wrapper perspective-wrapper">
-                            <div class="animation-wrapper">
+                            <div class="animation-wrapper animation-wrapper-poker">
                                 <div class="card-container rotate face-up card-blue" ng-class="isFloat=='{{poker.data}}'?'card-green':''">
                                     <div class="card card-face">
                                         <div class="small-card-id">

@@ -138,10 +138,6 @@
 .user-image {
     max-width: 200px;
 }
-.user-image-poker {
-    max-width:96px;
-    max-height:90px;
-}
 
 .success {
     color:green;
@@ -155,4 +151,9 @@
 .panel-body-project {
     padding-left:0px; 
     padding-right:0px;
+}
+
+.row-monitor {
+    margin-left:0px;
+    margin-right:0px;
 }

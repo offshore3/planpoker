@@ -9,22 +9,22 @@
     
     $scope.pokers = {
         poker: [
-            { data: 1, myStyle: { "left": "17.5%" } },
-            { data: 2, myStyle: { "left": "21.5%" } },
-            { data: 3, myStyle: { "left": "25.5%" } },
-            { data: 5, myStyle: { "left": "29.5%" } },
-            { data: 8, myStyle: { "left": "33.5%" } },
-            { data: 13, myStyle: { "left": "37.5%" } },
-            { data: 20, myStyle: { "left": "41.5%" } },
-            { data: 40, myStyle: { "left": "45.5%" } },
-            { data: 100, myStyle: { "left": "49.5%" } },
-            { data: 's', myStyle: { "left": "53.5%" } },
-            { data: 'm', myStyle: { "left": "57.5%" } },
-            { data: 'l', myStyle: { "left": "61.5%" } },
-            { data: 'xs', myStyle: { "left": "65.5%" } },
-            { data: 'rest', myStyle: { "left": "69.5%" } },
-            { data: 'yes', myStyle: { "left": "73.5%" } },
-            { data: 'no', myStyle: { "left": "77.5%" } }
+            { data: 1, myStyle: { "left": "17.5%" }, pokerclass: "card-poker-1" },
+            { data: 2, myStyle: { "left": "21.5%" }, pokerclass: "card-poker-2" },
+            { data: 3, myStyle: { "left": "25.5%" }, pokerclass: "card-poker-3" },
+            { data: 5, myStyle: { "left": "29.5%" }, pokerclass: "card-poker-4" },
+            { data: 8, myStyle: { "left": "33.5%" }, pokerclass: "card-poker-5" },
+            { data: 13, myStyle: { "left": "37.5%" }, pokerclass: "card-poker-6" },
+            { data: 20, myStyle: { "left": "41.5%" }, pokerclass: "card-poker-7" },
+            { data: 40, myStyle: { "left": "45.5%" }, pokerclass: "card-poker-8" },
+            { data: 100, myStyle: { "left": "49.5%" }, pokerclass: "card-poker-9" },
+            { data: 's', myStyle: { "left": "53.5%" }, pokerclass: "card-poker-10" },
+            { data: 'm', myStyle: { "left": "57.5%" }, pokerclass: "card-poker-11" },
+            { data: 'l', myStyle: { "left": "61.5%" }, pokerclass: "card-poker-12" },
+            { data: 'xs', myStyle: { "left": "65.5%" }, pokerclass: "card-poker-13" },
+            { data: 'rest', myStyle: { "left": "69.5%" }, pokerclass: "card-poker-14" },
+            { data: 'yes', myStyle: { "left": "73.5%" }, pokerclass: "card-poker-15" },
+            { data: 'no', myStyle: { "left": "77.5%" }, pokerclass: "card-poker-16" }
         ]
     };
 

@@ -197,6 +197,7 @@
   -ms-transform: rotateY(180deg);
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  width:100px;
 }
 .card-in-hand:hover .card-container,
 .card-in-hand.selected .card-container {
@@ -270,11 +271,34 @@
     .card-poker {
         margin-top:400px;
     }
+    .user-image-poker {
+        max-width:96px;
+        max-height:90px;
+    }
 }
 
 @media screen and (min-device-width: 481px) and (max-device-width: 768px) {
     .card-poker {
         margin-top:250px;
+    }
+
+    .card-container,.card {
+        width: 100px;
+        height: 140px;
+    }
+
+    .user-image-poker {
+        max-width:90px;
+        max-height:95px;
+    }
+    .card-face .player-vote {
+        font-size:40px;
+    }
+    .card-in-hand .card-flipped .animation-wrapper {
+        width: 100px;
+    }
+    .card-in-hand-in-hand .card-flipped .animation-wrapper {
+        width: 100px;
     }
 }
 
@@ -282,4 +306,78 @@
     .card-poker {
         margin-top:100px;
     }
+    .card-container,.card {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .user-image-poker {
+        max-width:30px;
+        max-height:80px;
+    }
+    .card-face .player-vote {
+        font-size:20px;
+    }
+    .animation-wrapper-poker {
+        width: 60px !important;
+    }
+
+    .card-poker-1 {
+        left:0% !important;
+    }
+    .card-poker-2 {
+        left:10% !important;
+    }
+    .card-poker-3 {
+        left:20% !important;
+    }
+    .card-poker-4 {
+        left:30% !important;
+    }
+    .card-poker-5 {
+        left:40% !important;
+    }
+    .card-poker-6 {
+        left:50% !important;
+    }
+    .card-poker-7 {
+        left:60% !important;
+    }
+    .card-poker-8 {
+        left:68% !important;
+    }
+
+    .card-poker-9 {
+        padding-top: 95px;
+        left:0% !important;
+    }
+    .card-poker-10 {
+        padding-top: 95px;
+        left:10% !important;
+    }
+    .card-poker-11 {
+        padding-top: 95px;
+        left:20% !important;
+    }
+    .card-poker-12 {
+        padding-top: 95px;
+        left:30% !important;
+    }
+    .card-poker-13 {
+        padding-top: 95px;
+        left:40% !important;
+    }
+    .card-poker-14 {
+        padding-top: 95px;
+        left:50% !important;
+    }    
+    .card-poker-15 {
+        padding-top: 95px;
+        left:60% !important;
+    }
+    .card-poker-16 {
+        padding-top: 95px;
+        left:68% !important;
+    }
+
 }

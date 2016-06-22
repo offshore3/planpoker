@@ -4,9 +4,9 @@
             <div class="all-players-cards-selected row" ng-show="estimates.length">
                 <div class="scroll-container flex">
                     <div class="card-in-hand-in-hand card-flipped">
-                        <div class="row">
+                        <div class="row row-monitor">
                             <div class="col-sm-2 col-xs-4" ng-repeat="estimate in estimates">
-                                <div class="animation-wrapper">
+                                <div class="animation-wrapper animation-wrapper-poker">
                                     <div class="card-container rotate face-up card-blue">                                        
                                         <div class="card card-face">
                                             <div class="small-card-id">
@@ -21,14 +21,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="label label-inverse label-name pull-right">{{estimate.UserName}}</div>
+                                <div class="label label-inverse label-name pull-left">{{estimate.UserName}}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="all-players-cards-selected row text-left" ng-show="isShowResult">
-                <div class="row">
+                <div class="row row-monitor">
                     <div class="col-md-6">
                         <h3>Plan average: {{averagePoint}} points</h3>
                     </div>
