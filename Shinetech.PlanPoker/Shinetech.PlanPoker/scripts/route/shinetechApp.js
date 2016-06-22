@@ -1,4 +1,5 @@
 ﻿var webAPI = "http://localhost:25455/",
+//var webAPI = "http://192.168.1.153:9198/",
     Token = "Token",
     userImagePath = "",
     appModule = angular.module("shinetech-app", ["ngRoute", "ngCookies"]),

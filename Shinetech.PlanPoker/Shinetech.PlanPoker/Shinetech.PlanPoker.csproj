@@ -112,6 +112,7 @@
     <Content Include="fonts\fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fonts\FontAwesome.otf" />
+    <None Include="Properties\PublishProfiles\PlanPokerWeb.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
