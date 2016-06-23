@@ -326,25 +326,25 @@
         left:0% !important;
     }
     .card-poker-2 {
-        left:10% !important;
+        left:12% !important;
     }
     .card-poker-3 {
-        left:20% !important;
+        left:24% !important;
     }
     .card-poker-5 {
-        left:30% !important;
+        left:36% !important;
     }
     .card-poker-8 {
-        left:40% !important;
+        left:48% !important;
     }
     .card-poker-13 {
-        left:50% !important;
-    }
-    .card-poker-20 {
         left:60% !important;
     }
+    .card-poker-20 {
+        left:72% !important;
+    }
     .card-poker-40 {
-        left:68% !important;
+        left:84% !important;
     }
 
     .card-poker-100 {
@@ -353,31 +353,31 @@
     }
     .card-poker-s {
         padding-top: 95px;
-        left:10% !important;
+        left:12% !important;
     }
     .card-poker-m {
         padding-top: 95px;
-        left:20% !important;
+        left:24% !important;
     }
     .card-poker-l {
         padding-top: 95px;
-        left:30% !important;
+        left:36% !important;
     }
     .card-poker-xs {
         padding-top: 95px;
-        left:40% !important;
+        left:48% !important;
     }
     .card-poker-rest {
         padding-top: 95px;
-        left:50% !important;
+        left:60% !important;
     }    
     .card-poker-yes {
         padding-top: 95px;
-        left:60% !important;
+        left:72% !important;
     }
     .card-poker-no {
         padding-top: 95px;
-        left:68% !important;
+        left:84% !important;
     }
 
 }
