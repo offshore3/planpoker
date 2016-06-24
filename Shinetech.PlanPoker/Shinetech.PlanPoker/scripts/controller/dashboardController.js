@@ -71,7 +71,7 @@
         dashboardService.selectCard(command, function (data) {
 
         }, function () {
-
+             
         });
     };
 
