@@ -7,7 +7,7 @@
         };
         return $http({
             method: "POST",
-            url: webAPI + "api/sendeforgetpasswordmail",
+            url: webAPI + "api/sendforgetpasswordmail",
             data: sendEmailViewModel
         }).then(function (response) {
             return $q.when(response);

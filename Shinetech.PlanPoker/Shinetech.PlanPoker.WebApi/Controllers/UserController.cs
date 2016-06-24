@@ -100,7 +100,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("sendeforgetpasswordmail")]
+        [Route("sendforgetpasswordmail")]
         public bool SendForgetPassowrdEmail(SendEmailViewModel sendEmailViewModel)
         {
             return _userLogic.SendForgetPassowrdEmail(sendEmailViewModel.ToLogicModel());
