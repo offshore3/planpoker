@@ -40,6 +40,7 @@
         if ($scope.projectCode) {
             dashboardService.decryptProjectCode($scope.projectCode, function (data) {
                 $scope.projectId = data;
+                $scope.isFloat = "";
                 $scope.seletedProjectId = data;
                 $scope.changeProject();
             });
@@ -78,7 +79,7 @@
         $rootScope.isShowResult = false;
         $rootScope.averagePoint = "";
         $scope.isFloat = "";
-        if ($scope.seletedProjectId == undefined || $scope.seletedProjectId == null || $scope.seletedProjectId == "") {
+        if ($scope.seletedProjectId == undefined || $scope.seletedProjectId == null || $scope.seletedProjectId === "") {
             $rootScope.estimates = [];
             return;
         }
