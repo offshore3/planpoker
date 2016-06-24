@@ -40,6 +40,8 @@
         if ($scope.projectCode) {
             dashboardService.decryptProjectCode($scope.projectCode, function (data) {
                 $scope.projectId = data;
+                $scope.seletedProjectId = data;
+                $scope.changeProject();
             });
         }
 
