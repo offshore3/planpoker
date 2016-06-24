@@ -45,7 +45,7 @@ namespace Shinetech.PlanPoker.WebApi.Tests
         public void CreateProject_should_call_CreateProject_method_once_in_project_controller()
         {
             //Arrange
-            ProjectLogicModel model = new ProjectLogicModel
+            var model = new ProjectLogicModel
             {
                 Name = "Test1",
                 Id = 5
@@ -62,7 +62,7 @@ namespace Shinetech.PlanPoker.WebApi.Tests
         public void EditProject_should_call_EditProject_method_once_in_project_controller()
         {
             //Arrange
-            ProjectLogicModel model = new ProjectLogicModel
+            var model = new ProjectLogicModel
             {
                 Name = "Test1",
                 Id = 5
@@ -81,7 +81,7 @@ namespace Shinetech.PlanPoker.WebApi.Tests
             //Arrange
 
             //Act
-            _projectController.GetProjects(1,20,"");
+            _projectController.GetProjects(1,20);
             //Assert
             _projectLogicMock.Verify(x => x.GetPages(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()), Times.Once);
             _projectLogicMock.Verify(x => x.GetProjectByUser(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>()), Times.Once);

@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.WebApi.Controllers;
-using Shinetech.PlanPoker.WebApi.Tools;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 
 namespace Shinetech.PlanPoker.WebApi.Tests

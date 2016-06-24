@@ -53,8 +53,6 @@
         });
     }
 
-    //begin  add by Jimbo 2016-06-16 09:48:33
-
     this.getInvite = function (projectId, email, successCallback, errorCallback) {
         httpProxy.get("api/participate?projectId=" + projectId + "&email=" + email).then(function (data) {
             successCallback(data);
@@ -70,7 +68,6 @@
             errorCallback(error);
         });
     };
-    //end  add by Jimbo 2016-06-16 09:48:33
 
     this.createProject = function (project, successCallback, errorCallback) {
         httpProxy.post("api/project", project).then(function (data) {

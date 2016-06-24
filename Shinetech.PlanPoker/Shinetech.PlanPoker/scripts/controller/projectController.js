@@ -86,35 +86,34 @@
                 ProjectId: $scope.currentProjectId,
                 Email: $scope.InviteEmail
             }
-            //begin  add by Jimbo 2016-06-16 09:48:33
+
             loginService.getUser(function (data) {
-                if (data.Email.toLowerCase() == $scope.InviteEmail.toLowerCase())
-                {
+                if (data.Email.toLowerCase() === $scope.InviteEmail.toLowerCase()) {
                     $scope.isInviteSelf = true;
                     $scope.isParticipateInviteBusy = false;
-                    return;
-
                 }
-            });
+                else
+                {
+                    projectService.getInvite(command.ProjectId, command.Email, function (data) {
+                        if (data === null) {
+                            projectService.createInvite(command, function () {
+                                $scope.loadParticipates($scope.currentProjectId);
+                                $scope.sendEmail();
+                            }, function () {
 
-            projectService.getInvite(command.ProjectId,command.Email, function (data) {
-                if (data === null) {
-                    projectService.createInvite(command, function () {
-                        $scope.loadParticipates($scope.currentProjectId);
-                        $scope.sendEmail();
+                            });
+                        } else if (data != null && data.IsRegister) {
+                            $scope.isInvted = true;
+                        } else if (data != null && !data.IsRegister) {
+                            $scope.sendEmail();
+                        }
+                        $scope.isParticipateInviteBusy = false;
                     }, function () {
-
+                        $scope.isParticipateInviteBusy = false;
                     });
-                } else if (data != null && data.IsRegister){
-                    $scope.isInvted = true;
-                } else if (data != null && !data.IsRegister) {
-                    $scope.sendEmail();
                 }
-                $scope.isParticipateInviteBusy = false;
-            }, function () {
-                $scope.isParticipateInviteBusy = false;
             });
-            //end  add by Jimbo 2016-06-16 09:48:33
+
         }
 
         $scope.changeEmail = function () {

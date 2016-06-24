@@ -54,7 +54,7 @@ namespace Shinetech.PlanPoker.Logic.Tests
         public void Check_email_when_email_does_not_exist_should_return_false()
         {
             //Arrange
-            var email = "1234567@qq.com";
+            const string email = "1234567@qq.com";
             var users = new List<UserModel>();
             var userLogicModel = new UserLogicModel
             {
@@ -81,7 +81,6 @@ namespace Shinetech.PlanPoker.Logic.Tests
                 Password = "123456"
             };
             var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
-            var user = userLogicModel.ToModel();
             _unitOfWorkFactory.Setup(x => x.GetCurrentUnitOfWork()).Returns(_uniteOfWorkMock.Object);
             //Act
             userLogic.Create(userLogicModel);
@@ -139,7 +138,7 @@ namespace Shinetech.PlanPoker.Logic.Tests
             //Arrange
             var userLogic = new UserLogic(_iuserRepositoryMock.Object, _unitOfWorkFactory.Object);
             //Act
-            var result = userLogic.GetAll();
+            userLogic.GetAll();
             //Assert
             _iuserRepositoryMock.Verify(x => x.Query(), Times.Once);
         }
@@ -157,7 +156,6 @@ namespace Shinetech.PlanPoker.Logic.Tests
                 Name = "Joy1",
                 ImagePath = "Location"
             };
-            var userModel=new UserModel();
             //Act
             _iuserRepositoryMock.Setup(x => x.GetForUpdate(userLogicModel.Id)).Returns(userLogicModel.ToModel);
             _unitOfWorkFactory.Setup(x => x.GetCurrentUnitOfWork()).Returns(_uniteOfWorkMock.Object);

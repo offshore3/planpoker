@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
 
 namespace Shinetech.PlanPoker.WebApi.Controllers

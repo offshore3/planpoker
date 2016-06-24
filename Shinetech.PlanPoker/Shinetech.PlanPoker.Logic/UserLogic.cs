@@ -111,7 +111,7 @@ namespace Shinetech.PlanPoker.Logic
 
         public bool CheckToken(string email, string password)
         {
-            bool isLoginUser = false;
+            bool isLoginUser;
             try
             {
                 isLoginUser = _userRepository.Query().Any(x => x.Email == email && x.Password == TokenGenerator.EncodeToken(password));
@@ -137,9 +137,12 @@ namespace Shinetech.PlanPoker.Logic
             
             using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
             {
-                userModel.ResetPasswordToken = TokenGenerator.EncodeToken(model.MailLogicModel.EmailTo + "&" + DateTime.UtcNow.ToString());
-                userModel.ExpiredTime = DateTime.Now.AddHours(1);
-                _userRepository.Save(userModel);
+                if (userModel != null)
+                {
+                    userModel.ResetPasswordToken = TokenGenerator.EncodeToken(model.MailLogicModel.EmailTo + "&" + DateTime.UtcNow.ToString());
+                    userModel.ExpiredTime = DateTime.Now.AddHours(1);
+                    _userRepository.Save(userModel);
+                }
                 unitOfwork.Commit();
             }            
 
@@ -149,7 +152,8 @@ namespace Shinetech.PlanPoker.Logic
             bodytxt = bodytxt.Replace("{webname}", model.MailLogicModel.WebName);
             bodytxt = bodytxt.Replace("{weburl}", model.MailLogicModel.WebUrl);
             bodytxt = bodytxt.Replace("{webtel}", model.MailLogicModel.WebTel);
-            bodytxt = bodytxt.Replace("{linkurl}", model.MailLogicModel.AbsUrl + "?code=" + userModel.ResetPasswordToken);
+            if (userModel != null)
+                bodytxt = bodytxt.Replace("{linkurl}", model.MailLogicModel.AbsUrl + "?code=" + userModel.ResetPasswordToken);
 
             try
             {

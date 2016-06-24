@@ -11,12 +11,10 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
     public class InviteController : BaseController
     {
         private readonly IInviteLogic _inviteLogic;
-        private readonly IUserLogic _userLogic;
 
         public InviteController(IUserLogic userLogic, IInviteLogic inviteLogic) : base(userLogic)
         {
             _inviteLogic = inviteLogic;
-            _userLogic = userLogic;
         }
 
         [HttpGet]

@@ -2,7 +2,6 @@
 using System.Web.Http;
 using Shinetech.PlanPoker.Data.Common;
 using Shinetech.PlanPoker.ILogic;
-using Shinetech.PlanPoker.WebApi.Controllers;
 using Shinetech.PlanPoker.WebApi.ViewModels;
 using Shinetech.PlanPoker.WebApi.Hubs;
 using Shinetech.PlanPoker.WebApi.Tools;

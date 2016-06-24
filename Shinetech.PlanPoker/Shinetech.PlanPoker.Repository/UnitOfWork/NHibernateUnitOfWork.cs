@@ -1,6 +1,5 @@
 ﻿using System;
 using NHibernate;
-using Shinetech.PlanPoker.Data;
 
 namespace Shinetech.PlanPoker.Repository.UnitOfWork
 {
