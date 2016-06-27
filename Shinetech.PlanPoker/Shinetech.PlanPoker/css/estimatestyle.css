@@ -380,4 +380,9 @@
         left:84% !important;
     }
 
+    .dropdown-setting a:hover,.dropdown-setting li>a,.dropdown-setting>li a:hover,.dropdown-setting ul {
+    background-color: #db0101;
+    color: #fff !important;
+    }
+
 }

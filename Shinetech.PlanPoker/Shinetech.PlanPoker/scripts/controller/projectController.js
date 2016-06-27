@@ -128,6 +128,7 @@
             $scope.emailtemplate.emailcode = $scope.currentProjectId;
             projectService.sendEmail($scope.emailtemplate, $scope.mailtemplatecontent,function (response) {
                 $scope.isSendEmail = true;
+                $scope.InviteEmail = '';
             }, function () {
 
             });
