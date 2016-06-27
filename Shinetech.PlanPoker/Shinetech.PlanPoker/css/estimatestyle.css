@@ -275,6 +275,10 @@
         max-width:96px;
         max-height:90px;
     }
+
+    .navbar-show {
+        display: none;
+    }
 }
 
 @media screen and (min-device-width: 481px) and (max-device-width: 768px) {
@@ -388,5 +392,5 @@
     .btn-gap {
         padding: 10px 15px;
     }
-
+    
 }
