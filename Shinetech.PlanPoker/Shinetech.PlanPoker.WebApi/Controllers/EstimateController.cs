@@ -134,7 +134,8 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
                     SelectedPoker = item.SelectedPoker,
                     UserImage = user.ImagePath,
                     UserName = user.Name,
-                    UserId = user.Id.ToString()
+                    UserId = user.Id.ToString(),
+                    Email =user.Email
                 });
             }
             return estimatesViewModel;

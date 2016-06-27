@@ -55,7 +55,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="label label-inverse label-name pull-left">{{estimate.UserName}}</div>
+                                        <div class="label label-inverse label-name pull-left">{{estimate.UserName?estimate.UserName:estimate.Email | cutString:true:8:' ...'}}</div>
                                     </div>
                                 </div>
                             </div>
