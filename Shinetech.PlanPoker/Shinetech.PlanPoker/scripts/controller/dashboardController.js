@@ -1,6 +1,7 @@
 ﻿appModule.controller('dashboardController', ['$rootScope', '$scope', '$cookieStore', 'dashboardService', 'projectService', function ($rootScope, $scope, $cookieStore, dashboardService, projectService) {
 
     $scope.customerIdSubscribed;
+    $rootScope.isShowResult = false;
     $scope.webAPI = webAPI;
     $scope.selectedPoker = {
         text: "√",

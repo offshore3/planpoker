@@ -385,4 +385,8 @@
     color: #fff !important;
     }
 
+    .btn-gap {
+        padding: 10px 15px;
+    }
+
 }
