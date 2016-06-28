@@ -2,33 +2,27 @@
     $routeProvider
 
         .when("/login", {
-            templateUrl: "template/login.html",
-            controller: "loginController"
+            templateUrl: "template/login.html"
         })
 
         .when("/register", {
-            templateUrl: "template/register.html",
-            controller: "registerController"
+            templateUrl: "template/register.html"
         })
 
         .when("/retrievepassword", {
-            templateUrl: "template/RetrievePassword.html",
-            controller:"retrievePasswordController"
+            templateUrl: "template/RetrievePassword.html"
         })
 
         .when("/resetpassword", {
-            templateUrl: "template/ResetPassword.html",
-            controller:"resetPasswordController"
+            templateUrl: "template/ResetPassword.html"
         })
 
         .when("/dashboard", {
-            templateUrl: "template/dashboard.html",
-            controller:"dashboardController"
+            templateUrl: "template/dashboard.html"
         })
 
         .when("/monitor/:projectCode/", {
-            templateUrl: "template/monitor.html",
-            controller: "monitorController"
+            templateUrl: "template/monitor.html"
         })
 
         .otherwise("/login");

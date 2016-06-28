@@ -29,12 +29,10 @@ namespace Shinetech.PlanPoker.WebApi.Tools
             _userLogic = WindsorBootstrapper.Container.Resolve<IUserLogic>();
             var result = false;
             var credentialstring = TokenGenerator.DecodeToken(tokenStr);
-
-            var datas = credentialstring.Split('&');
-            var userEmail = datas[0];
-            var password = datas[1];
-            var isUserExist = _userLogic.CheckToken(userEmail, password);
-            if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(password) || !isUserExist)
+            var userId = 0;
+            int.TryParse(credentialstring, out userId);
+            var user = _userLogic.Get(userId);
+            if (userId==0 || user==null)
             {
                 result = true;
             }

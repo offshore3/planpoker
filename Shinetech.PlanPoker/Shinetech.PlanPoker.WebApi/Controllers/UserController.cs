@@ -60,6 +60,13 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("login")]
+        public string Login(int userId)
+        {
+            return _userLogic.Login(userId);
+        }
+
+        [HttpGet]
         [Route("user")]
         [PlanPokerAuthorize]
         public UserViewModel GetUserViewModel()
@@ -112,5 +119,21 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         {
             return TokenGenerator.DecodeToken(resetPasswordToken);
         }
+
+        [HttpPost]
+        [Route("unionlogin")]
+        public string Unionlogin(UserViewModel userViewModel)
+        {
+            var user = _userLogic.GetUserByOpenId(userViewModel.ToLogicModel());
+            return Login(user.Id);
+        }
+
+        [HttpPut]
+        [Route("useremail")]
+        public void UpdateUserEmailWithUnionLogin(UserViewModel userViewModel)
+        {
+            _userLogic.UpdateUserEmail(userViewModel.ToLogicModel(),LoginUserId);
+        }
+        
     }
 }

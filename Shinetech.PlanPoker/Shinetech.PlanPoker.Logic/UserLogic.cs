@@ -89,9 +89,14 @@ namespace Shinetech.PlanPoker.Logic
             var isLoginSuccess = user != null;
 
             return isLoginSuccess
-                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + "&" +
+                ? TokenGenerator.EncodeToken(user.Id.ToString()) + "&" +
                   user.Id
                 : string.Empty;
+        }
+
+        public string Login(int userId)
+        {
+            return TokenGenerator.EncodeToken(userId.ToString()) + "&" +userId;
         }
 
         public IEnumerable<UserLogicModel> GetAll()
@@ -172,6 +177,27 @@ namespace Shinetech.PlanPoker.Logic
             }
 
             return true;
+        }
+
+        public UserLogicModel GetUserByOpenId(UserLogicModel model)
+        {
+            var userlogicModel = _userRepository.Query().FirstOrDefault(x => x.OpenId == model.OpenId);
+            if (userlogicModel != null) return userlogicModel.ToLogicModel();
+            {
+                Create(model);
+                return _userRepository.Query().FirstOrDefault(x => x.OpenId == model.OpenId).ToLogicModel();
+            }
+        }
+
+        public void UpdateUserEmail(UserLogicModel toLogicModel, int loginUserId)
+        {
+            var userModel = _userRepository.GetForUpdate(loginUserId);
+            if(userModel==null) throw new PlanPokerException("User not exist.");
+            using (var unitOfwork = _unitOfWorkFactory.GetCurrentUnitOfWork())
+            {
+                userModel.Email = toLogicModel.Email;
+                unitOfwork.Commit();
+            }
         }
     }
 }

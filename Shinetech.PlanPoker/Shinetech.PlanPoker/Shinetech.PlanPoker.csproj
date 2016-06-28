@@ -138,6 +138,7 @@
     <Content Include="scripts\controller\registerController.js" />
     <Content Include="scripts\controller\loginController.js" />
     <Content Include="scripts\controller\shinetechController.js" />
+    <Content Include="scripts\controller\unionLoginController.js" />
     <Content Include="scripts\directive\file-reader.js" />
     <Content Include="scripts\directive\file-services.js" />
     <Content Include="scripts\directive\registerDirective.js" />

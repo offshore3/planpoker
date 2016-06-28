@@ -102,11 +102,13 @@ namespace Shinetech.PlanPoker.Logic.Tools
         }
         public static string Base64Encode(string source)
         {
+            if (string.IsNullOrEmpty(source)) return string.Empty;
             byte[] barray = Encoding.Default.GetBytes(source);
             return Base64Helper.ToBase64String(barray);
         }
         public static string Base64Decode(string source)
         {
+            if (string.IsNullOrEmpty(source)) return string.Empty;
             byte[] barray = Base64Helper.FromBase64String(source);
             return Encoding.Default.GetString(barray);
         }

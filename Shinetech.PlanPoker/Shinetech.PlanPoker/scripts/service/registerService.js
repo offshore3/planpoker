@@ -28,4 +28,15 @@
         });
     };
 
+    this.updateUserEmail = function (user) {
+        return $http({
+            method: "PUT",
+            url: webAPI + "api/useremail",
+            data: user
+        }).then(function (response) {
+            return $q.when(response);
+        });
+    };
+    
+
 }])

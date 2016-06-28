@@ -1,5 +1,4 @@
 ﻿appModule.controller('loginController', ['$scope','$location','loginService', function ($scope,$location, loginService) {
-
     $scope.user = {};
     $scope.message = "";
     $scope.isLoginBusy = false;
@@ -15,6 +14,19 @@
             $scope.isLoginBusy = false;
         });
     };
+
+    $scope.$on('socialLoginSuccess', function (d, data) {
+        $scope.user.email = null;
+        $scope.user.Name = data.firstName + " " + data.lastName;
+        $scope.user.OpenId = data.id;
+        $scope.user.Password = null;
+        $scope.user.ComfirmPassword = null;
+        loginService.getOrCreateUser($scope.user, function(parameters) {
+            $location.path("/dashboard");
+        }, function(parameters) {
+
+        });
+    });
 
 }]);
 

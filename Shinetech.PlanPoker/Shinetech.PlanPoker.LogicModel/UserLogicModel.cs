@@ -12,6 +12,7 @@ namespace Shinetech.PlanPoker.LogicModel
         public string ComfirmPassword { get; set; }
         public string ImagePath { get; set; }
         public string ResetPasswordToken { get; set; }
+        public string OpenId { get; set; }
         public DateTime ExpiredTime { get; set; }
         public IEnumerable<ProjectLogicModel> Projects { get; set; }
     }

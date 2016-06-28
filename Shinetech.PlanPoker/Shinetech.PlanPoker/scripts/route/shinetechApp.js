@@ -1,7 +1,8 @@
 ﻿var webAPI = "http://localhost:25455/",
 //var webAPI = "http://192.168.1.153:9198/",
-    Token = "Token",
     userImagePath = "",
+    linkedInAppId = "81lwls13jlqfi1",
+    linkedInAppKey = "Bep6Tl9XWBcu1JgR",
     appModule = angular.module("shinetech-app", ["ngRoute", "ngCookies"]),
     hub = $.connection.ShinetechPlanPokerHub;
 

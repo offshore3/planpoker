@@ -3,13 +3,13 @@
 <head>
     <title> Shinetech Plan Poker </title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=0.72, maximum-scale=1.0, minimum-scale=0.7">
 </head>
-<body ng-controller="shinetechController" >
+<body ng-controller="shinetechController">
     <header class="navbar navbar-default bs-docs-nav">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed shinetech-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" ng-if="isSettingsShow">
+                <button type="button" class="navbar-toggle collapsed shinetech-toggle" data-toggle="collapse" data-target="#bs-example" aria-expanded="false" ng-if="isSettingsShow" ng-click="showMenu()">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -17,7 +17,7 @@
                 </button>
                 <a href="#dashboard" class="navbar-brand">Shinetech Plan Poker</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+            <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right" ng-if="isSettingsShow">
                     <li class="dropdown dropdown-setting">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
@@ -31,6 +31,16 @@
                     </li>
                 </ul>
             </div>
+
+            <div class="collapse navbar-show" id="bs-example">
+                <ul class="nav navbar-nav navbar-right" ng-if="isSettingsShow">
+                    <li><a href="" data-toggle="modal" data-target="#profileModal">My Profile</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#projectsModal">My Projects</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#changePasswordModal">Change Password</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a ng-click="removeCookie()">Logout</a></li>
+                </ul>
+            </div>
         </div>
     </header>
     <div ng-view></div>
@@ -39,19 +49,20 @@
     <link href="fonts/css/font-awesome.css" rel="stylesheet" />
     <link href="css/estimatestyle.css" rel="stylesheet" />
     <script src="scripts/jquery/jquery.js"></script>
-<script src="scripts/jquery/jquery.signalR-2.2.0.js"></script>
+    <script src="scripts/jquery/jquery.signalR-2.2.0.js"></script>
     <!--<script src="http://192.168.1.153:9198/signalr/hubs"></script>-->
     <script src="http://localhost:25455/signalr/hubs"></script>
     <script src="scripts/bootstrap/bootstrap.min.js"></script>
     <script src="scripts/angular/angular.js"></script>
     <script src="scripts/angular/angular-route.js"></script>
     <script src="scripts/angular/angular-cookies.js"></script>
+
     <script src="scripts/route/shinetechApp.js"></script>
     <script src="scripts/route/shinetechRoute.js"></script>
     <script src="scripts/tools/emailTemplate.js"></script>
     <script src="scripts/tools/mailTemplateContent.js"></script>
 
-    
+
     <script src="scripts/directive/registerDirective.js"></script>
     <script src="scripts/directive/file-reader.js"></script>
     <script src="scripts/tools/httpProxy.js"></script>
@@ -81,6 +92,11 @@
     <script src="scripts/controller/resetPasswordController.js"></script>
     <script src="scripts/controller/monitorController.js"></script>
     <script src="scripts/controller/dashboardParentController.js"></script>
-
+    <script src="scripts/controller/unionLoginController.js"></script>
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+                                        api_key: 81lwls13jlqfi1
+                                        authorize: true
+                                        onLoad: onLinkedInLoad
+    </script>
 </body>
 </html>

@@ -15,6 +15,7 @@ namespace Shinetech.PlanPoker.Data.Maps
             Map(m => m.Password);
             Map(m => m.ImagePath).Nullable();
             Map(m => m.ResetPasswordToken).Nullable();
+            Map(m => m.OpenId).Nullable();
             Map(m=>m.ExpiredTime).Nullable();
             HasManyToMany(x => x.Projects).Table("ProjectUserMap").AsSet();
         }

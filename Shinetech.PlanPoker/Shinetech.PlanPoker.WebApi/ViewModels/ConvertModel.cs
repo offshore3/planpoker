@@ -17,6 +17,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 ImagePath = user.ImagePath,
                 ResetPasswordToken=user.ResetPasswordToken,
                 ExpiredTime=user.ExpiredTime,
+                OpenId = user.OpenId,
                 Projects = user.Projects?.Select(x => x.ToLogicModel())
             };
         }
@@ -33,6 +34,7 @@ namespace Shinetech.PlanPoker.WebApi.ViewModels
                 ImagePath = user.ImagePath,
                 ResetPasswordToken=user.ResetPasswordToken,
                 ExpiredTime=user.ExpiredTime,
+                OpenId = user.OpenId,
                 Projects = user.Projects?.Select(x => x.ToViewModel())
             };
         }

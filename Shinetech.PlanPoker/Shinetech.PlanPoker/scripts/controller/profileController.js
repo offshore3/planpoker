@@ -5,6 +5,9 @@
     $scope.getUserInfo = function () {
         loginService.getUser(function (data) {
             $scope.user = data;
+            if (data.Email == null || data.Email.length === 0) {
+                $("#unionLoginModal").modal("show");
+            }
             if ($scope.user.ImagePath != null) {
                 $scope.user.ImagePath = webAPI + $scope.user.ImagePath;
             }
