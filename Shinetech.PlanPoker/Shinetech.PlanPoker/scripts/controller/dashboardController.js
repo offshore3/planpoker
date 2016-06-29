@@ -7,7 +7,7 @@
         text: "√",
         data: ""
     };
-    
+
     $scope.pokers = {
         poker: [
             { data: 1, myStyle: { "left": "17.5%" }, pokerclass: "card-poker-1" },
@@ -99,7 +99,11 @@
                 $rootScope.estimates = [];
                 return;
             }
-
+            E(data.EstimateViewModel).ForEach(function (x) {
+                if (x.UserImage != null && x.UserImage.lastIndexOf('http') < 0) {
+                    x.UserImage = webAPI + x.UserImage;
+                }
+            });
             $rootScope.estimates = data.EstimateViewModel;
             $rootScope.isShowResult = data.IsShow;
             $rootScope.averagePoint = data.AveragePoint;
@@ -113,7 +117,7 @@
         $scope.isShowEstimateBusy = true;
         dashboardService.showEstimate($scope.seletedProjectId, function () {
             $scope.isShowEstimateBusy = false;
-        }, function() {
+        }, function () {
             $scope.isShowEstimateBusy = false;
         });
     }

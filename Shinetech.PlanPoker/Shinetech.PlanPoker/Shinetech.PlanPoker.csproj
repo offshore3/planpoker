@@ -146,6 +146,7 @@
     <Content Include="scripts\jquery\jquery.signalR-2.2.0.min.js" />
     <Content Include="scripts\route\shinetechApp.js" />
     <Content Include="scripts\route\shinetechRoute.js" />
+    <Content Include="scripts\service\authorizationService.js" />
     <Content Include="scripts\service\changePasswordService.js" />
     <Content Include="scripts\service\projectService.js" />
     <Content Include="scripts\service\profileService.js" />

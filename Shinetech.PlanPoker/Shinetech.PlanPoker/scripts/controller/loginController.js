@@ -1,4 +1,4 @@
-﻿appModule.controller('loginController', ['$scope','$location','loginService', function ($scope,$location, loginService) {
+﻿appModule.controller('loginController', ['$scope', '$location', 'loginService', 'authorizationService', function ($scope, $location, loginService, authorizationService) {
 
     $scope.user = {};
     $scope.message = "";
@@ -16,6 +16,12 @@
         });
     };
 
+    $scope.authorization = getQueryVariable('authorization');
+    if ($scope.authorization) {
+        authorizationService.setAuthorization($scope.authorization);
+        location.href = "/#/dashboard";
+    }
+    
 }]);
 
 

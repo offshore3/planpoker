@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web.Configuration;
+using Castle.Core.Internal;
+using Newtonsoft.Json;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.IRepository;
 using Shinetech.PlanPoker.Logic.Tools;
@@ -89,7 +94,7 @@ namespace Shinetech.PlanPoker.Logic
             var isLoginSuccess = user != null;
 
             return isLoginSuccess
-                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + "&" +
+                ? TokenGenerator.Generate(email, password, DateTime.MaxValue.ToString("yyyy-MM-dd hh:mm")) + ",," +
                   user.Id
                 : string.Empty;
         }
@@ -172,6 +177,76 @@ namespace Shinetech.PlanPoker.Logic
             }
 
             return true;
+        }
+        
+        public string LoginWithLinkedIn(string code, string state)
+        {
+            var linkedInLoginRedirectUrl = WebConfigurationManager.AppSettings["LinkedInLoginRedirectUrl"];
+            var linkedInLoginAppSecret = WebConfigurationManager.AppSettings["LinkedInLoginAppSecret"];
+            var linkedInLoginAppId = WebConfigurationManager.AppSettings["LinkedInLoginAppId"];
+            var linkedInGetAccountDetailUrl = WebConfigurationManager.AppSettings["LinkedInGetAccountDetailUrl"];
+            var linkedInGetAccessTokenAddress = WebConfigurationManager.AppSettings["LinkedInGetAccessTokenAddress"];
+            var webPath = WebConfigurationManager.AppSettings["WebPath"];
+            var authorization = string.Empty;
+
+            using (var client = new HttpClient())
+            {
+                var values = new Dictionary<string, string>
+                {
+                    {"grant_type", "authorization_code"},
+                    {"code", code},
+                    {"redirect_uri", linkedInLoginRedirectUrl},
+                    {"client_id", linkedInLoginAppId},
+                    {"client_secret", linkedInLoginAppSecret}
+                };
+
+                var body = new FormUrlEncodedContent(values);
+                var str = client.PostAsync(linkedInGetAccessTokenAddress, body).Result;
+                var content = str.Content.ReadAsStringAsync().Result;
+
+                var result = JsonConvert.DeserializeObject<LinkedInAuthResult>(content);
+
+                if (result.AccessToken.IsNullOrEmpty())
+                {
+                    throw new PlanPokerException("Get access token failed - " + content);
+                }
+
+                using (var profileClient = GetLinkedInHttpClient(result.AccessToken))
+                {
+                    var httpResponse = profileClient
+                        .GetAsync(linkedInGetAccountDetailUrl).Result;
+                    var profileContent = httpResponse.Content.ReadAsStringAsync().Result;
+                    var profile = JsonConvert.DeserializeObject<LinkedInLogicModel>(profileContent);
+                    var user = _userRepository.Query().FirstOrDefault(x => x.Email == profile.Email);
+                    if (user != null)
+                    {
+                        authorization = Login(user.Email, TokenGenerator.DecodeToken(user.Password));
+                    }
+                    else {
+                        var userLogicModel = new UserLogicModel
+                        {
+                            Email = profile.Email,
+                            Name = profile.FirstName + " " + profile.LastName,
+                            Password = "123456",
+                            ComfirmPassword = "123456",
+                            ExpiredTime = DateTime.Now,
+                            ImagePath = profile.Picture
+                        };
+                        Create(userLogicModel);
+                        authorization = Login(userLogicModel.Email, userLogicModel.Password);
+                    }
+                }
+            }
+
+            return webPath + "#/login?authorization=" + authorization;
+        }
+
+        private static HttpClient GetLinkedInHttpClient(string token)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.TryAddWithoutValidation("x-li-format", "json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            return client;
         }
     }
 }
