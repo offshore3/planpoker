@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using Shinetech.PlanPoker.ILogic;
 using Shinetech.PlanPoker.Logic.Tools;
@@ -111,6 +114,18 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         public string DecryptProjectCode(string resetPasswordToken)
         {
             return TokenGenerator.DecodeToken(resetPasswordToken);
+        }
+
+        [HttpGet]
+        [Route("login-with-linkedin")]
+        public HttpResponseMessage LoginWithLinkedIn(string code, string state)
+        {
+            var result = _userLogic.LoginWithLinkedIn(code, state);
+            
+            var response = Request.CreateResponse(HttpStatusCode.Redirect);
+            
+            response.Headers.Location = new Uri(result);
+            return response;
         }
     }
 }

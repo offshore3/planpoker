@@ -1,9 +1,9 @@
 ﻿angular.module('shinetech-app').constant('emailtemplate', {
     webname: 'Shinetech Plan Poker',
     weburl: 'http://shinetechchina.com.cn/',
-    webcompany: '北京盛安德',
-    webaddress: '陕西省西安市高新区',
-    webtel: '15829774321',
+    webcompany: 'Shinetechchina',
+    webaddress: 'Shaanxi xi\'an',
+    webtel: '15812345678',
     webmail: '472514904@qq.com',
     emailsmtp: 'smtp.163.com',
     emailssl:'1',
