@@ -269,7 +269,7 @@
 
 @media screen and (min-width: 300px) {
     .card-poker {
-        margin-top:400px;
+        margin-top:200px;
     }
     .user-image-poker {
         max-width:96px;
@@ -281,9 +281,9 @@
     }
 }
 
-@media screen and (min-device-width: 481px) and (max-device-width: 768px) {
+@media screen and (min-device-width: 481px) and (max-device-width: 800px) {
     .card-poker {
-        margin-top:250px;
+        margin-top:150px;
     }
 
     .card-container,.card {
@@ -304,6 +304,65 @@
     .card-in-hand-in-hand .card-flipped .animation-wrapper {
         width: 100px;
     }
+
+    .card-poker-1 {
+        left:0% !important;
+    }
+    .card-poker-2 {
+        left:12% !important;
+    }
+    .card-poker-3 {
+        left:24% !important;
+    }
+    .card-poker-5 {
+        left:36% !important;
+    }
+    .card-poker-8 {
+        left:48% !important;
+    }
+    .card-poker-13 {
+        left:60% !important;
+    }
+    .card-poker-20 {
+        left:72% !important;
+    }
+    .card-poker-40 {
+        left:84% !important;
+    }
+
+    .card-poker-100 {
+        padding-top: 150px;
+        left:0% !important;
+    }
+    .card-poker-s {
+        padding-top: 150px;
+        left:12% !important;
+    }
+    .card-poker-m {
+        padding-top: 150px;
+        left:24% !important;
+    }
+    .card-poker-l {
+        padding-top: 150px;
+        left:36% !important;
+    }
+    .card-poker-xs {
+        padding-top: 150px;
+        left:48% !important;
+    }
+    .card-poker-rest {
+        padding-top: 150px;
+        left:60% !important;
+    }    
+    .card-poker-yes {
+        padding-top: 150px;
+        left:72% !important;
+    }
+    .card-poker-no {
+        padding-top: 150px;
+        left:84% !important;
+    }
+
 }
 
 @media only screen and (max-device-width: 480px) {

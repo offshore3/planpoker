@@ -248,5 +248,67 @@ namespace Shinetech.PlanPoker.Logic
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             return client;
         }
+
+        public string LoginWithFacebook(string code, string state)
+        {
+            var facebookLoginRedirectUrl = WebConfigurationManager.AppSettings["LinkedInLoginRedirectUrl"];
+            var facebookLoginAppSecret = WebConfigurationManager.AppSettings["LinkedInLoginAppSecret"];
+            var facebookLoginAppId = WebConfigurationManager.AppSettings["LinkedInLoginAppId"];
+            var facebookGetAccountDetailUrl = WebConfigurationManager.AppSettings["LinkedInGetAccountDetailUrl"];
+            var facebookGetAccessTokenAddress = WebConfigurationManager.AppSettings["LinkedInGetAccessTokenAddress"];
+            var webPath = WebConfigurationManager.AppSettings["WebPath"];
+            var authorization = string.Empty;
+
+            using (var client = new HttpClient())
+            {
+                var values = new Dictionary<string, string>
+                {
+                    {"grant_type", "authorization_code"},
+                    {"code", code},
+                    {"redirect_uri", linkedInLoginRedirectUrl},
+                    {"client_id", linkedInLoginAppId},
+                    {"client_secret", linkedInLoginAppSecret}
+                };
+
+                var body = new FormUrlEncodedContent(values);
+                var str = client.PostAsync(linkedInGetAccessTokenAddress, body).Result;
+                var content = str.Content.ReadAsStringAsync().Result;
+
+                var result = JsonConvert.DeserializeObject<LinkedInAuthResult>(content);
+
+                if (result.AccessToken.IsNullOrEmpty())
+                {
+                    throw new PlanPokerException("Get access token failed - " + content);
+                }
+
+                using (var profileClient = GetLinkedInHttpClient(result.AccessToken))
+                {
+                    var httpResponse = profileClient
+                        .GetAsync(linkedInGetAccountDetailUrl).Result;
+                    var profileContent = httpResponse.Content.ReadAsStringAsync().Result;
+                    var profile = JsonConvert.DeserializeObject<LinkedInLogicModel>(profileContent);
+                    var user = _userRepository.Query().FirstOrDefault(x => x.Email == profile.Email);
+                    if (user != null)
+                    {
+                        authorization = Login(user.Email, TokenGenerator.DecodeToken(user.Password));
+                    }
+                    else {
+                        var userLogicModel = new UserLogicModel
+                        {
+                            Email = profile.Email,
+                            Name = profile.FirstName + " " + profile.LastName,
+                            Password = "123456",
+                            ComfirmPassword = "123456",
+                            ExpiredTime = DateTime.Now,
+                            ImagePath = profile.Picture
+                        };
+                        Create(userLogicModel);
+                        authorization = Login(userLogicModel.Email, userLogicModel.Password);
+                    }
+                }
+            }
+
+            return webPath + "#/login?authorization=" + authorization;
+        }
     }
 }
