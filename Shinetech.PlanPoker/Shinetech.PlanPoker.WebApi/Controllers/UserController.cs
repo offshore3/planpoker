@@ -132,7 +132,7 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
         [Route("login-with-facebook")]
         public HttpResponseMessage LoginWithFacebook(string code, string state)
         {
-            var result = _userLogic.LoginWithLinkedIn(code, state);
+            var result = _userLogic.LoginWithFacebook(code, state);
 
             var response = Request.CreateResponse(HttpStatusCode.Redirect);
 

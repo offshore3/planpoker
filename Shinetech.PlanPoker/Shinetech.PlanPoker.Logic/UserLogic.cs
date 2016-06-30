@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Configuration;
@@ -249,45 +250,51 @@ namespace Shinetech.PlanPoker.Logic
             return client;
         }
 
+        private static HttpClient GetFacebookHttpClient(string token)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.TryAddWithoutValidation("x-li-format", "json");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            return client;
+        }
+
         public string LoginWithFacebook(string code, string state)
         {
-            var facebookLoginRedirectUrl = WebConfigurationManager.AppSettings["LinkedInLoginRedirectUrl"];
-            var facebookLoginAppSecret = WebConfigurationManager.AppSettings["LinkedInLoginAppSecret"];
-            var facebookLoginAppId = WebConfigurationManager.AppSettings["LinkedInLoginAppId"];
-            var facebookGetAccountDetailUrl = WebConfigurationManager.AppSettings["LinkedInGetAccountDetailUrl"];
-            var facebookGetAccessTokenAddress = WebConfigurationManager.AppSettings["LinkedInGetAccessTokenAddress"];
+//#if DEBUG
+//            GlobalProxySelection.Select = new WebProxy("127.0.0.1:1080");
+//#endif
+            var facebookLoginRedirectUrl = WebConfigurationManager.AppSettings["FacebookLoginRedirectUrl"];
+            var facebookLoginAppSecret = WebConfigurationManager.AppSettings["FacebookLoginAppSecret"];
+            var facebookLoginAppId = WebConfigurationManager.AppSettings["FacebookLoginAppId"];
+            var facebookGetAccountDetailUrl = WebConfigurationManager.AppSettings["FacebookGetAccountDetailUrl"];
+            var facebookGetAccessTokenAddress = WebConfigurationManager.AppSettings["FacebookGetAccessTokenAddress"];
             var webPath = WebConfigurationManager.AppSettings["WebPath"];
             var authorization = string.Empty;
+            
 
             using (var client = new HttpClient())
             {
-                var values = new Dictionary<string, string>
-                {
-                    {"grant_type", "authorization_code"},
-                    {"code", code},
-                    {"redirect_uri", linkedInLoginRedirectUrl},
-                    {"client_id", linkedInLoginAppId},
-                    {"client_secret", linkedInLoginAppSecret}
-                };
-
-                var body = new FormUrlEncodedContent(values);
-                var str = client.PostAsync(linkedInGetAccessTokenAddress, body).Result;
+                var getTokenUrl = $"{facebookGetAccessTokenAddress}client_id={facebookLoginAppId}&" +
+                                  $"client_secret={facebookLoginAppSecret}&redirect_uri={facebookLoginRedirectUrl}&code={code}";
+                var str = client.GetAsync(getTokenUrl).Result;
                 var content = str.Content.ReadAsStringAsync().Result;
 
-                var result = JsonConvert.DeserializeObject<LinkedInAuthResult>(content);
+                var result = JsonConvert.DeserializeObject<FacebookAuthResult>(content);
 
                 if (result.AccessToken.IsNullOrEmpty())
                 {
                     throw new PlanPokerException("Get access token failed - " + content);
                 }
 
-                using (var profileClient = GetLinkedInHttpClient(result.AccessToken))
+                using (var profileClient = GetFacebookHttpClient(result.AccessToken))
                 {
+                    var facebookUserInforequest = string.Format(facebookGetAccountDetailUrl, result.AccessToken);
                     var httpResponse = profileClient
-                        .GetAsync(linkedInGetAccountDetailUrl).Result;
+                        .GetAsync(facebookUserInforequest).Result;
                     var profileContent = httpResponse.Content.ReadAsStringAsync().Result;
-                    var profile = JsonConvert.DeserializeObject<LinkedInLogicModel>(profileContent);
-                    var user = _userRepository.Query().FirstOrDefault(x => x.Email == profile.Email);
+                    var profile = JsonConvert.DeserializeObject<dynamic>(profileContent);
+                    string email = profile.email.ToString();
+                    var user = _userRepository.Query().FirstOrDefault(x => x.Email == email);
                     if (user != null)
                     {
                         authorization = Login(user.Email, TokenGenerator.DecodeToken(user.Password));
@@ -295,12 +302,12 @@ namespace Shinetech.PlanPoker.Logic
                     else {
                         var userLogicModel = new UserLogicModel
                         {
-                            Email = profile.Email,
-                            Name = profile.FirstName + " " + profile.LastName,
+                            Email = profile.email.ToString(),
+                            Name = profile.first_name + " " + profile.last_name,
                             Password = "123456",
                             ComfirmPassword = "123456",
                             ExpiredTime = DateTime.Now,
-                            ImagePath = profile.Picture
+                            ImagePath = profile.picture.data.url.ToString()
                         };
                         Create(userLogicModel);
                         authorization = Login(userLogicModel.Email, userLogicModel.Password);
