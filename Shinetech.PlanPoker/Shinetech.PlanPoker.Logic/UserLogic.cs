@@ -183,8 +183,9 @@ namespace Shinetech.PlanPoker.Logic
         
         public string LoginWithLinkedIn(string code, string state)
         {
+#if DEBUG
             GlobalProxySelection.Select = GlobalProxySelection.GetEmptyWebProxy();
-
+#endif
             var linkedInLoginRedirectUrl = WebConfigurationManager.AppSettings["LinkedInLoginRedirectUrl"];
             var linkedInLoginAppSecret = WebConfigurationManager.AppSettings["LinkedInLoginAppSecret"];
             var linkedInLoginAppId = WebConfigurationManager.AppSettings["LinkedInLoginAppId"];
@@ -263,8 +264,9 @@ namespace Shinetech.PlanPoker.Logic
 
         public string LoginWithFacebook(string code, string state)
         {
+#if DEBUG
             GlobalProxySelection.Select = new WebProxy("127.0.0.1:1080");
-
+#endif
             var facebookLoginRedirectUrl = WebConfigurationManager.AppSettings["FacebookLoginRedirectUrl"];
             var facebookLoginAppSecret = WebConfigurationManager.AppSettings["FacebookLoginAppSecret"];
             var facebookLoginAppId = WebConfigurationManager.AppSettings["FacebookLoginAppId"];
