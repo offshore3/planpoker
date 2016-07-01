@@ -22,4 +22,25 @@ namespace Shinetech.PlanPoker.LogicModel
         [JsonProperty("expires_in")]
         public int ExpiresInSeconds { get; set; }
     }
+
+    public class FacebookLogicModel
+    {
+        [JsonProperty("email")]
+        public string Email { get; set; }
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
+        [JsonProperty("last_name")]
+        public string LastName { get; set; }
+        [JsonProperty("picture")]
+        public string Picture { get; set; }
+    }
+
+    public class FacebookAuthResult
+    {
+        [JsonProperty("access_token")]
+        public string AccessToken { get; set; }
+
+        [JsonProperty("expires_in")]
+        public int ExpiresInSeconds { get; set; }
+    }
 }

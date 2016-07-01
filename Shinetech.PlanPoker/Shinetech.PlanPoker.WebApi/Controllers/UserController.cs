@@ -127,5 +127,17 @@ namespace Shinetech.PlanPoker.WebApi.Controllers
             response.Headers.Location = new Uri(result);
             return response;
         }
+
+        [HttpGet]
+        [Route("login-with-facebook")]
+        public HttpResponseMessage LoginWithFacebook(string code, string state)
+        {
+            var result = _userLogic.LoginWithFacebook(code, state);
+
+            var response = Request.CreateResponse(HttpStatusCode.Redirect);
+
+            response.Headers.Location = new Uri(result);
+            return response;
+        }
     }
 }
