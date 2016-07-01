@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -145,7 +146,7 @@ namespace Shinetech.PlanPoker.Logic
             {
                 if (userModel != null)
                 {
-                    userModel.ResetPasswordToken = TokenGenerator.EncodeToken(model.MailLogicModel.EmailTo + "&" + DateTime.UtcNow.ToString());
+                    userModel.ResetPasswordToken = TokenGenerator.EncodeToken(model.MailLogicModel.EmailTo + "&" + DateTime.UtcNow.ToString(CultureInfo.InvariantCulture));
                     userModel.ExpiredTime = DateTime.Now.AddHours(1);
                     _userRepository.Save(userModel);
                 }
@@ -182,13 +183,15 @@ namespace Shinetech.PlanPoker.Logic
         
         public string LoginWithLinkedIn(string code, string state)
         {
+            GlobalProxySelection.Select = GlobalProxySelection.GetEmptyWebProxy();
+
             var linkedInLoginRedirectUrl = WebConfigurationManager.AppSettings["LinkedInLoginRedirectUrl"];
             var linkedInLoginAppSecret = WebConfigurationManager.AppSettings["LinkedInLoginAppSecret"];
             var linkedInLoginAppId = WebConfigurationManager.AppSettings["LinkedInLoginAppId"];
             var linkedInGetAccountDetailUrl = WebConfigurationManager.AppSettings["LinkedInGetAccountDetailUrl"];
             var linkedInGetAccessTokenAddress = WebConfigurationManager.AppSettings["LinkedInGetAccessTokenAddress"];
             var webPath = WebConfigurationManager.AppSettings["WebPath"];
-            var authorization = string.Empty;
+            string authorization;
 
             using (var client = new HttpClient())
             {
@@ -260,16 +263,15 @@ namespace Shinetech.PlanPoker.Logic
 
         public string LoginWithFacebook(string code, string state)
         {
-//#if DEBUG
-//            GlobalProxySelection.Select = new WebProxy("127.0.0.1:1080");
-//#endif
+            GlobalProxySelection.Select = new WebProxy("127.0.0.1:1080");
+
             var facebookLoginRedirectUrl = WebConfigurationManager.AppSettings["FacebookLoginRedirectUrl"];
             var facebookLoginAppSecret = WebConfigurationManager.AppSettings["FacebookLoginAppSecret"];
             var facebookLoginAppId = WebConfigurationManager.AppSettings["FacebookLoginAppId"];
             var facebookGetAccountDetailUrl = WebConfigurationManager.AppSettings["FacebookGetAccountDetailUrl"];
             var facebookGetAccessTokenAddress = WebConfigurationManager.AppSettings["FacebookGetAccessTokenAddress"];
             var webPath = WebConfigurationManager.AppSettings["WebPath"];
-            var authorization = string.Empty;
+            string authorization;
             
 
             using (var client = new HttpClient())
