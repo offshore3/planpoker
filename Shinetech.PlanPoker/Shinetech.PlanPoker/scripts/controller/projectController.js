@@ -1,7 +1,7 @@
 ﻿appModule.controller('projectController', [
-    '$scope','$location', 'projectService', 'loginService', '$cookieStore', 'emailtemplate', 'mailtemplatecontent', function ($scope,$location, projectService, loginService,$cookieStore, emailtemplate, mailtemplatecontent) {
+    '$scope','$location', 'projectService', 'loginService', 'emailtemplate', 'mailtemplatecontent', function ($scope,$location, projectService, loginService, emailtemplate, mailtemplatecontent) {
         $scope.projects = {};
-        $scope.LoginUserId = $cookieStore.get("LoginUserId");
+        $scope.LoginUserId = $.cookie('LoginUserId');
         $scope.emailtemplate = emailtemplate;
         $scope.mailtemplatecontent = mailtemplatecontent.invitemail;
 

@@ -17,6 +17,11 @@
                 $rootScope.estimates = [];
                 return;
             }
+            E(data.EstimateViewModel).ForEach(function (x) {
+                if (x.UserImage != null && x.UserImage.lastIndexOf('http') < 0) {
+                    x.UserImage = webAPI + x.UserImage;
+                }
+            });
             $rootScope.estimates = data.EstimateViewModel;
             $rootScope.isShowResult = data.IsShow;
             $rootScope.averagePoint = data.AveragePoint;

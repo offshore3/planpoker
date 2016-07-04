@@ -1,4 +1,4 @@
-﻿appModule.controller('changePasswordController', ['$scope','$location', '$cookieStore', 'changePasswordService', 'loginService', function ($scope, $location, $cookieStore, changePasswordService, loginService) {
+﻿appModule.controller('changePasswordController', ['$scope','$location', 'changePasswordService', 'loginService', function ($scope, $location, changePasswordService, loginService) {
 
     $scope.user = {};
     $scope.isChangePasswordBusy = false;

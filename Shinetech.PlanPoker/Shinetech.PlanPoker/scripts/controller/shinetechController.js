@@ -1,8 +1,8 @@
-﻿appModule.controller("shinetechController", ['$scope', '$location', '$cookieStore', '$rootScope', function ($scope, $location, $cookieStore, $rootScope) {
+﻿appModule.controller("shinetechController", ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
     $scope.removeCookie = function () {
         $rootScope.estimates = [];
-        $cookieStore.remove("Authorization");
-        $cookieStore.remove("LoginUserId");
+        $.removeCookie('Authorization');
+        $.removeCookie('LoginUserId');
         $location.path("/login");
     }
 }])

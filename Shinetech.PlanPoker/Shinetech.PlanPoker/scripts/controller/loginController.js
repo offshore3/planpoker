@@ -21,7 +21,10 @@
         authorizationService.setAuthorization($scope.authorization);
         location.href = "/#/dashboard";
     }
-    
+
+    if ($.cookie('Authorization') && $.cookie('LoginUserId')) {
+        location.href = "/#/dashboard";
+    }
 }]);
 
 

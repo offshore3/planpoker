@@ -1,4 +1,4 @@
-﻿appModule.controller('dashboardController', ['$rootScope', '$scope', '$cookieStore', 'dashboardService', 'projectService', function ($rootScope, $scope, $cookieStore, dashboardService, projectService) {
+﻿appModule.controller('dashboardController', ['$rootScope', '$scope', 'dashboardService', 'projectService', function ($rootScope, $scope, dashboardService, projectService) {
 
     $scope.customerIdSubscribed;
     $rootScope.isShowResult = false;
@@ -65,7 +65,7 @@
 
         var command = {
             ProjectId: $scope.seletedProjectId,
-            UserId: $cookieStore.get("LoginUserId"),
+            UserId: $.cookie('LoginUserId'),
             SelectedPoker: poker.data
         };
 
@@ -85,7 +85,7 @@
             return;
         }
 
-        $scope.href = "#/monitor/" + $scope.seletedProjectId + "-" + $cookieStore.get('LoginUserId');
+        $scope.href = "#/monitor/" + $scope.seletedProjectId + "-" + $.cookie('LoginUserId');
 
         dashboardService.getEstimateUsers($scope.seletedProjectId, function (data) {
             if ($scope.customerIdSubscribed &&

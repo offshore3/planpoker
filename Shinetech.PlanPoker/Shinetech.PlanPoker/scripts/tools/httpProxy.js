@@ -1,8 +1,8 @@
 ﻿appModule.factory("httpProxy", [
-    "$http", "$q", "$cookieStore", "dateFormatter", function($http, $q, $cookieStore, dateFormatter) {
+    "$http", "$q", "dateFormatter", function($http, $q, dateFormatter) {
         var baseUrl = webAPI;
-        $http.defaults.headers.common["Authorization"] = $cookieStore.get("Authorization");
-        $http.defaults.headers.common["LoginUserId"] = $cookieStore.get("LoginUserId");
+        $http.defaults.headers.common["Authorization"] = $.cookie('Authorization');
+        $http.defaults.headers.common["LoginUserId"] = $.cookie('LoginUserId');
 
         function servicesError(deferred, error, errorCode) {
             deferred.reject(error);

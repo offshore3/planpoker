@@ -6,7 +6,7 @@
     hub = $.connection.ShinetechPlanPokerHub;
 
 angular.module("shinetech-app").run([
-    "$rootScope", "$location", "$routeParams", "$cookieStore", function($rootScope, $location, $routeParams, $cookieStore) {
+    "$rootScope", "$location", function($rootScope, $location) {
         $rootScope.$on("$routeChangeSuccess", routeChangeSuccess);
         $rootScope.$on('$locationChangeStart', locationChangeStart);
         function routeChangeSuccess() {
@@ -18,7 +18,7 @@ angular.module("shinetech-app").run([
 
         function locationChangeStart() {
             if ($location.path() === "/dashboard") {
-                if ($cookieStore.get("LoginUserId") === undefined || $cookieStore.get("LoginUserId") === null) {
+                if ($.cookie('LoginUserId') === undefined || $.cookie('LoginUserId') === null) {
                     $rootScope.gotoLogin();
                 }
             }
@@ -65,6 +65,9 @@ angular.module("shinetech-app").run([
             if (existItem) {
                 existItem.SelectedPoker = item.SelectedPoker;
             } else {
+                if (item.UserImage != null && item.UserImage.lastIndexOf('http') < 0) {
+                    item.UserImage = webAPI + item.UserImage;
+                }
                 $rootScope.estimates.push(item);
             }
             $rootScope.$apply();

@@ -155,6 +155,7 @@
     <Content Include="scripts\service\retrievePasswordService.js" />
     <Content Include="scripts\service\registerService.js" />
     <Content Include="scripts\service\loginService.js" />
+    <Content Include="scripts\tools\cookies.js" />
     <Content Include="scripts\tools\linq.js" />
     <Content Include="scripts\tools\mailTemplateContent.js" />
     <Content Include="scripts\tools\emailTemplate.js" />

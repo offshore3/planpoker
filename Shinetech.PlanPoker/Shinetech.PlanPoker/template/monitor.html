@@ -1,5 +1,5 @@
 ﻿<div class="container">
-    <div ng-controller="dashboardController">
+    <div ng-controller="monitorController" ng-init="initMonitor()">
         <div class="all-players-cards-selected all-players-cards-content text-center row">
             <div class="all-players-cards-selected row" ng-show="estimates.length">
                 <div class="scroll-container flex">
@@ -16,7 +16,7 @@
                                                 <span ng-show="isShowResult">
                                                     {{estimate.SelectedPoker}}
                                                 </span>
-                                                <img ng-show="!isShowResult" class="user-image-poker" ng-src="{{estimate.UserImage?webAPI+estimate.UserImage:'/images/user.png'}}" />
+                                                <img ng-show="!isShowResult" class="user-image-poker" ng-src="{{estimate.UserImage?estimate.UserImage:'/images/user.png'}}" />
                                             </div>
                                         </div>
                                     </div>
