@@ -9,9 +9,9 @@ using System.Web.Configuration;
 
 namespace Shinetech.PlanPoker.WebApi.Tools
 {
-    public class FileUpload:IFileUpload
+    public class FileUpload : IFileUpload
     {
-         string IFileUpload.ImgUpload(string fileNameStr, Stream stream)
+        string IFileUpload.ImgUpload(string fileNameStr, Stream stream)
         {
             return ImgUpload(fileNameStr, stream);
         }
